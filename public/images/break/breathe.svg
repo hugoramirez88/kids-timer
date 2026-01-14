@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#F3E5F5"/>
+  <!-- Outer breathing circle -->
+  <circle cx="50" cy="50" r="35" fill="none" stroke="#CE93D8" stroke-width="3" stroke-dasharray="8,4"/>
+  <!-- Middle breathing circle -->
+  <circle cx="50" cy="50" r="25" fill="#E1BEE7" opacity="0.5"/>
+  <!-- Inner calm circle -->
+  <circle cx="50" cy="50" r="15" fill="#BA68C8" opacity="0.6"/>
+  <!-- Center dot -->
+  <circle cx="50" cy="50" r="6" fill="#9C27B0"/>
+  <!-- Breath lines going out -->
+  <line x1="50" y1="10" x2="50" y2="18" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="82" x2="50" y2="90" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="10" y1="50" x2="18" y2="50" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="82" y1="50" x2="90" y2="50" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+  <!-- Diagonal breath lines -->
+  <line x1="18" y1="18" x2="24" y2="24" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="76" y1="76" x2="82" y2="82" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="82" y1="18" x2="76" y2="24" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="18" y1="82" x2="24" y2="76" stroke="#CE93D8" stroke-width="2" stroke-linecap="round"/>
+</svg>

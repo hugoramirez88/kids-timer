@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#E3F2FD"/>
+  <!-- Glass -->
+  <path d="M 35 25 L 38 80 L 62 80 L 65 25 Z" fill="#B3E5FC" stroke="#29B6F6" stroke-width="2"/>
+  <!-- Water in glass -->
+  <path d="M 37 40 L 39 75 L 61 75 L 63 40 Z" fill="#29B6F6" opacity="0.7"/>
+  <!-- Water bubbles -->
+  <circle cx="45" cy="55" r="3" fill="#81D4FA"/>
+  <circle cx="55" cy="60" r="2" fill="#81D4FA"/>
+  <circle cx="50" cy="48" r="2.5" fill="#81D4FA"/>
+  <!-- Glass shine -->
+  <line x1="40" y1="30" x2="42" y2="70" stroke="#fff" stroke-width="2" opacity="0.6"/>
+  <!-- Water drops -->
+  <ellipse cx="72" cy="35" rx="4" ry="6" fill="#29B6F6"/>
+  <ellipse cx="78" cy="50" rx="3" ry="5" fill="#29B6F6"/>
+  <ellipse cx="28" cy="42" rx="3" ry="5" fill="#29B6F6"/>
+</svg>
