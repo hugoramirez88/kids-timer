@@ -21,10 +21,15 @@
 
         <div class="header-actions">
           <div class="header-stats">
-            <span class="points">{{ profiles.activeProfile.points }} pts</span>
+            <button type="button" class="points-btn" @click="showRewardsShop = true" title="Loja">
+              {{ profiles.activeProfile.points }} ⭐
+            </button>
+            <button type="button" class="badges-btn" @click="showBadges = true" title="Conquistas">
+              🏆
+            </button>
             <span class="today-count">Hoje: {{ timer.completedPomodorosToday }}</span>
           </div>
-          <button class="settings-btn" @click="showSettings = true" title="Configurações">
+          <button type="button" class="settings-btn" @click="showSettings = true" title="Configurações">
             ⚙️
           </button>
         </div>
@@ -73,11 +78,36 @@
       <div class="modal modal-large">
         <div class="modal-header">
           <h3>Configurações</h3>
-          <button class="close-btn" @click="showSettings = false">✕</button>
+          <button type="button" class="close-btn" @click="showSettings = false">✕</button>
         </div>
         <SettingsPanel />
       </div>
     </div>
+
+    <!-- Rewards Shop Modal -->
+    <div v-if="showRewardsShop" class="modal-overlay" @click.self="showRewardsShop = false">
+      <div class="modal modal-large">
+        <div class="modal-header">
+          <h3>Loja de Recompensas</h3>
+          <button type="button" class="close-btn" @click="showRewardsShop = false">✕</button>
+        </div>
+        <RewardsShop />
+      </div>
+    </div>
+
+    <!-- Badges Display Modal -->
+    <div v-if="showBadges" class="modal-overlay" @click.self="showBadges = false">
+      <div class="modal modal-large">
+        <div class="modal-header">
+          <h3>Conquistas</h3>
+          <button type="button" class="close-btn" @click="showBadges = false">✕</button>
+        </div>
+        <BadgesDisplay />
+      </div>
+    </div>
+
+    <!-- Celebration Overlay -->
+    <Celebration />
   </div>
 </template>
 
@@ -96,6 +126,9 @@ import Hourglass from './components/Progress/Hourglass.vue'
 import ProgressBar from './components/Progress/ProgressBar.vue'
 import BreakSuggestion from './components/Break/BreakSuggestion.vue'
 import SettingsPanel from './components/Settings/SettingsPanel.vue'
+import RewardsShop from './components/Rewards/RewardsShop.vue'
+import BadgesDisplay from './components/Rewards/BadgesDisplay.vue'
+import Celebration from './components/Rewards/Celebration.vue'
 
 const timer = useTimerStore()
 const profiles = useProfilesStore()
@@ -103,6 +136,8 @@ const settings = useSettingsStore()
 
 const showProfileSwitch = ref(false)
 const showSettings = ref(false)
+const showRewardsShop = ref(false)
+const showBadges = ref(false)
 
 // Dynamic progress indicator component
 const progressComponent = computed(() => {
@@ -200,13 +235,35 @@ body {
 
 .header-stats {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  align-items: center;
   font-size: 14px;
   font-weight: 600;
 }
 
-.points {
+.points-btn, .badges-btn {
+  padding: 6px 12px;
+  background: var(--color-surface, white);
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 8px);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.points-btn {
   color: var(--color-primary, #4CAF50);
+}
+
+.badges-btn {
+  font-size: 16px;
+}
+
+.points-btn:hover, .badges-btn:hover {
+  border-color: var(--color-primary, #4CAF50);
+  transform: scale(1.05);
 }
 
 .today-count {
