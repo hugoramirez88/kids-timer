@@ -1,0 +1,24 @@
+/* src/themes/base.css */
+:root {
+  /* Default fallbacks */
+  --color-primary: #4CAF50;
+  --color-primary-light: #E8F5E9;
+  --color-primary-dark: #388E3C;
+  --color-secondary: #2196F3;
+  --color-warning: #FF9800;
+  --color-danger: #f44336;
+  --color-neutral: #e0e0e0;
+
+  --color-background: #f5f5f5;
+  --color-surface: white;
+  --color-border: #e0e0e0;
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-progress-bg: #e0e0e0;
+
+  --font-family: 'Nunito', sans-serif;
+  --border-radius: 12px;
+  --border-radius-large: 20px;
+
+  --animation-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

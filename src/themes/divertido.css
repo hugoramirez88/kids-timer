@@ -1,0 +1,24 @@
+/* src/themes/divertido.css */
+[data-theme="divertido"] {
+  --color-primary: #FF6B6B;
+  --color-primary-light: #FFE5E5;
+  --color-primary-dark: #E55555;
+  --color-secondary: #4ECDC4;
+  --color-warning: #FFE66D;
+  --color-danger: #FF6B6B;
+  --color-neutral: #F0F0F0;
+
+  --color-background: linear-gradient(135deg, #FFF5F5 0%, #F5FFFA 100%);
+  --color-surface: white;
+  --color-border: #FFD1D1;
+  --color-text: #2D3436;
+  --color-text-secondary: #636E72;
+  --color-progress-bg: #FFE5E5;
+
+  --border-radius: 16px;
+  --border-radius-large: 24px;
+}
+
+[data-theme="divertido"] body {
+  background: linear-gradient(135deg, #FFF5F5 0%, #F5FFFA 100%);
+}

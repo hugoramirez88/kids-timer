@@ -1,0 +1,25 @@
+/* src/themes/minimalista.css */
+[data-theme="minimalista"] {
+  --color-primary: #2D3436;
+  --color-primary-light: #F5F5F5;
+  --color-primary-dark: #1A1A1A;
+  --color-secondary: #636E72;
+  --color-warning: #FDCB6E;
+  --color-danger: #D63031;
+  --color-neutral: #DFE6E9;
+
+  --color-background: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-border: #DFE6E9;
+  --color-text: #2D3436;
+  --color-text-secondary: #636E72;
+  --color-progress-bg: #DFE6E9;
+
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --border-radius: 8px;
+  --border-radius-large: 12px;
+}
+
+[data-theme="minimalista"] body {
+  background: #FFFFFF;
+}
