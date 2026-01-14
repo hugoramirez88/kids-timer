@@ -1,0 +1,32 @@
+/* src/themes/floresta.css - Forest Theme */
+[data-theme="floresta"] {
+  --color-primary: #27AE60;
+  --color-primary-light: #D5F5E3;
+  --color-primary-dark: #1E8449;
+  --color-secondary: #F39C12;
+  --color-warning: #F1C40F;
+  --color-danger: #E74C3C;
+  --color-neutral: #ECF0F1;
+
+  --color-background: #E8F8F5;
+  --color-surface: #FDFEFE;
+  --color-border: #A9DFBF;
+  --color-text: #1D8348;
+  --color-text-secondary: #52BE80;
+  --color-progress-bg: #D5F5E3;
+
+  --border-radius: 14px;
+  --border-radius-large: 22px;
+}
+
+[data-theme="floresta"] body {
+  background: linear-gradient(180deg, #E8F8F5 0%, #D5F5E3 50%, #A9DFBF 100%);
+}
+
+[data-theme="floresta"] .app {
+  background: linear-gradient(180deg, #E8F8F5 0%, #D5F5E3 50%, #A9DFBF 100%);
+}
+
+[data-theme="floresta"] .app.break-mode {
+  background: linear-gradient(135deg, #D5F5E3 0%, #A9DFBF 100%);
+}

@@ -1,0 +1,32 @@
+/* src/themes/oceano.css - Ocean Theme */
+[data-theme="oceano"] {
+  --color-primary: #3498DB;
+  --color-primary-light: #D6EAF8;
+  --color-primary-dark: #2980B9;
+  --color-secondary: #1ABC9C;
+  --color-warning: #F39C12;
+  --color-danger: #E74C3C;
+  --color-neutral: #ECF0F1;
+
+  --color-background: #EBF5FB;
+  --color-surface: #FDFEFE;
+  --color-border: #AED6F1;
+  --color-text: #21618C;
+  --color-text-secondary: #5DADE2;
+  --color-progress-bg: #D6EAF8;
+
+  --border-radius: 14px;
+  --border-radius-large: 22px;
+}
+
+[data-theme="oceano"] body {
+  background: linear-gradient(180deg, #EBF5FB 0%, #D6EAF8 50%, #AED6F1 100%);
+}
+
+[data-theme="oceano"] .app {
+  background: linear-gradient(180deg, #EBF5FB 0%, #D6EAF8 50%, #AED6F1 100%);
+}
+
+[data-theme="oceano"] .app.break-mode {
+  background: linear-gradient(135deg, #D6EAF8 0%, #85C1E9 100%);
+}

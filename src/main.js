@@ -5,6 +5,10 @@ import App from './App.vue'
 import './themes/base.css'
 import './themes/divertido.css'
 import './themes/minimalista.css'
+import './themes/floresta.css'
+import './themes/espaco.css'
+import './themes/oceano.css'
+import './themes/doces.css'
 
 import { setupAudioListeners } from './utils/audio'
 

@@ -1,0 +1,32 @@
+/* src/themes/doces.css - Sweets/Candy Theme */
+[data-theme="doces"] {
+  --color-primary: #E91E63;
+  --color-primary-light: #FCE4EC;
+  --color-primary-dark: #C2185B;
+  --color-secondary: #FF9800;
+  --color-warning: #FFC107;
+  --color-danger: #F44336;
+  --color-neutral: #F8BBD9;
+
+  --color-background: #FFF0F5;
+  --color-surface: #FFFFFF;
+  --color-border: #F8BBD9;
+  --color-text: #AD1457;
+  --color-text-secondary: #EC407A;
+  --color-progress-bg: #FCE4EC;
+
+  --border-radius: 20px;
+  --border-radius-large: 28px;
+}
+
+[data-theme="doces"] body {
+  background: linear-gradient(135deg, #FFF0F5 0%, #FCE4EC 50%, #F8BBD9 100%);
+}
+
+[data-theme="doces"] .app {
+  background: linear-gradient(135deg, #FFF0F5 0%, #FCE4EC 50%, #F8BBD9 100%);
+}
+
+[data-theme="doces"] .app.break-mode {
+  background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+}

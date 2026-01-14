@@ -1,0 +1,48 @@
+/* src/themes/espaco.css - Space Theme */
+[data-theme="espaco"] {
+  --color-primary: #9B59B6;
+  --color-primary-light: #3D2855;
+  --color-primary-dark: #7D3C98;
+  --color-secondary: #00BCD4;
+  --color-warning: #F39C12;
+  --color-danger: #E74C3C;
+  --color-neutral: #34495E;
+
+  --color-background: #1A1A2E;
+  --color-surface: #16213E;
+  --color-border: #4A3F6B;
+  --color-text: #E8E8E8;
+  --color-text-secondary: #B8B8D1;
+  --color-progress-bg: #2D2D44;
+
+  --border-radius: 16px;
+  --border-radius-large: 24px;
+}
+
+[data-theme="espaco"] body {
+  background: linear-gradient(180deg, #0F0F23 0%, #1A1A2E 50%, #16213E 100%);
+}
+
+[data-theme="espaco"] .app {
+  background: linear-gradient(180deg, #0F0F23 0%, #1A1A2E 50%, #16213E 100%);
+}
+
+[data-theme="espaco"] .app.break-mode {
+  background: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 100%);
+}
+
+/* Override text colors for dark theme */
+[data-theme="espaco"] .profile-badge,
+[data-theme="espaco"] .preset-btn,
+[data-theme="espaco"] .profile-card,
+[data-theme="espaco"] .btn-secondary,
+[data-theme="espaco"] .modal {
+  background: #16213E;
+  color: #E8E8E8;
+}
+
+[data-theme="espaco"] .profile-badge:hover,
+[data-theme="espaco"] .preset-btn:hover,
+[data-theme="espaco"] .profile-card:hover {
+  border-color: #9B59B6;
+}
