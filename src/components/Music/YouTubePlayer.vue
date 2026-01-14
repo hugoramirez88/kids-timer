@@ -39,8 +39,7 @@
     <div v-if="savedVideos.length > 0" class="saved-videos">
       <h4>Videos Salvos</h4>
       <div class="video-list">
-        <button
-          type="button"
+        <div
           v-for="video in savedVideos"
           :key="video.id"
           :class="['video-item', { active: currentVideoId === video.id }]"
@@ -53,7 +52,7 @@
           <button type="button" class="remove-video-btn" @click.stop="removeVideo(video.id)">
             ✕
           </button>
-        </button>
+        </div>
       </div>
     </div>
 

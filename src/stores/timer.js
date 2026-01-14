@@ -94,14 +94,10 @@ export const useTimerStore = defineStore('timer', () => {
     intervalId = null
 
     if (status.value === 'working') {
-      // Work session complete
-      window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'work-complete' } }))
-      startBreak()
-    } else if (status.value === 'break') {
-      // Break complete - full pomodoro done
+      // Work session complete - THIS IS THE POMODORO COMPLETION!
       const profiles = useProfilesStore()
 
-      // Award points
+      // Award points for completing work
       profiles.addPoints(pointValues.completePomodoro)
       if (isFirstOfDay.value) {
         profiles.addPoints(pointValues.firstOfDay)
@@ -117,10 +113,17 @@ export const useTimerStore = defineStore('timer', () => {
       // Check daily badges
       checkDailyBadges()
 
-      window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'pomodoro-complete' } }))
-
       // Record to session history
       recordSession()
+
+      window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'work-complete' } }))
+      window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'pomodoro-complete' } }))
+
+      // Start break
+      startBreak()
+    } else if (status.value === 'break') {
+      // Break complete - just return to idle
+      window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'break-complete' } }))
 
       status.value = 'idle'
       timeRemaining.value = 0

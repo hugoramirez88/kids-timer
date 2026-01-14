@@ -60,27 +60,47 @@ const progressColor = computed(() => {
   return 'var(--color-primary, #4CAF50)'
 })
 
-// Animal position along path (simplified linear interpolation)
-const animalX = computed(() => {
-  return 20 + (260 * timer.progress)
-})
+// Quadratic bezier interpolation: B(t) = (1-t)²P0 + 2(1-t)tP1 + t²P2
+function quadraticBezier(t, p0, p1, p2) {
+  const mt = 1 - t
+  return mt * mt * p0 + 2 * mt * t * p1 + t * t * p2
+}
 
-const animalY = computed(() => {
+// Path segments with their approximate length ratios
+// Segment 1: (20,100) -> Q(80,40) -> (140,100) ~= 140px
+// Segment 2: (140,100) -> Q(200,160) -> (260,100) ~= 140px
+// Segment 3: (260,100) -> (280,100) = 20px line
+// Total ~= 300px, ratios: 0.467, 0.467, 0.066
+
+const animalPosition = computed(() => {
   const p = timer.progress
-  // Approximate Y position based on path curves
-  if (p < 0.33) {
-    // First curve: goes up
-    const t = p / 0.33
-    return 100 - 60 * Math.sin(t * Math.PI)
-  } else if (p < 0.66) {
-    // Second curve: goes down
-    const t = (p - 0.33) / 0.33
-    return 100 + 60 * Math.sin(t * Math.PI)
+
+  if (p <= 0.467) {
+    // First bezier curve: (20,100) -> Q(80,40) -> (140,100)
+    const t = p / 0.467
+    return {
+      x: quadraticBezier(t, 20, 80, 140),
+      y: quadraticBezier(t, 100, 40, 100)
+    }
+  } else if (p <= 0.934) {
+    // Second bezier curve: (140,100) -> Q(200,160) -> (260,100)
+    const t = (p - 0.467) / 0.467
+    return {
+      x: quadraticBezier(t, 140, 200, 260),
+      y: quadraticBezier(t, 100, 160, 100)
+    }
   } else {
-    // Final stretch
-    return 100
+    // Final line segment: (260,100) -> (280,100)
+    const t = (p - 0.934) / 0.066
+    return {
+      x: 260 + t * 20,
+      y: 100
+    }
   }
 })
+
+const animalX = computed(() => animalPosition.value.x)
+const animalY = computed(() => animalPosition.value.y)
 
 const animalEmoji = computed(() => {
   const animals = {

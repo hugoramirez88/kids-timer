@@ -114,6 +114,33 @@
         </div>
       </div>
     </section>
+
+    <!-- Soundscapes Section -->
+    <section class="shop-section">
+      <h3>Sons Ambiente</h3>
+      <div class="items-grid">
+        <div
+          v-for="soundscape in soundscapesData"
+          :key="soundscape.id"
+          :class="['shop-item', { owned: isOwned('soundscape', soundscape.id) }]"
+        >
+          <div class="item-preview">
+            <span class="soundscape-emoji">{{ soundscape.icon }}</span>
+          </div>
+          <span class="item-name">{{ soundscape.name }}</span>
+          <button
+            type="button"
+            v-if="!isOwned('soundscape', soundscape.id)"
+            class="buy-btn"
+            :disabled="!canAfford(soundscape.cost)"
+            @click="buyItem('soundscape', soundscape.id, soundscape.cost)"
+          >
+            {{ soundscape.cost }} ⭐
+          </button>
+          <span v-else class="selected-badge">Desbloqueado</span>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -121,6 +148,7 @@
 import { useProfilesStore } from '../../stores/profiles'
 import { useSettingsStore } from '../../stores/settings'
 import { avatars, themes as themesData, pathAnimals as pathAnimalsData } from '../../data/rewards'
+import { soundscapes as soundscapesData } from '../../data/ambientSoundscapes'
 
 const profiles = useProfilesStore()
 const settings = useSettingsStore()
@@ -131,6 +159,11 @@ function isOwned(type, id) {
     case 'avatar': return profiles.activeProfile.unlockedAvatars.includes(id)
     case 'theme': return profiles.activeProfile.unlockedThemes.includes(id)
     case 'animal': return profiles.activeProfile.unlockedAnimals.includes(id)
+    case 'soundscape':
+      // Default soundscapes are always owned
+      const defaultSoundscapes = ['jardim-tranquilo', 'brisa-suave']
+      if (defaultSoundscapes.includes(id)) return true
+      return profiles.activeProfile.unlockedSoundscapes?.includes(id) || false
   }
   return false
 }
@@ -290,7 +323,7 @@ function getAnimalEmoji(animalId) {
   font-size: 24px;
 }
 
-.animal-emoji {
+.animal-emoji, .soundscape-emoji {
   font-size: 36px;
 }
 

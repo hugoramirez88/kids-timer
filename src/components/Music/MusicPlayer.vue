@@ -2,84 +2,121 @@
 <template>
   <div class="music-player">
     <div class="player-header">
-      <h3>Musica para Estudar</h3>
+      <h3>Sons Ambiente</h3>
       <button type="button" class="toggle-btn" @click="togglePlayer">
         {{ isPlaying ? 'Pausar' : 'Tocar' }}
       </button>
     </div>
 
     <!-- Now Playing -->
-    <div v-if="currentTrack" class="now-playing">
-      <div class="track-icon">
-        {{ getInstrumentEmoji(currentTrack.instrument) }}
+    <div v-if="currentSoundscape" class="now-playing" :class="{ playing: isPlaying }">
+      <div class="soundscape-icon">
+        {{ currentSoundscape.icon }}
       </div>
-      <div class="track-info">
-        <span class="track-title">{{ currentTrack.title }}</span>
-        <span class="track-composer">{{ currentTrack.composer }}</span>
+      <div class="soundscape-info">
+        <span class="soundscape-name">{{ currentSoundscape.name }}</span>
+        <span class="soundscape-desc">{{ currentSoundscape.description }}</span>
       </div>
       <div class="visualizer" v-if="isPlaying">
         <div class="bar" v-for="i in 5" :key="i" :style="getBarStyle(i)"></div>
       </div>
     </div>
 
-    <!-- Educational Info -->
-    <div v-if="currentTrack" class="educational-info">
-      <div class="info-card">
-        <span class="info-label">Instrumento</span>
-        <span class="info-value">{{ currentTrack.instrument }}</span>
-      </div>
-      <div class="info-card fun-fact">
-        <span class="info-label">Curiosidade</span>
-        <span class="info-value">{{ currentTrack.funFact }}</span>
+    <!-- Soundscape Selection -->
+    <div class="soundscape-grid">
+      <button
+        type="button"
+        v-for="soundscape in soundscapes"
+        :key="soundscape.id"
+        :class="[
+          'soundscape-item',
+          {
+            active: currentSoundscape?.id === soundscape.id,
+            locked: !isUnlocked(soundscape.id)
+          }
+        ]"
+        @click="selectSoundscape(soundscape)"
+        :disabled="!isUnlocked(soundscape.id)"
+      >
+        <span class="item-icon">{{ soundscape.icon }}</span>
+        <span class="item-name">{{ soundscape.name }}</span>
+        <span v-if="!isUnlocked(soundscape.id)" class="item-cost">
+          {{ soundscape.cost }} ⭐
+        </span>
+        <span v-else-if="currentSoundscape?.id === soundscape.id && isPlaying" class="playing-indicator">
+          ♪
+        </span>
+      </button>
+    </div>
+
+    <!-- Classical Music Section -->
+    <div class="classical-section">
+      <h4>Músicas Clássicas</h4>
+      <p class="info-text">Curiosidades sobre compositores famosos</p>
+      <div class="track-list">
+        <div
+          v-for="track in classicalMusic"
+          :key="track.id"
+          class="track-item"
+          @click="showTrackInfo(track)"
+        >
+          <span class="track-emoji">{{ getInstrumentEmoji(track.instrument) }}</span>
+          <div class="track-details">
+            <span class="track-name">{{ track.title }}</span>
+            <span class="track-author">{{ track.composer }}</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Track List -->
-    <div class="track-list">
-      <button
-        type="button"
-        v-for="track in classicalMusic"
-        :key="track.id"
-        :class="['track-item', { active: currentTrack?.id === track.id }]"
-        @click="selectTrack(track)"
-      >
-        <span class="track-emoji">{{ getInstrumentEmoji(track.instrument) }}</span>
-        <div class="track-details">
-          <span class="track-name">{{ track.title }}</span>
-          <span class="track-author">{{ track.composer }}</span>
+    <!-- Track Info Modal -->
+    <div v-if="selectedTrack" class="track-modal" @click.self="selectedTrack = null">
+      <div class="track-modal-content">
+        <div class="modal-icon">{{ getInstrumentEmoji(selectedTrack.instrument) }}</div>
+        <h3>{{ selectedTrack.title }}</h3>
+        <p class="composer">{{ selectedTrack.composer }}</p>
+        <div class="info-row">
+          <span class="label">Instrumento:</span>
+          <span class="value">{{ selectedTrack.instrument }}</span>
         </div>
-      </button>
+        <div class="fun-fact">
+          <span class="label">Curiosidade:</span>
+          <p>{{ selectedTrack.funFact }}</p>
+        </div>
+        <button type="button" class="close-modal-btn" @click="selectedTrack = null">
+          Fechar
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
+import { soundscapes, getSoundscape } from '../../data/ambientSoundscapes'
 import { classicalMusic } from '../../data/classicalMusic'
 import { useTimerStore } from '../../stores/timer'
 import { useSettingsStore } from '../../stores/settings'
+import { useProfilesStore } from '../../stores/profiles'
 
 const timer = useTimerStore()
 const settings = useSettingsStore()
+const profiles = useProfilesStore()
 
-const currentTrack = ref(classicalMusic[0])
+const currentSoundscape = ref(soundscapes[0])
+const selectedTrack = ref(null)
 const isPlaying = ref(false)
+
 let audioContext = null
 let oscillators = []
 let gainNode = null
+let lfoNode = null
 
-// Music frequencies for different "styles" to simulate different pieces
-const trackFrequencies = {
-  'vivaldi-primavera': [329.63, 392.00, 493.88], // E4, G4, B4 - bright
-  'beethoven-fur-elise': [329.63, 349.23, 392.00], // E4, F4, G4 - melodic
-  'bach-cello-suite': [196.00, 246.94, 293.66], // G3, B3, D4 - deep
-  'mozart-eine-kleine': [261.63, 329.63, 392.00], // C4, E4, G4 - happy
-  'debussy-clair-de-lune': [261.63, 311.13, 392.00], // C4, Eb4, G4 - dreamy
-  'tchaikovsky-swan-lake': [246.94, 293.66, 349.23], // B3, D4, F4 - dramatic
-  'pachelbel-canon': [293.66, 349.23, 440.00], // D4, F4, A4 - peaceful
-  'grieg-morning-mood': [392.00, 493.88, 587.33], // G4, B4, D5 - bright morning
-  'saint-saens-swan': [220.00, 261.63, 329.63], // A3, C4, E4 - gentle
-  'handel-water-music': [261.63, 329.63, 440.00], // C4, E4, A4 - flowing
+function isUnlocked(soundscapeId) {
+  const soundscape = getSoundscape(soundscapeId)
+  if (soundscape.cost === 0) return true
+  // Check if user has unlocked this soundscape
+  return profiles.activeProfile?.unlockedSoundscapes?.includes(soundscapeId) || false
 }
 
 function initAudio() {
@@ -91,30 +128,44 @@ function initAudio() {
   }
 }
 
-function createAmbientTones() {
-  stopAmbientTones()
+function createAmbientSound() {
+  stopAmbientSound()
 
-  const frequencies = trackFrequencies[currentTrack.value.id] || [261.63, 329.63, 392.00]
+  const config = currentSoundscape.value.config
 
-  frequencies.forEach((freq, i) => {
+  // Create LFO for subtle movement
+  lfoNode = audioContext.createOscillator()
+  lfoNode.type = 'sine'
+  lfoNode.frequency.value = config.lfoRate
+
+  const lfoGain = audioContext.createGain()
+  lfoGain.gain.value = config.lfoDepth
+  lfoNode.connect(lfoGain)
+
+  // Create oscillators for each frequency
+  config.frequencies.forEach((freqMultiplier, i) => {
     const osc = audioContext.createOscillator()
-    osc.type = 'sine'
-    osc.frequency.value = freq
+    osc.type = config.waveType
+    osc.frequency.value = config.baseFreq * freqMultiplier
 
     // Add slight detuning for richness
-    const detune = (i - 1) * 3
-    osc.detune.value = detune
+    osc.detune.value = (i - 1) * 2
+
+    // Connect LFO to frequency for subtle vibrato
+    lfoGain.connect(osc.frequency)
 
     osc.connect(gainNode)
     osc.start()
     oscillators.push(osc)
   })
 
-  // Fade in
-  gainNode.gain.linearRampToValueAtTime(0.08, audioContext.currentTime + 2)
+  lfoNode.start()
+
+  // Fade in smoothly
+  gainNode.gain.linearRampToValueAtTime(config.volume, audioContext.currentTime + 3)
 }
 
-function stopAmbientTones() {
+function stopAmbientSound() {
   oscillators.forEach(osc => {
     try {
       osc.stop()
@@ -122,6 +173,14 @@ function stopAmbientTones() {
     } catch (e) {}
   })
   oscillators = []
+
+  if (lfoNode) {
+    try {
+      lfoNode.stop()
+      lfoNode.disconnect()
+    } catch (e) {}
+    lfoNode = null
+  }
 }
 
 function togglePlayer() {
@@ -137,7 +196,7 @@ function playMusic() {
   if (audioContext.state === 'suspended') {
     audioContext.resume()
   }
-  createAmbientTones()
+  createAmbientSound()
   isPlaying.value = true
 }
 
@@ -146,21 +205,28 @@ function pauseMusic() {
     gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5)
   }
   setTimeout(() => {
-    stopAmbientTones()
+    stopAmbientSound()
   }, 600)
   isPlaying.value = false
 }
 
-function selectTrack(track) {
-  currentTrack.value = track
+function selectSoundscape(soundscape) {
+  if (!isUnlocked(soundscape.id)) return
+
+  currentSoundscape.value = soundscape
+
   if (isPlaying.value) {
-    // Fade out, switch, fade in
-    gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.3)
+    // Crossfade to new soundscape
+    gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5)
     setTimeout(() => {
-      stopAmbientTones()
-      createAmbientTones()
-    }, 400)
+      stopAmbientSound()
+      createAmbientSound()
+    }, 600)
   }
+}
+
+function showTrackInfo(track) {
+  selectedTrack.value = track
 }
 
 function getInstrumentEmoji(instrument) {
@@ -176,11 +242,15 @@ function getInstrumentEmoji(instrument) {
 }
 
 function getBarStyle(index) {
-  const heights = [40, 60, 80, 60, 40]
-  const delays = [0, 0.1, 0.2, 0.3, 0.4]
+  const config = currentSoundscape.value?.config || { lfoRate: 0.1 }
+  const baseHeight = 30 + (index * 10)
+  const delay = index * 0.15
+  const speed = 0.8 + (config.lfoRate * 2)
+
   return {
-    height: `${heights[index - 1]}%`,
-    animationDelay: `${delays[index - 1]}s`,
+    height: `${baseHeight}%`,
+    animationDelay: `${delay}s`,
+    animationDuration: `${speed}s`,
   }
 }
 
@@ -196,14 +266,16 @@ watch(() => timer.status, (status) => {
 })
 
 onMounted(() => {
-  // Select random track on mount
-  const randomIndex = Math.floor(Math.random() * classicalMusic.length)
-  currentTrack.value = classicalMusic[randomIndex]
+  // Initialize with first unlocked soundscape
+  const unlocked = soundscapes.find(s => isUnlocked(s.id))
+  if (unlocked) {
+    currentSoundscape.value = unlocked
+  }
 })
 
 onUnmounted(() => {
   if (isPlaying.value) {
-    stopAmbientTones()
+    stopAmbientSound()
   }
   if (audioContext) {
     audioContext.close()
@@ -250,30 +322,37 @@ onUnmounted(() => {
   align-items: center;
   gap: 16px;
   padding: 16px;
-  background: var(--color-primary-light, #E8F5E9);
+  background: var(--color-surface, white);
+  border: 2px solid var(--color-border, #e0e0e0);
   border-radius: var(--border-radius, 12px);
   margin-bottom: 16px;
+  transition: all 0.3s;
 }
 
-.track-icon {
+.now-playing.playing {
+  background: var(--color-primary-light, #E8F5E9);
+  border-color: var(--color-primary, #4CAF50);
+}
+
+.soundscape-icon {
   font-size: 36px;
 }
 
-.track-info {
+.soundscape-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.track-title {
+.soundscape-name {
   font-size: 18px;
   font-weight: 600;
   color: var(--color-text, #333);
 }
 
-.track-composer {
-  font-size: 14px;
+.soundscape-desc {
+  font-size: 13px;
   color: var(--color-text-secondary, #666);
 }
 
@@ -292,40 +371,89 @@ onUnmounted(() => {
 }
 
 @keyframes pulse-bar {
-  0% { transform: scaleY(0.5); }
+  0% { transform: scaleY(0.4); }
   100% { transform: scaleY(1); }
 }
 
-.educational-info {
+.soundscape-grid {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
-.info-card {
-  padding: 12px 16px;
+.soundscape-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
   background: var(--color-surface, white);
-  border: 1px solid var(--color-border, #e0e0e0);
-  border-radius: var(--border-radius, 8px);
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 12px);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
 }
 
-.info-card.fun-fact {
-  grid-column: span 2;
+.soundscape-item:hover:not(:disabled) {
+  border-color: var(--color-primary, #4CAF50);
+  transform: translateY(-2px);
 }
 
-.info-label {
-  display: block;
+.soundscape-item.active {
+  border-color: var(--color-primary, #4CAF50);
+  background: var(--color-primary-light, #E8F5E9);
+}
+
+.soundscape-item.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.item-icon {
+  font-size: 24px;
+}
+
+.item-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text, #333);
+  text-align: center;
+}
+
+.item-cost {
   font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--color-text-secondary, #666);
+  color: var(--color-warning, #FF9800);
+  font-weight: 600;
+}
+
+.playing-indicator {
+  font-size: 12px;
+  color: var(--color-primary, #4CAF50);
+  animation: bounce 0.5s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.classical-section {
+  border-top: 1px solid var(--color-border, #e0e0e0);
+  padding-top: 16px;
+}
+
+.classical-section h4 {
+  font-size: 16px;
+  color: var(--color-text, #333);
   margin-bottom: 4px;
 }
 
-.info-value {
-  font-size: 14px;
-  color: var(--color-text, #333);
+.info-text {
+  font-size: 12px;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 12px;
 }
 
 .track-list {
@@ -339,28 +467,22 @@ onUnmounted(() => {
 .track-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 10px 12px;
   background: var(--color-surface, white);
   border: 1px solid var(--color-border, #e0e0e0);
   border-radius: var(--border-radius, 8px);
   cursor: pointer;
-  font-family: inherit;
-  text-align: left;
   transition: all 0.2s;
 }
 
 .track-item:hover {
   border-color: var(--color-primary, #4CAF50);
-}
-
-.track-item.active {
-  border-color: var(--color-primary, #4CAF50);
   background: var(--color-primary-light, #E8F5E9);
 }
 
 .track-emoji {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .track-details {
@@ -370,13 +492,104 @@ onUnmounted(() => {
 }
 
 .track-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--color-text, #333);
 }
 
 .track-author {
+  font-size: 11px;
+  color: var(--color-text-secondary, #666);
+}
+
+/* Track Info Modal */
+.track-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.track-modal-content {
+  background: var(--color-surface, white);
+  padding: 28px;
+  border-radius: var(--border-radius-large, 20px);
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.track-modal-content h3 {
+  font-size: 20px;
+  color: var(--color-text, #333);
+  margin-bottom: 4px;
+}
+
+.composer {
+  font-size: 14px;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 16px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border, #e0e0e0);
+}
+
+.info-row .label {
   font-size: 12px;
   color: var(--color-text-secondary, #666);
+}
+
+.info-row .value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text, #333);
+}
+
+.fun-fact {
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--color-primary-light, #E8F5E9);
+  border-radius: var(--border-radius, 8px);
+  text-align: left;
+}
+
+.fun-fact .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary-dark, #388E3C);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.fun-fact p {
+  font-size: 13px;
+  color: var(--color-text, #333);
+  margin: 0;
+}
+
+.close-modal-btn {
+  margin-top: 20px;
+  padding: 10px 24px;
+  background: var(--color-primary, #4CAF50);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius, 8px);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
 }
 </style>
