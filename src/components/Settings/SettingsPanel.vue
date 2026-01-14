@@ -75,13 +75,13 @@
           v-for="option in musicOptions"
           :key="option.id"
           :class="['music-btn', { active: settings.musicPreference === option.id }]"
-          @click="settings.musicPreference = option.id"
+          @click="selectMusicPreference(option.id)"
         >
           <span class="music-icon">{{ option.icon }}</span>
           <span class="music-name">{{ option.name }}</span>
         </button>
       </div>
-      <MusicPlayer v-if="settings.musicPreference === 'classical'" />
+      <MusicPlayer v-if="settings.musicPreference === 'music'" />
       <YouTubePlayer v-if="settings.musicPreference === 'youtube'" />
     </section>
 
@@ -169,18 +169,20 @@
 import { computed } from 'vue'
 import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
+import { useAudioStore } from '../../stores/audio'
 import { themes } from '../../data/rewards'
 import MusicPlayer from '../Music/MusicPlayer.vue'
 import YouTubePlayer from '../Music/YouTubePlayer.vue'
 
 const settings = useSettingsStore()
 const profiles = useProfilesStore()
+const audio = useAudioStore()
 
 const availableThemes = themes
 
 const musicOptions = [
   { id: 'none', name: 'Desligado', icon: '🔇' },
-  { id: 'classical', name: 'Classica', icon: '🎼' },
+  { id: 'music', name: 'Música', icon: '🎵' },
   { id: 'youtube', name: 'YouTube', icon: '🎬' },
 ]
 
@@ -256,6 +258,14 @@ function getThemePreviewStyle(themeId) {
     doces: '#E91E63',
   }
   return { backgroundColor: colors[themeId] || '#ccc' }
+}
+
+function selectMusicPreference(preference) {
+  // Stop any playing audio when switching to 'none'
+  if (preference === 'none') {
+    audio.stop()
+  }
+  settings.musicPreference = preference
 }
 </script>
 

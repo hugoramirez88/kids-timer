@@ -108,6 +108,9 @@
 
     <!-- Celebration Overlay -->
     <Celebration />
+
+    <!-- Floating Mini Player (shows when music is playing) -->
+    <MiniPlayer v-if="profiles.activeProfile" />
   </div>
 </template>
 
@@ -129,6 +132,7 @@ import SettingsPanel from './components/Settings/SettingsPanel.vue'
 import RewardsShop from './components/Rewards/RewardsShop.vue'
 import BadgesDisplay from './components/Rewards/BadgesDisplay.vue'
 import Celebration from './components/Rewards/Celebration.vue'
+import MiniPlayer from './components/Music/MiniPlayer.vue'
 
 const timer = useTimerStore()
 const profiles = useProfilesStore()

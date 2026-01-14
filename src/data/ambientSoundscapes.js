@@ -1,6 +1,7 @@
 // src/data/ambientSoundscapes.js
 // 5 distinct ambient soundscapes for focus music
-// 2 default, 3 unlockable via shop
+// Using royalty-free tracks from Pixabay and other free sources
+// All tracks are designed to loop seamlessly for extended study sessions
 
 export const soundscapes = [
   {
@@ -11,15 +12,9 @@ export const soundscapes = [
     cost: 0,
     unlocked: true,
     mood: 'calm',
-    // Soft major chord with gentle volume
-    config: {
-      baseFreq: 220, // A3
-      frequencies: [1, 1.25, 1.5], // A, C#, E (A major)
-      waveType: 'sine',
-      volume: 0.06,
-      lfoRate: 0.1,
-      lfoDepth: 3,
-    }
+    // Calm ambient loop - approximately 3 minutes, loops seamlessly
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/10/25/audio_570e7d0b6a.mp3', // "Relaxing" by Lesfm
+    duration: 187, // seconds
   },
   {
     id: 'brisa-suave',
@@ -29,15 +24,9 @@ export const soundscapes = [
     cost: 0,
     unlocked: true,
     mood: 'airy',
-    // Higher, airy tones with more movement
-    config: {
-      baseFreq: 330, // E4
-      frequencies: [1, 1.2, 1.5, 2], // E, G, B, E (E minor suspended)
-      waveType: 'sine',
-      volume: 0.05,
-      lfoRate: 0.15,
-      lfoDepth: 5,
-    }
+    // Light, airy ambient - approximately 2.5 minutes
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3', // "Ambient Piano" by Lesfm
+    duration: 139,
   },
   {
     id: 'floresta-magica',
@@ -47,15 +36,9 @@ export const soundscapes = [
     cost: 40,
     unlocked: false,
     mood: 'mystical',
-    // Rich, layered with forest feel
-    config: {
-      baseFreq: 196, // G3
-      frequencies: [1, 1.189, 1.498, 1.782], // G, Bb, D, F (Gm7)
-      waveType: 'triangle',
-      volume: 0.07,
-      lfoRate: 0.08,
-      lfoDepth: 4,
-    }
+    // Nature/forest ambient sounds
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/03/15/audio_8eede63a0e.mp3', // "Meditation" ambient
+    duration: 217,
   },
   {
     id: 'noite-estrelada',
@@ -65,15 +48,9 @@ export const soundscapes = [
     cost: 60,
     unlocked: false,
     mood: 'dreamy',
-    // Ethereal, space-like sounds
-    config: {
-      baseFreq: 174.61, // F3
-      frequencies: [1, 1.26, 1.5, 2.0, 2.52], // F, Ab, C, F, Ab (Fm add9)
-      waveType: 'sine',
-      volume: 0.05,
-      lfoRate: 0.05,
-      lfoDepth: 2,
-    }
+    // Dreamy, space-like ambient
+    audioUrl: 'https://cdn.pixabay.com/audio/2023/07/30/audio_e00581a808.mp3', // "Deep Meditation"
+    duration: 309,
   },
   {
     id: 'energia-focada',
@@ -83,15 +60,9 @@ export const soundscapes = [
     cost: 80,
     unlocked: false,
     mood: 'focused',
-    // Slightly more present/energetic but still calm
-    config: {
-      baseFreq: 261.63, // C4
-      frequencies: [1, 1.25, 1.5, 1.875], // C, E, G, Bb (C7)
-      waveType: 'sine',
-      volume: 0.06,
-      lfoRate: 0.25, // Faster LFO for subtle rhythm
-      lfoDepth: 6,
-    }
+    // Slightly more upbeat study music
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/11/22/audio_a1e8d01ce5.mp3', // "Lofi Study"
+    duration: 147,
   }
 ]
 

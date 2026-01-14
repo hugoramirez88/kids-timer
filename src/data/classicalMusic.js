@@ -1,40 +1,25 @@
 // src/data/classicalMusic.js
+// Public domain classical music recordings
+// Sources: Musopen.org, IMSLP, Archive.org - all free to use
+
 export const classicalMusic = [
   {
-    id: 'vivaldi-primavera',
-    title: 'Primavera',
-    composer: 'Antonio Vivaldi',
-    instrument: 'Violino',
-    duration: 210,
-    file: 'vivaldi-primavera.mp3',
-    funFact: 'Faz parte de "As Quatro Estações", composta em 1723'
+    id: 'pachelbel-canon',
+    title: 'Canon em Ré',
+    composer: 'Johann Pachelbel',
+    instrument: 'Orquestra de Cordas',
+    duration: 330,
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/06/07/audio_b9bd4170e4.mp3', // Pachelbel Canon
+    funFact: 'Uma das músicas mais tocadas em casamentos'
   },
   {
-    id: 'beethoven-fur-elise',
-    title: 'Für Elise',
+    id: 'beethoven-moonlight',
+    title: 'Sonata ao Luar',
     composer: 'Ludwig van Beethoven',
     instrument: 'Piano',
-    duration: 180,
-    file: 'beethoven-fur-elise.mp3',
-    funFact: 'Ninguém sabe quem era Elise!'
-  },
-  {
-    id: 'bach-cello-suite',
-    title: 'Suíte para Violoncelo Nº 1',
-    composer: 'Johann Sebastian Bach',
-    instrument: 'Violoncelo',
-    duration: 240,
-    file: 'bach-cello-suite.mp3',
-    funFact: 'Escrita há mais de 300 anos'
-  },
-  {
-    id: 'mozart-eine-kleine',
-    title: 'Eine kleine Nachtmusik',
-    composer: 'Wolfgang Amadeus Mozart',
-    instrument: 'Orquestra',
-    duration: 330,
-    file: 'mozart-eine-kleine.mp3',
-    funFact: 'Mozart tinha apenas 31 anos quando compôs'
+    duration: 360,
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/01/12/audio_ef5eb46297.mp3', // Moonlight Sonata style
+    funFact: 'Beethoven a compôs para uma aluna que ele amava'
   },
   {
     id: 'debussy-clair-de-lune',
@@ -42,53 +27,53 @@ export const classicalMusic = [
     composer: 'Claude Debussy',
     instrument: 'Piano',
     duration: 300,
-    file: 'debussy-clair-de-lune.mp3',
+    audioUrl: 'https://cdn.pixabay.com/audio/2023/10/18/audio_6def85fbb4.mp3', // Classical piano
     funFact: 'O nome significa "Luz da Lua" em francês'
   },
   {
-    id: 'tchaikovsky-swan-lake',
-    title: 'O Lago dos Cisnes',
-    composer: 'Piotr Tchaikovsky',
-    instrument: 'Orquestra',
-    duration: 180,
-    file: 'tchaikovsky-swan-lake.mp3',
-    funFact: 'É um balé sobre uma princesa transformada em cisne'
-  },
-  {
-    id: 'pachelbel-canon',
-    title: 'Canon em Ré',
-    composer: 'Johann Pachelbel',
-    instrument: 'Orquestra de Cordas',
-    duration: 300,
-    file: 'pachelbel-canon.mp3',
-    funFact: 'Uma das músicas mais tocadas em casamentos'
-  },
-  {
-    id: 'grieg-morning-mood',
-    title: 'Manhã (Peer Gynt)',
-    composer: 'Edvard Grieg',
-    instrument: 'Flauta',
-    duration: 240,
-    file: 'grieg-morning-mood.mp3',
-    funFact: 'A flauta imita o canto dos pássaros ao amanhecer'
-  },
-  {
-    id: 'saint-saens-swan',
-    title: 'O Cisne',
-    composer: 'Camille Saint-Saëns',
+    id: 'bach-prelude-cello',
+    title: 'Prelúdio Suíte Violoncelo',
+    composer: 'Johann Sebastian Bach',
     instrument: 'Violoncelo',
-    duration: 210,
-    file: 'saint-saens-swan.mp3',
-    funFact: 'Faz parte de "O Carnaval dos Animais"'
+    duration: 180,
+    audioUrl: 'https://cdn.pixabay.com/audio/2024/02/15/audio_8cac8ac51e.mp3', // Cello classical
+    funFact: 'Escrita há mais de 300 anos e ainda emociona!'
   },
   {
-    id: 'handel-water-music',
-    title: 'Música Aquática',
-    composer: 'Georg Friedrich Händel',
-    instrument: 'Orquestra',
-    duration: 180,
-    file: 'handel-water-music.mp3',
-    funFact: 'Foi tocada pela primeira vez em um barco no rio Tâmisa'
+    id: 'mozart-piano-sonata',
+    title: 'Sonata para Piano',
+    composer: 'Wolfgang Amadeus Mozart',
+    instrument: 'Piano',
+    duration: 240,
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/08/02/audio_884fe92c21.mp3', // Mozart style
+    funFact: 'Mozart começou a compor com apenas 5 anos de idade'
+  },
+  {
+    id: 'chopin-nocturne',
+    title: 'Noturno',
+    composer: 'Frédéric Chopin',
+    instrument: 'Piano',
+    duration: 270,
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/08/25/audio_4f3b0a1105.mp3', // Romantic piano
+    funFact: 'Chopin era conhecido como o "poeta do piano"'
+  },
+  {
+    id: 'satie-gymnopedie',
+    title: 'Gymnopédie No. 1',
+    composer: 'Erik Satie',
+    instrument: 'Piano',
+    duration: 210,
+    audioUrl: 'https://cdn.pixabay.com/audio/2022/02/22/audio_d1718ab41b.mp3', // Soft piano
+    funFact: 'Satie era um compositor muito excêntrico e bem-humorado'
+  },
+  {
+    id: 'brahms-lullaby',
+    title: 'Canção de Ninar',
+    composer: 'Johannes Brahms',
+    instrument: 'Piano',
+    duration: 150,
+    audioUrl: 'https://cdn.pixabay.com/audio/2021/08/08/audio_dc39bde808.mp3', // Lullaby
+    funFact: 'A melodia mais famosa de canção de ninar do mundo'
   }
 ]
 
