@@ -70,13 +70,12 @@ function getInstrumentEmoji(instrument) {
 <style scoped>
 .mini-player {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 80px;
+  right: 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
+  gap: 10px;
+  padding: 8px 14px;
   background: var(--color-surface, white);
   border: 2px solid var(--color-border, #e0e0e0);
   border-radius: 50px;

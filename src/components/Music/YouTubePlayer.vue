@@ -1,8 +1,10 @@
 <!-- src/components/Music/YouTubePlayer.vue -->
+<!-- Audio-only YouTube player integrated with global audio controls -->
 <template>
   <div class="youtube-player">
     <div class="player-header">
-      <h3>YouTube Music</h3>
+      <h3>🎬 YouTube (Apenas Áudio)</h3>
+      <p class="header-hint">O vídeo fica oculto - só o áudio toca</p>
     </div>
 
     <!-- URL Input -->
@@ -18,32 +20,40 @@
       </button>
     </div>
 
-    <!-- Player Container -->
-    <div v-if="currentVideoId" class="player-container">
-      <div class="video-wrapper">
-        <iframe
-          :src="`https://www.youtube.com/embed/${currentVideoId}?autoplay=1&loop=1&playlist=${currentVideoId}`"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+    <!-- Now Playing (Audio Only) -->
+    <div v-if="currentVideoId" class="now-playing-yt" :class="{ playing: isPlaying }">
+      <div class="yt-thumbnail">
+        <img :src="`https://img.youtube.com/vi/${currentVideoId}/mqdefault.jpg`" alt="Video thumbnail" />
+        <div class="audio-only-badge">🔊 Áudio</div>
       </div>
-      <div class="video-controls">
-        <button type="button" class="clear-btn" @click="clearVideo">
-          Remover
+      <div class="yt-info">
+        <span class="yt-title">{{ currentVideoTitle }}</span>
+        <span class="yt-status">{{ isPlaying ? 'Tocando...' : 'Pausado' }}</span>
+      </div>
+      <div class="yt-controls">
+        <button type="button" class="yt-btn play" @click="togglePlay">
+          {{ isPlaying ? '⏸️' : '▶️' }}
+        </button>
+        <button type="button" class="yt-btn stop" @click="stopVideo">
+          ⏹️
         </button>
       </div>
     </div>
 
+    <!-- Hidden YouTube Player (for audio extraction) -->
+    <div class="hidden-player" ref="playerContainer">
+      <div id="yt-player"></div>
+    </div>
+
     <!-- Saved Videos -->
     <div v-if="savedVideos.length > 0" class="saved-videos">
-      <h4>Videos Salvos</h4>
+      <h4>Vídeos Salvos</h4>
       <div class="video-list">
         <div
           v-for="video in savedVideos"
           :key="video.id"
           :class="['video-item', { active: currentVideoId === video.id }]"
-          @click="playVideo(video.id)"
+          @click="playVideo(video)"
         >
           <span class="video-thumbnail">
             <img :src="`https://img.youtube.com/vi/${video.id}/default.jpg`" :alt="video.title" />
@@ -58,70 +68,139 @@
 
     <!-- Suggestions -->
     <div class="suggestions">
-      <h4>Sugestoes</h4>
+      <h4>Sugestões para Estudar</h4>
       <p class="suggestion-hint">Pesquise no YouTube por:</p>
       <div class="suggestion-tags">
-        <span class="tag">lofi beats</span>
-        <span class="tag">study music</span>
-        <span class="tag">relaxing piano</span>
-        <span class="tag">nature sounds</span>
+        <span class="tag">lofi hip hop radio</span>
+        <span class="tag">study music playlist</span>
+        <span class="tag">relaxing piano music</span>
+        <span class="tag">classical music for studying</span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import { useTimerStore } from '../../stores/timer'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { useAudioStore } from '../../stores/audio'
 import { useSettingsStore } from '../../stores/settings'
 import { storage } from '../../utils/storage'
 
-const timer = useTimerStore()
+const audio = useAudioStore()
 const settings = useSettingsStore()
 
 const videoUrl = ref('')
 const currentVideoId = ref('')
+const currentVideoTitle = ref('')
 const savedVideos = ref([])
+const isPlaying = ref(false)
+const playerContainer = ref(null)
 
-// Load saved videos from storage
+let player = null
+let ytApiReady = false
+
+// Load YouTube IFrame API
 onMounted(() => {
   const data = storage.load()
   if (data.savedYoutubeVideos) {
     savedVideos.value = data.savedYoutubeVideos
   }
+
+  // Load YouTube API if not already loaded
+  if (!window.YT) {
+    const tag = document.createElement('script')
+    tag.src = 'https://www.youtube.com/iframe_api'
+    const firstScriptTag = document.getElementsByTagName('script')[0]
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+    window.onYouTubeIframeAPIReady = () => {
+      ytApiReady = true
+      if (currentVideoId.value) {
+        createPlayer(currentVideoId.value)
+      }
+    }
+  } else {
+    ytApiReady = true
+  }
 })
+
+onUnmounted(() => {
+  if (player) {
+    player.destroy()
+    player = null
+  }
+})
+
+function createPlayer(videoId) {
+  if (player) {
+    player.destroy()
+  }
+
+  player = new window.YT.Player('yt-player', {
+    height: '1',
+    width: '1',
+    videoId: videoId,
+    playerVars: {
+      autoplay: 1,
+      loop: 1,
+      playlist: videoId,
+      controls: 0,
+      disablekb: 1,
+      fs: 0,
+      modestbranding: 1,
+      rel: 0,
+    },
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange,
+    },
+  })
+}
+
+function onPlayerReady(event) {
+  event.target.playVideo()
+  isPlaying.value = true
+  // Stop any other audio that might be playing
+  audio.stop()
+}
+
+function onPlayerStateChange(event) {
+  // YT.PlayerState: PLAYING = 1, PAUSED = 2, ENDED = 0
+  if (event.data === 1) {
+    isPlaying.value = true
+  } else if (event.data === 2 || event.data === 0) {
+    isPlaying.value = false
+  }
+}
 
 function extractVideoId(url) {
   if (!url) return null
-
-  // Handle various YouTube URL formats
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s?]+)/,
-    /^([a-zA-Z0-9_-]{11})$/, // Direct video ID
+    /^([a-zA-Z0-9_-]{11})$/,
   ]
-
   for (const pattern of patterns) {
     const match = url.match(pattern)
     if (match) return match[1]
   }
-
   return null
 }
 
 function loadVideo() {
   const id = extractVideoId(videoUrl.value.trim())
   if (!id) {
-    alert('Link invalido. Cole um link do YouTube ou ID do video.')
+    alert('Link inválido. Cole um link do YouTube.')
     return
   }
 
   currentVideoId.value = id
+  currentVideoTitle.value = `YouTube - ${id.substring(0, 8)}...`
 
   // Save to list if not already saved
   if (!savedVideos.value.find(v => v.id === id)) {
     const newVideo = {
       id,
-      title: `Video ${savedVideos.value.length + 1}`,
+      title: currentVideoTitle.value,
       addedAt: Date.now(),
     }
     savedVideos.value.push(newVideo)
@@ -129,20 +208,47 @@ function loadVideo() {
   }
 
   videoUrl.value = ''
+
+  if (ytApiReady) {
+    createPlayer(id)
+  }
 }
 
-function playVideo(id) {
-  currentVideoId.value = id
+function playVideo(video) {
+  currentVideoId.value = video.id
+  currentVideoTitle.value = video.title
+
+  // Stop any file-based audio
+  audio.stop()
+
+  if (ytApiReady) {
+    createPlayer(video.id)
+  }
 }
 
-function clearVideo() {
+function togglePlay() {
+  if (!player) return
+
+  if (isPlaying.value) {
+    player.pauseVideo()
+  } else {
+    player.playVideo()
+  }
+}
+
+function stopVideo() {
+  if (player) {
+    player.stopVideo()
+  }
   currentVideoId.value = ''
+  currentVideoTitle.value = ''
+  isPlaying.value = false
 }
 
 function removeVideo(id) {
   savedVideos.value = savedVideos.value.filter(v => v.id !== id)
   if (currentVideoId.value === id) {
-    currentVideoId.value = ''
+    stopVideo()
   }
   saveVideos()
 }
@@ -153,21 +259,28 @@ function saveVideos() {
   storage.save(data)
 }
 
-// Auto-pause when timer stops (if we had more control)
-watch(() => timer.status, (status) => {
-  // YouTube iframe doesn't allow direct control without API
-  // The user can manually pause/play
+// Pause YouTube when switching away from YouTube mode
+watch(() => settings.musicPreference, (pref) => {
+  if (pref !== 'youtube' && player && isPlaying.value) {
+    player.pauseVideo()
+  }
 })
 </script>
 
 <style scoped>
 .youtube-player {
-  padding: 16px;
+  padding: 16px 0;
 }
 
 .player-header h3 {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--color-text, #333);
+  margin-bottom: 4px;
+}
+
+.header-hint {
+  font-size: 12px;
+  color: var(--color-text-secondary, #666);
   margin-bottom: 16px;
 }
 
@@ -214,42 +327,107 @@ watch(() => timer.status, (status) => {
   background: var(--color-primary-dark, #388E3C);
 }
 
-.player-container {
-  margin-bottom: 16px;
-}
-
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
+/* Now Playing Card */
+.now-playing-yt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--color-surface, white);
+  border: 2px solid var(--color-border, #e0e0e0);
   border-radius: var(--border-radius, 12px);
+  margin-bottom: 16px;
+  transition: all 0.3s;
 }
 
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+.now-playing-yt.playing {
+  border-color: var(--color-danger, #f44336);
+  background: #FFEBEE;
+}
+
+.yt-thumbnail {
+  position: relative;
+  width: 80px;
+  height: 45px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.yt-thumbnail img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
-.video-controls {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 8px;
-}
-
-.clear-btn {
-  padding: 6px 16px;
-  background: var(--color-danger, #f44336);
+.audio-only-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.7);
   color: white;
-  border: none;
-  border-radius: var(--border-radius, 6px);
-  font-size: 12px;
+  font-size: 9px;
+  border-radius: 4px;
+}
+
+.yt-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.yt-title {
+  font-size: 14px;
   font-weight: 600;
+  color: var(--color-text, #333);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.yt-status {
+  font-size: 12px;
+  color: var(--color-text-secondary, #666);
+}
+
+.yt-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.yt-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
   cursor: pointer;
-  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.yt-btn.play {
+  background: var(--color-danger, #f44336);
+}
+
+.yt-btn.stop {
+  background: var(--color-neutral, #e0e0e0);
+}
+
+.yt-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Hidden player - completely invisible but functional */
+.hidden-player {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .saved-videos {
@@ -279,8 +457,6 @@ watch(() => timer.status, (status) => {
   border: 1px solid var(--color-border, #e0e0e0);
   border-radius: var(--border-radius, 8px);
   cursor: pointer;
-  font-family: inherit;
-  text-align: left;
   transition: all 0.2s;
 }
 
@@ -289,8 +465,8 @@ watch(() => timer.status, (status) => {
 }
 
 .video-item.active {
-  border-color: var(--color-primary, #4CAF50);
-  background: var(--color-primary-light, #E8F5E9);
+  border-color: var(--color-danger, #f44336);
+  background: #FFEBEE;
 }
 
 .video-thumbnail {
@@ -334,7 +510,7 @@ watch(() => timer.status, (status) => {
 
 .suggestions {
   padding: 12px;
-  background: var(--color-primary-light, #E8F5E9);
+  background: #FFEBEE;
   border-radius: var(--border-radius, 12px);
 }
 

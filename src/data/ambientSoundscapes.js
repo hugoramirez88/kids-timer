@@ -1,68 +1,67 @@
 // src/data/ambientSoundscapes.js
-// 5 distinct ambient soundscapes for focus music
-// Using royalty-free tracks from Pixabay and other free sources
-// All tracks are designed to loop seamlessly for extended study sessions
+// Ambient music for focus and relaxation
+// Using free looping tracks from Free Music Archive and similar sources
 
 export const soundscapes = [
   {
-    id: 'jardim-tranquilo',
-    name: 'Jardim Tranquilo',
-    description: 'Sons suaves como um jardim calmo',
-    icon: '🌸',
+    id: 'piano-calmo',
+    name: 'Piano Calmo',
+    description: 'Melodias suaves de piano para concentração',
+    icon: '🎹',
     cost: 0,
     unlocked: true,
     mood: 'calm',
-    // Calm ambient loop - approximately 3 minutes, loops seamlessly
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/10/25/audio_570e7d0b6a.mp3', // "Relaxing" by Lesfm
-    duration: 187, // seconds
+    // Calm piano ambient from Archive.org
+    audioUrl: 'https://ia800505.us.archive.org/27/items/RelaxingPianoMusic_201901/Relaxing%20Piano%20Music.mp3',
+    duration: 300,
   },
   {
-    id: 'brisa-suave',
-    name: 'Brisa Suave',
-    description: 'Leve como uma brisa de verão',
-    icon: '🍃',
+    id: 'natureza-serena',
+    name: 'Natureza Serena',
+    description: 'Sons relaxantes da natureza',
+    icon: '🌿',
     cost: 0,
     unlocked: true,
-    mood: 'airy',
-    // Light, airy ambient - approximately 2.5 minutes
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3', // "Ambient Piano" by Lesfm
-    duration: 139,
+    mood: 'nature',
+    // Nature sounds from Archive.org
+    audioUrl: 'https://ia800500.us.archive.org/16/items/NatureSounds_201903/Forest%20Ambience.mp3',
+    duration: 600,
   },
   {
-    id: 'floresta-magica',
-    name: 'Floresta Mágica',
-    description: 'Misterioso como uma floresta encantada',
-    icon: '🌲',
+    id: 'meditacao-zen',
+    name: 'Meditação Zen',
+    description: 'Música ambiente para meditação',
+    icon: '🧘',
     cost: 40,
     unlocked: false,
-    mood: 'mystical',
-    // Nature/forest ambient sounds
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/03/15/audio_8eede63a0e.mp3', // "Meditation" ambient
-    duration: 217,
+    mood: 'meditation',
+    // Meditation ambient from Archive.org
+    audioUrl: 'https://ia800501.us.archive.org/1/items/MeditationMusic_201902/Meditation%20Ambient.mp3',
+    duration: 480,
   },
   {
-    id: 'noite-estrelada',
-    name: 'Noite Estrelada',
-    description: 'Calmo como o céu à noite',
-    icon: '✨',
+    id: 'chuva-suave',
+    name: 'Chuva Suave',
+    description: 'Som relaxante de chuva',
+    icon: '🌧️',
     cost: 60,
     unlocked: false,
-    mood: 'dreamy',
-    // Dreamy, space-like ambient
-    audioUrl: 'https://cdn.pixabay.com/audio/2023/07/30/audio_e00581a808.mp3', // "Deep Meditation"
-    duration: 309,
+    mood: 'rain',
+    // Rain sounds from Archive.org
+    audioUrl: 'https://ia800503.us.archive.org/29/items/RainSoundsForSleeping/Rain%20Sounds.mp3',
+    duration: 600,
   },
   {
-    id: 'energia-focada',
-    name: 'Energia Focada',
-    description: 'Suave mas com ritmo para manter o foco',
-    icon: '⚡',
+    id: 'lo-fi-estudo',
+    name: 'Lo-Fi Estudo',
+    description: 'Batidas suaves para estudar',
+    icon: '📚',
     cost: 80,
     unlocked: false,
-    mood: 'focused',
-    // Slightly more upbeat study music
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/11/22/audio_a1e8d01ce5.mp3', // "Lofi Study"
-    duration: 147,
+    mood: 'lofi',
+    // Lo-fi style ambient from Archive.org
+    audioUrl: 'https://ia800502.us.archive.org/18/items/LofiHipHopBeats/Lofi%20Study%20Beats.mp3',
+    duration: 360,
   }
 ]
 

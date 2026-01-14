@@ -1,25 +1,27 @@
 // src/data/classicalMusic.js
-// Public domain classical music recordings
-// Sources: Musopen.org, IMSLP, Archive.org - all free to use
+// Public domain classical music recordings from Archive.org and Musopen
+// All recordings are in the public domain or Creative Commons
 
 export const classicalMusic = [
   {
-    id: 'pachelbel-canon',
-    title: 'Canon em Ré',
-    composer: 'Johann Pachelbel',
-    instrument: 'Orquestra de Cordas',
-    duration: 330,
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/06/07/audio_b9bd4170e4.mp3', // Pachelbel Canon
-    funFact: 'Uma das músicas mais tocadas em casamentos'
+    id: 'bach-cello-suite-1',
+    title: 'Suíte para Violoncelo No. 1',
+    composer: 'Johann Sebastian Bach',
+    instrument: 'Violoncelo',
+    duration: 142,
+    // Musopen recording - public domain
+    audioUrl: 'https://ia800501.us.archive.org/6/items/BachCelloSuiteNo.1InGMajorBwv1007/01.Prelude.mp3',
+    funFact: 'Bach escreveu 6 suítes para violoncelo solo - esta é a mais famosa!'
   },
   {
-    id: 'beethoven-moonlight',
-    title: 'Sonata ao Luar',
+    id: 'beethoven-fur-elise',
+    title: 'Für Elise',
     composer: 'Ludwig van Beethoven',
     instrument: 'Piano',
-    duration: 360,
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/01/12/audio_ef5eb46297.mp3', // Moonlight Sonata style
-    funFact: 'Beethoven a compôs para uma aluna que ele amava'
+    duration: 180,
+    // Archive.org public domain recording
+    audioUrl: 'https://ia800504.us.archive.org/15/items/FurElise_261/fur_elise_beethoven.mp3',
+    funFact: 'Ninguém sabe quem era a misteriosa Elise!'
   },
   {
     id: 'debussy-clair-de-lune',
@@ -27,53 +29,59 @@ export const classicalMusic = [
     composer: 'Claude Debussy',
     instrument: 'Piano',
     duration: 300,
-    audioUrl: 'https://cdn.pixabay.com/audio/2023/10/18/audio_6def85fbb4.mp3', // Classical piano
+    // Archive.org public domain
+    audioUrl: 'https://ia800302.us.archive.org/26/items/ClairDeLune_644/DebussyClairDeLune.mp3',
     funFact: 'O nome significa "Luz da Lua" em francês'
   },
   {
-    id: 'bach-prelude-cello',
-    title: 'Prelúdio Suíte Violoncelo',
-    composer: 'Johann Sebastian Bach',
-    instrument: 'Violoncelo',
-    duration: 180,
-    audioUrl: 'https://cdn.pixabay.com/audio/2024/02/15/audio_8cac8ac51e.mp3', // Cello classical
-    funFact: 'Escrita há mais de 300 anos e ainda emociona!'
-  },
-  {
-    id: 'mozart-piano-sonata',
-    title: 'Sonata para Piano',
+    id: 'mozart-eine-kleine',
+    title: 'Eine kleine Nachtmusik',
     composer: 'Wolfgang Amadeus Mozart',
-    instrument: 'Piano',
-    duration: 240,
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/08/02/audio_884fe92c21.mp3', // Mozart style
-    funFact: 'Mozart começou a compor com apenas 5 anos de idade'
+    instrument: 'Orquestra',
+    duration: 330,
+    // Archive.org public domain
+    audioUrl: 'https://ia800501.us.archive.org/35/items/EineKleineNachtmusik_757/01EineKleineNachtmusikAllegro.mp3',
+    funFact: 'Mozart tinha apenas 31 anos quando compôs esta obra!'
   },
   {
-    id: 'chopin-nocturne',
-    title: 'Noturno',
+    id: 'chopin-nocturne-op9-2',
+    title: 'Noturno Op. 9 No. 2',
     composer: 'Frédéric Chopin',
     instrument: 'Piano',
     duration: 270,
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/08/25/audio_4f3b0a1105.mp3', // Romantic piano
+    // Archive.org public domain
+    audioUrl: 'https://ia800500.us.archive.org/31/items/ChopinNocturneNo.2/NocturneOp.9No.2.mp3',
     funFact: 'Chopin era conhecido como o "poeta do piano"'
   },
   {
-    id: 'satie-gymnopedie',
+    id: 'pachelbel-canon',
+    title: 'Canon em Ré',
+    composer: 'Johann Pachelbel',
+    instrument: 'Orquestra de Cordas',
+    duration: 330,
+    // Archive.org public domain
+    audioUrl: 'https://ia800504.us.archive.org/9/items/PachelbelCanonInD_201704/Pachelbel%20-%20Canon%20in%20D.mp3',
+    funFact: 'Uma das músicas mais tocadas em casamentos no mundo todo!'
+  },
+  {
+    id: 'satie-gymnopedie-1',
     title: 'Gymnopédie No. 1',
     composer: 'Erik Satie',
     instrument: 'Piano',
     duration: 210,
-    audioUrl: 'https://cdn.pixabay.com/audio/2022/02/22/audio_d1718ab41b.mp3', // Soft piano
-    funFact: 'Satie era um compositor muito excêntrico e bem-humorado'
+    // Archive.org public domain
+    audioUrl: 'https://ia800501.us.archive.org/11/items/ErikSatie-Gymnopedie/gymnopedie1.mp3',
+    funFact: 'Satie era um compositor muito excêntrico e bem-humorado!'
   },
   {
-    id: 'brahms-lullaby',
-    title: 'Canção de Ninar',
-    composer: 'Johannes Brahms',
-    instrument: 'Piano',
-    duration: 150,
-    audioUrl: 'https://cdn.pixabay.com/audio/2021/08/08/audio_dc39bde808.mp3', // Lullaby
-    funFact: 'A melodia mais famosa de canção de ninar do mundo'
+    id: 'vivaldi-primavera',
+    title: 'A Primavera (As Quatro Estações)',
+    composer: 'Antonio Vivaldi',
+    instrument: 'Violino',
+    duration: 210,
+    // Archive.org public domain
+    audioUrl: 'https://ia800500.us.archive.org/8/items/VivaldiSpring/01VivaldiSpring.mp3',
+    funFact: 'Faz parte de "As Quatro Estações", composta em 1723'
   }
 ]
 
