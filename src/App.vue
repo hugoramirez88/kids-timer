@@ -19,9 +19,14 @@
           <span>{{ profiles.activeProfile.name }}</span>
         </button>
 
-        <div class="header-stats">
-          <span class="points">{{ profiles.activeProfile.points }} pts</span>
-          <span class="today-count">Hoje: {{ timer.completedPomodorosToday }}</span>
+        <div class="header-actions">
+          <div class="header-stats">
+            <span class="points">{{ profiles.activeProfile.points }} pts</span>
+            <span class="today-count">Hoje: {{ timer.completedPomodorosToday }}</span>
+          </div>
+          <button class="settings-btn" @click="showSettings = true" title="Configurações">
+            ⚙️
+          </button>
         </div>
       </header>
 
@@ -58,6 +63,17 @@
         <button class="btn btn-secondary" @click="showProfileSwitch = false">Fechar</button>
       </div>
     </div>
+
+    <!-- Settings Modal -->
+    <div v-if="showSettings" class="modal-overlay" @click.self="showSettings = false">
+      <div class="modal modal-large">
+        <div class="modal-header">
+          <h3>Configurações</h3>
+          <button class="close-btn" @click="showSettings = false">✕</button>
+        </div>
+        <SettingsPanel />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -72,12 +88,14 @@ import TimerDisplay from './components/Timer/TimerDisplay.vue'
 import TimerControls from './components/Timer/TimerControls.vue'
 import CircularProgress from './components/Progress/CircularProgress.vue'
 import BreakSuggestion from './components/Break/BreakSuggestion.vue'
+import SettingsPanel from './components/Settings/SettingsPanel.vue'
 
 const timer = useTimerStore()
 const profiles = useProfilesStore()
 const settings = useSettingsStore()
 
 const showProfileSwitch = ref(false)
+const showSettings = ref(false)
 
 function onProfileSelected() {
   settings.initTheme()
@@ -280,5 +298,53 @@ body {
 
 .btn-secondary:hover {
   background: #d0d0d0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.settings-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 12px);
+  background: var(--color-surface, white);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.settings-btn:hover {
+  border-color: var(--color-primary, #4CAF50);
+}
+
+.modal-large {
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.close-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--color-text-secondary, #666);
+}
+
+.close-btn:hover {
+  color: var(--color-text, #333);
 }
 </style>
