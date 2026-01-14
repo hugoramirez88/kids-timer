@@ -8,6 +8,7 @@
       <h3>Tema</h3>
       <div class="theme-grid">
         <button
+          type="button"
           v-for="theme in availableThemes"
           :key="theme.id"
           :class="['theme-btn', { active: settings.theme === theme.id, locked: !isUnlocked('theme', theme.id) }]"
@@ -26,6 +27,7 @@
       <h3>Indicador de Progresso</h3>
       <div class="indicator-grid">
         <button
+          type="button"
           v-for="indicator in indicators"
           :key="indicator.id"
           :class="['indicator-btn', { active: settings.progressIndicator === indicator.id }]"
@@ -44,6 +46,7 @@
       <div class="setting-row">
         <label>Efeitos sonoros</label>
         <button
+          type="button"
           :class="['toggle-btn', { active: settings.soundEffectsEnabled }]"
           @click="settings.soundEffectsEnabled = !settings.soundEffectsEnabled"
         >
@@ -63,6 +66,24 @@
       </div>
     </section>
 
+    <!-- Music Settings -->
+    <section class="settings-section">
+      <h3>Musica</h3>
+      <div class="music-options">
+        <button
+          type="button"
+          v-for="option in musicOptions"
+          :key="option.id"
+          :class="['music-btn', { active: settings.musicPreference === option.id }]"
+          @click="settings.musicPreference = option.id"
+        >
+          <span class="music-icon">{{ option.icon }}</span>
+          <span class="music-name">{{ option.name }}</span>
+        </button>
+      </div>
+      <MusicPlayer v-if="settings.musicPreference === 'classical'" />
+    </section>
+
     <!-- Alert Settings -->
     <section class="settings-section">
       <h3>Alertas de Tempo</h3>
@@ -70,6 +91,7 @@
       <div class="setting-row">
         <label>1 minuto restante</label>
         <button
+          type="button"
           :class="['toggle-btn', { active: settings.alerts.oneMinute }]"
           @click="settings.alerts.oneMinute = !settings.alerts.oneMinute"
         >
@@ -80,6 +102,7 @@
       <div class="setting-row">
         <label>5 minutos restantes</label>
         <button
+          type="button"
           :class="['toggle-btn', { active: settings.alerts.fiveMinutes }]"
           @click="settings.alerts.fiveMinutes = !settings.alerts.fiveMinutes"
         >
@@ -90,6 +113,7 @@
       <div class="setting-row">
         <label>50% do tempo</label>
         <button
+          type="button"
           :class="['toggle-btn', { active: settings.alerts.fiftyPercent }]"
           @click="settings.alerts.fiftyPercent = !settings.alerts.fiftyPercent"
         >
@@ -100,6 +124,7 @@
       <div class="setting-row">
         <label>25% do tempo</label>
         <button
+          type="button"
           :class="['toggle-btn', { active: settings.alerts.twentyFivePercent }]"
           @click="settings.alerts.twentyFivePercent = !settings.alerts.twentyFivePercent"
         >
@@ -115,11 +140,18 @@ import { computed } from 'vue'
 import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
 import { themes } from '../../data/rewards'
+import MusicPlayer from '../Music/MusicPlayer.vue'
 
 const settings = useSettingsStore()
 const profiles = useProfilesStore()
 
 const availableThemes = themes
+
+const musicOptions = [
+  { id: 'none', name: 'Desligado', icon: '🔇' },
+  { id: 'classical', name: 'Classica', icon: '🎼' },
+  { id: 'youtube', name: 'YouTube', icon: '🎬' },
+]
 
 const indicators = [
   { id: 'circular', name: 'Circulo', icon: '⭕' },
@@ -281,5 +313,44 @@ function getThemePreviewStyle(themeId) {
 input[type="range"] {
   width: 120px;
   cursor: pointer;
+}
+
+.music-options {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.music-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background: var(--color-surface, white);
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 12px);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.music-btn:hover {
+  border-color: var(--color-primary, #4CAF50);
+}
+
+.music-btn.active {
+  border-color: var(--color-primary, #4CAF50);
+  background: var(--color-primary-light, #E8F5E9);
+}
+
+.music-icon {
+  font-size: 24px;
+}
+
+.music-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text, #333);
 }
 </style>
