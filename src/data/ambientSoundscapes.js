@@ -1,6 +1,6 @@
 // src/data/ambientSoundscapes.js
-// Ambient music for focus and relaxation
-// Using free looping tracks from Free Music Archive and similar sources
+// Ambient music from Calm Pills collection on Archive.org (CC0 license)
+// All tracks are free to use without restrictions
 
 export const soundscapes = [
   {
@@ -11,21 +11,19 @@ export const soundscapes = [
     cost: 0,
     unlocked: true,
     mood: 'calm',
-    // Calm piano ambient from Archive.org
-    audioUrl: 'https://ia800505.us.archive.org/27/items/RelaxingPianoMusic_201901/Relaxing%20Piano%20Music.mp3',
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_1_-_Still_Habitat.mp3',
     duration: 300,
   },
   {
-    id: 'natureza-serena',
-    name: 'Natureza Serena',
-    description: 'Sons relaxantes da natureza',
-    icon: '🌿',
+    id: 'anoitecer',
+    name: 'Anoitecer',
+    description: 'Sons relaxantes para o fim do dia',
+    icon: '🌅',
     cost: 0,
     unlocked: true,
-    mood: 'nature',
-    // Nature sounds from Archive.org
-    audioUrl: 'https://ia800500.us.archive.org/16/items/NatureSounds_201903/Forest%20Ambience.mp3',
-    duration: 600,
+    mood: 'evening',
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_2_-_Slowly_Dusk.mp3',
+    duration: 300,
   },
   {
     id: 'meditacao-zen',
@@ -35,33 +33,30 @@ export const soundscapes = [
     cost: 40,
     unlocked: false,
     mood: 'meditation',
-    // Meditation ambient from Archive.org
-    audioUrl: 'https://ia800501.us.archive.org/1/items/MeditationMusic_201902/Meditation%20Ambient.mp3',
-    duration: 480,
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_3_-_Slow_Journey.mp3',
+    duration: 300,
   },
   {
-    id: 'chuva-suave',
-    name: 'Chuva Suave',
-    description: 'Som relaxante de chuva',
-    icon: '🌧️',
+    id: 'sonho-tranquilo',
+    name: 'Sonho Tranquilo',
+    description: 'Sons suaves como um sonho',
+    icon: '💭',
     cost: 60,
     unlocked: false,
-    mood: 'rain',
-    // Rain sounds from Archive.org
-    audioUrl: 'https://ia800503.us.archive.org/29/items/RainSoundsForSleeping/Rain%20Sounds.mp3',
-    duration: 600,
+    mood: 'dreamy',
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_4_-_Whispering_Dream.mp3',
+    duration: 300,
   },
   {
-    id: 'lo-fi-estudo',
-    name: 'Lo-Fi Estudo',
-    description: 'Batidas suaves para estudar',
+    id: 'foco-suave',
+    name: 'Foco Suave',
+    description: 'Melodia gentil para manter o foco',
     icon: '📚',
     cost: 80,
     unlocked: false,
-    mood: 'lofi',
-    // Lo-fi style ambient from Archive.org
-    audioUrl: 'https://ia800502.us.archive.org/18/items/LofiHipHopBeats/Lofi%20Study%20Beats.mp3',
-    duration: 360,
+    mood: 'focus',
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_5_-_Soft_Focus.mp3',
+    duration: 300,
   }
 ]
 

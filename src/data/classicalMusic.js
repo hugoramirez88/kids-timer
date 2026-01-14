@@ -1,47 +1,25 @@
 // src/data/classicalMusic.js
-// Public domain classical music recordings from Archive.org and Musopen
-// All recordings are in the public domain or Creative Commons
+// Public domain classical music from Musopen collection on Archive.org
+// All recordings are public domain (CC0 or pre-1929)
 
 export const classicalMusic = [
   {
-    id: 'bach-cello-suite-1',
-    title: 'Suíte para Violoncelo No. 1',
+    id: 'bach-goldberg-aria',
+    title: 'Variações Goldberg - Ária',
     composer: 'Johann Sebastian Bach',
-    instrument: 'Violoncelo',
-    duration: 142,
-    // Musopen recording - public domain
-    audioUrl: 'https://ia800501.us.archive.org/6/items/BachCelloSuiteNo.1InGMajorBwv1007/01.Prelude.mp3',
-    funFact: 'Bach escreveu 6 suítes para violoncelo solo - esta é a mais famosa!'
+    instrument: 'Piano',
+    duration: 240,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Bach_GoldbergVariations/JohannSebastianBach-01-GoldbergVariationsBwv.988-Aria.mp3',
+    funFact: 'Bach compôs esta música para ajudar um conde com insônia!'
   },
   {
-    id: 'beethoven-fur-elise',
-    title: 'Für Elise',
+    id: 'beethoven-moonlight-1',
+    title: 'Sonata ao Luar - 1º Mov.',
     composer: 'Ludwig van Beethoven',
     instrument: 'Piano',
-    duration: 180,
-    // Archive.org public domain recording
-    audioUrl: 'https://ia800504.us.archive.org/15/items/FurElise_261/fur_elise_beethoven.mp3',
-    funFact: 'Ninguém sabe quem era a misteriosa Elise!'
-  },
-  {
-    id: 'debussy-clair-de-lune',
-    title: 'Clair de Lune',
-    composer: 'Claude Debussy',
-    instrument: 'Piano',
-    duration: 300,
-    // Archive.org public domain
-    audioUrl: 'https://ia800302.us.archive.org/26/items/ClairDeLune_644/DebussyClairDeLune.mp3',
-    funFact: 'O nome significa "Luz da Lua" em francês'
-  },
-  {
-    id: 'mozart-eine-kleine',
-    title: 'Eine kleine Nachtmusik',
-    composer: 'Wolfgang Amadeus Mozart',
-    instrument: 'Orquestra',
-    duration: 330,
-    // Archive.org public domain
-    audioUrl: 'https://ia800501.us.archive.org/35/items/EineKleineNachtmusik_757/01EineKleineNachtmusikAllegro.mp3',
-    funFact: 'Mozart tinha apenas 31 anos quando compôs esta obra!'
+    duration: 360,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Beethoven_PianoSonataNo.14/LudwigVanBeethoven-01-PianoSonataNo.14InC-SharpMinorOp.27No.2MoonlightI.AdagioSostenuto.mp3',
+    funFact: 'Beethoven a compôs para uma aluna que ele amava!'
   },
   {
     id: 'chopin-nocturne-op9-2',
@@ -49,39 +27,53 @@ export const classicalMusic = [
     composer: 'Frédéric Chopin',
     instrument: 'Piano',
     duration: 270,
-    // Archive.org public domain
-    audioUrl: 'https://ia800500.us.archive.org/31/items/ChopinNocturneNo.2/NocturneOp.9No.2.mp3',
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Chopin_NocturnesOp.9/FredericChopin-02-NocturneInE-FlatMajorOp.9No.2.mp3',
     funFact: 'Chopin era conhecido como o "poeta do piano"'
   },
   {
-    id: 'pachelbel-canon',
-    title: 'Canon em Ré',
-    composer: 'Johann Pachelbel',
-    instrument: 'Orquestra de Cordas',
-    duration: 330,
-    // Archive.org public domain
-    audioUrl: 'https://ia800504.us.archive.org/9/items/PachelbelCanonInD_201704/Pachelbel%20-%20Canon%20in%20D.mp3',
-    funFact: 'Uma das músicas mais tocadas em casamentos no mundo todo!'
-  },
-  {
-    id: 'satie-gymnopedie-1',
-    title: 'Gymnopédie No. 1',
-    composer: 'Erik Satie',
+    id: 'debussy-arabesque-1',
+    title: 'Arabesque No. 1',
+    composer: 'Claude Debussy',
     instrument: 'Piano',
-    duration: 210,
-    // Archive.org public domain
-    audioUrl: 'https://ia800501.us.archive.org/11/items/ErikSatie-Gymnopedie/gymnopedie1.mp3',
-    funFact: 'Satie era um compositor muito excêntrico e bem-humorado!'
+    duration: 240,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Debussy_DeuxArabesques/ClaudeDebussy-01-DeuxArabesquesL.66No.1InEMajorAndantinoConMoto.mp3',
+    funFact: 'Debussy criou um novo estilo chamado "impressionismo musical"'
   },
   {
-    id: 'vivaldi-primavera',
-    title: 'A Primavera (As Quatro Estações)',
-    composer: 'Antonio Vivaldi',
-    instrument: 'Violino',
-    duration: 210,
-    // Archive.org public domain
-    audioUrl: 'https://ia800500.us.archive.org/8/items/VivaldiSpring/01VivaldiSpring.mp3',
-    funFact: 'Faz parte de "As Quatro Estações", composta em 1723'
+    id: 'mozart-sonata-16',
+    title: 'Sonata No. 16 em Dó Maior',
+    composer: 'Wolfgang Amadeus Mozart',
+    instrument: 'Piano',
+    duration: 180,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Mozart_PianoSonataNo.16/WolfgangAmadeusMozart-01-PianoSonataNo.16InCMajorK.545SonataFacileI.Allegro.mp3',
+    funFact: 'Mozart começou a compor com apenas 5 anos!'
+  },
+  {
+    id: 'schubert-impromptu-3',
+    title: 'Impromptu Op. 90 No. 3',
+    composer: 'Franz Schubert',
+    instrument: 'Piano',
+    duration: 360,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Schubert_FourImpromptusOp.90/FranzSchubert-03-FourImpromptusOp.90D.899No.3InG-FlatMajorAndante.mp3',
+    funFact: 'Schubert compôs mais de 600 canções em sua curta vida!'
+  },
+  {
+    id: 'brahms-waltz-15',
+    title: 'Valsa Op. 39 No. 15',
+    composer: 'Johannes Brahms',
+    instrument: 'Piano',
+    duration: 120,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Brahms_WaltzesOp.39/JohannesBrahms-15-16WaltzesOp.39No.15InA-FlatMajor.mp3',
+    funFact: 'Esta é uma das valsas mais conhecidas de Brahms!'
+  },
+  {
+    id: 'grieg-morning-mood',
+    title: 'Manhã (Peer Gynt)',
+    composer: 'Edvard Grieg',
+    instrument: 'Orquestra',
+    duration: 240,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Grieg_PeerGyntSuiteNo.1/EdvardGrieg-01-PeerGyntSuiteNo.1Op.46I.MorningMood.mp3',
+    funFact: 'A flauta imita o canto dos pássaros ao amanhecer!'
   }
 ]
 
