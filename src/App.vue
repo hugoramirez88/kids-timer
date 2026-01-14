@@ -1,12 +1,104 @@
 <!-- src/App.vue -->
 <template>
-  <div class="app">
-    <h1>Timer Pomodoro</h1>
-    <p>Em construção...</p>
+  <div class="app" :class="{ 'break-mode': timer.status === 'break' }">
+    <!-- Profile Selection Screen -->
+    <ProfileSelector
+      v-if="!profiles.activeProfile"
+      @profileSelected="onProfileSelected"
+    />
+
+    <!-- Main Timer Screen -->
+    <main v-else class="timer-screen">
+      <header class="app-header">
+        <button class="profile-badge" @click="showProfileSwitch = true">
+          <img
+            :src="`/images/avatars/${profiles.activeProfile.avatar}.svg`"
+            :alt="profiles.activeProfile.name"
+            class="profile-badge-avatar"
+          />
+          <span>{{ profiles.activeProfile.name }}</span>
+        </button>
+
+        <div class="header-stats">
+          <span class="points">{{ profiles.activeProfile.points }} pts</span>
+          <span class="today-count">Hoje: {{ timer.completedPomodorosToday }}</span>
+        </div>
+      </header>
+
+      <div class="timer-main">
+        <div class="progress-container">
+          <CircularProgress :size="280" :stroke-width="16" />
+          <div class="timer-overlay">
+            <TimerDisplay />
+          </div>
+        </div>
+
+        <BreakSuggestion v-if="timer.status === 'break'" />
+
+        <TimerControls />
+      </div>
+    </main>
+
+    <!-- Profile Switch Modal -->
+    <div v-if="showProfileSwitch" class="modal-overlay" @click.self="showProfileSwitch = false">
+      <div class="modal">
+        <h3>Trocar Perfil</h3>
+        <div class="profile-list">
+          <button
+            v-for="profile in profiles.profiles"
+            :key="profile.id"
+            class="profile-list-item"
+            :class="{ active: profile.id === profiles.activeProfileId }"
+            @click="switchProfile(profile.id)"
+          >
+            <img :src="`/images/avatars/${profile.avatar}.svg`" :alt="profile.name" />
+            <span>{{ profile.name }}</span>
+          </button>
+        </div>
+        <button class="btn btn-secondary" @click="showProfileSwitch = false">Fechar</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
+import { useTimerStore } from './stores/timer'
+import { useProfilesStore } from './stores/profiles'
+import { useSettingsStore } from './stores/settings'
+
+import ProfileSelector from './components/Profiles/ProfileSelector.vue'
+import TimerDisplay from './components/Timer/TimerDisplay.vue'
+import TimerControls from './components/Timer/TimerControls.vue'
+import CircularProgress from './components/Progress/CircularProgress.vue'
+import BreakSuggestion from './components/Break/BreakSuggestion.vue'
+
+const timer = useTimerStore()
+const profiles = useProfilesStore()
+const settings = useSettingsStore()
+
+const showProfileSwitch = ref(false)
+
+function onProfileSelected() {
+  settings.initTheme()
+}
+
+function switchProfile(profileId) {
+  if (timer.status !== 'idle') {
+    if (!confirm('Trocar de perfil vai parar o timer. Continuar?')) {
+      return
+    }
+    timer.stop()
+  }
+  profiles.selectProfile(profileId)
+  showProfileSwitch.value = false
+}
+
+onMounted(() => {
+  if (profiles.activeProfile) {
+    settings.initTheme()
+  }
+})
 </script>
 
 <style>
@@ -17,17 +109,176 @@
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
-  background: #f5f5f5;
+  font-family: var(--font-family, 'Nunito', sans-serif);
+  background: var(--color-background, #f5f5f5);
   min-height: 100vh;
 }
 
 .app {
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+.app.break-mode {
+  background: linear-gradient(135deg, #E3F2FD 0%, #E8F5E9 100%);
+}
+
+.timer-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: var(--color-surface, white);
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 12px);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text, #333);
+  transition: all 0.2s;
+}
+
+.profile-badge:hover {
+  border-color: var(--color-primary, #4CAF50);
+}
+
+.profile-badge-avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.header-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.points {
+  color: var(--color-primary, #4CAF50);
+}
+
+.today-count {
+  color: var(--color-text-secondary, #666);
+}
+
+.timer-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
+  gap: 40px;
+}
+
+.progress-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-overlay {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--color-surface, white);
+  padding: 32px;
+  border-radius: var(--border-radius-large, 16px);
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal h3 {
+  font-size: 24px;
+  color: var(--color-text, #333);
+}
+
+.profile-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--color-surface, white);
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 8px);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--color-text, #333);
+  transition: all 0.2s;
+}
+
+.profile-list-item:hover {
+  border-color: var(--color-primary, #4CAF50);
+}
+
+.profile-list-item.active {
+  border-color: var(--color-primary, #4CAF50);
+  background: var(--color-primary-light, #E8F5E9);
+}
+
+.profile-list-item img {
+  width: 40px;
+  height: 40px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--border-radius, 8px);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: var(--color-neutral, #e0e0e0);
+  color: var(--color-text, #333);
+}
+
+.btn-secondary:hover {
+  background: #d0d0d0;
 }
 </style>
