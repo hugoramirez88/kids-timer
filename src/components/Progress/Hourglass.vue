@@ -78,25 +78,24 @@ const sandColor = computed(() => {
   return '#D4A574' // Sand color
 })
 
-// Use sqrt transformation for visual proportionality
-// Since the hourglass has a tapered shape (area ∝ height²),
-// we need height ∝ sqrt(progress) for linear visual area change
+// Sand height calculations that conserve total sand volume
+// Using ease-in (power > 1) for bottom to compensate for the wide base
+// This slows initial fill since the wide base creates lots of visible area
 
-// Top sand decreases as progress increases
+// Bottom sand increases as progress increases (ease-in: slow start, fast end)
+const bottomSandHeight = computed(() => {
+  // Power of 1.5 slows initial fill to compensate for wide base area
+  return 60 * Math.pow(timer.progress, 1.5)
+})
+
+// Top sand is complementary to conserve total (no "multiplying sand" effect)
 const topSandHeight = computed(() => {
-  // sqrt makes the visible area decrease linearly with time
-  return 60 * Math.sqrt(1 - timer.progress)
+  return 60 - bottomSandHeight.value
 })
 
 const topSandY = computed(() => {
-  // Position adjusts based on remaining sand height
+  // Sand surface drops as it drains through the neck
   return 15 + (60 - topSandHeight.value)
-})
-
-// Bottom sand increases as progress increases
-const bottomSandHeight = computed(() => {
-  // sqrt makes the visible area increase linearly with time
-  return 60 * Math.sqrt(timer.progress)
 })
 
 const bottomSandY = computed(() => {
