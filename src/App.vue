@@ -32,11 +32,15 @@
 
       <div class="timer-main">
         <div class="progress-container">
-          <CircularProgress :size="280" :stroke-width="16" />
-          <div class="timer-overlay">
+          <!-- Dynamic Progress Indicator -->
+          <component :is="progressComponent" />
+          <div class="timer-overlay" v-if="settings.progressIndicator === 'circular'">
             <TimerDisplay />
           </div>
         </div>
+
+        <!-- Timer display below for non-circular indicators -->
+        <TimerDisplay v-if="settings.progressIndicator !== 'circular'" />
 
         <BreakSuggestion v-if="timer.status === 'break'" />
 
@@ -78,7 +82,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useTimerStore } from './stores/timer'
 import { useProfilesStore } from './stores/profiles'
 import { useSettingsStore } from './stores/settings'
@@ -87,6 +91,9 @@ import ProfileSelector from './components/Profiles/ProfileSelector.vue'
 import TimerDisplay from './components/Timer/TimerDisplay.vue'
 import TimerControls from './components/Timer/TimerControls.vue'
 import CircularProgress from './components/Progress/CircularProgress.vue'
+import AnimalPath from './components/Progress/AnimalPath.vue'
+import Hourglass from './components/Progress/Hourglass.vue'
+import ProgressBar from './components/Progress/ProgressBar.vue'
 import BreakSuggestion from './components/Break/BreakSuggestion.vue'
 import SettingsPanel from './components/Settings/SettingsPanel.vue'
 
@@ -96,6 +103,17 @@ const settings = useSettingsStore()
 
 const showProfileSwitch = ref(false)
 const showSettings = ref(false)
+
+// Dynamic progress indicator component
+const progressComponent = computed(() => {
+  const indicators = {
+    'circular': CircularProgress,
+    'animal-path': AnimalPath,
+    'hourglass': Hourglass,
+    'progress-bar': ProgressBar,
+  }
+  return indicators[settings.progressIndicator] || CircularProgress
+})
 
 function onProfileSelected() {
   settings.initTheme()

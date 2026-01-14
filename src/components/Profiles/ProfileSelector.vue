@@ -5,6 +5,7 @@
 
     <div class="profiles-grid">
       <button
+        type="button"
         v-for="profile in profiles.profiles"
         :key="profile.id"
         class="profile-card"
@@ -17,7 +18,7 @@
         <span class="profile-stats">{{ profile.totalPomodoros }} pomodoros</span>
       </button>
 
-      <button class="profile-card add-new" @click="showCreateModal = true">
+      <button type="button" class="profile-card add-new" @click="showCreateModal = true">
         <div class="profile-avatar">
           <span class="add-icon">+</span>
         </div>

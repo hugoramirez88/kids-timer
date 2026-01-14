@@ -4,6 +4,7 @@
     <!-- Preset buttons (only when idle) -->
     <div v-if="timer.status === 'idle'" class="presets">
       <button
+        type="button"
         v-for="preset in timer.presets"
         :key="preset.id"
         :class="['preset-btn', { active: selectedPreset === preset.id }]"
@@ -39,6 +40,7 @@
     <!-- Main action buttons -->
     <div class="actions">
       <button
+        type="button"
         v-if="timer.status === 'idle'"
         class="btn btn-primary btn-large"
         @click="start"
@@ -47,6 +49,7 @@
       </button>
 
       <button
+        type="button"
         v-if="timer.status === 'working' || timer.status === 'break'"
         class="btn btn-warning"
         @click="timer.pause()"
@@ -55,6 +58,7 @@
       </button>
 
       <button
+        type="button"
         v-if="timer.status === 'paused'"
         class="btn btn-primary"
         @click="timer.resume()"
@@ -63,6 +67,7 @@
       </button>
 
       <button
+        type="button"
         v-if="timer.status !== 'idle'"
         class="btn btn-danger"
         @click="timer.stop()"
