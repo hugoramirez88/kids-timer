@@ -82,6 +82,7 @@
         </button>
       </div>
       <MusicPlayer v-if="settings.musicPreference === 'classical'" />
+      <YouTubePlayer v-if="settings.musicPreference === 'youtube'" />
     </section>
 
     <!-- Alert Settings -->
@@ -141,6 +142,7 @@ import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
 import { themes } from '../../data/rewards'
 import MusicPlayer from '../Music/MusicPlayer.vue'
+import YouTubePlayer from '../Music/YouTubePlayer.vue'
 
 const settings = useSettingsStore()
 const profiles = useProfilesStore()
