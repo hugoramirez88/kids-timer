@@ -1,188 +1,303 @@
-# Kids Timer - Roadmap
+# Kids Timer - Product Roadmap
 
-## Current Status
+> A Pomodoro timer designed for children, built with love for families.
 
-A working Pomodoro timer for children with:
+## Current Status (v1.0)
+
+A fully functional Pomodoro timer with:
 - Profile system with gamification (points, badges, streaks)
 - Multiple visual progress indicators (circular, animal path, hourglass, progress bar)
-- Customizable themes (Divertido, Minimalista)
-- Break suggestions in Brazilian Portuguese with illustrations
+- 6 customizable themes (2 default + 4 unlockable)
+- 5 ambient soundscapes (2 default + 3 unlockable)
+- Break suggestions in Brazilian Portuguese with educational illustrations
 - Audio feedback using Web Audio API
+- YouTube integration for custom music
+- Classical music educational section
 - Settings panel for customization
-- Local storage persistence
+- Local storage persistence (privacy-first, no cloud)
 
 ---
 
-## Phase 1: Core Improvements (In Progress)
+## Security & Privacy Review
 
-### Bug Fixes
-- [x] Fix button click responsiveness
-- [x] Fix progress indicator dynamic switching
-- [ ] Test all progress indicators thoroughly
-- [ ] Ensure theme switching works correctly
+### Current Status: SAFE for Children
 
-### Remaining Features from Initial Plan
-- [ ] Classical music player with educational info
-- [ ] YouTube integration for custom music
-- [ ] Rewards shop (spend points to unlock items)
-- [ ] Badges display screen
-- [ ] Celebration animations on pomodoro completion
-- [ ] Unlockable themes (Floresta, Espaço, Oceano, Doces)
+**Privacy:**
+- All data stored locally (localStorage only)
+- No user accounts or registration
+- No analytics or tracking
+- No data sent to external servers
+- No personal information collected
 
----
+**Security:**
+- No eval() or innerHTML vulnerabilities
+- No external script loading
+- YouTube embed uses standard iframe sandbox
 
-## Phase 2: Profile Enhancements
-
-### Edit Profile (Priority: High)
-- [ ] Allow changing profile name
-- [ ] Allow changing avatar to another animal
-- [ ] Allow uploading custom avatar from local file
-- [ ] Profile deletion confirmation
-
-### Profile Stats
-- [ ] Detailed statistics view (weekly, monthly charts)
-- [ ] Export stats to PDF/image
+**Parental Awareness:**
+- YouTube integration allows access to any YouTube content
+- Parents should supervise YouTube URL selection
+- Consider adding YouTube Kids API or URL whitelist in future
 
 ---
 
-## Phase 3: Illustration Sets
+## Priority Tasks (Immediate)
 
-### Art Style Packs
-Create two distinct illustration sets for break suggestions:
+### P0: Critical Fixes (Completed)
+- [x] Fix button click responsiveness (type="button")
+- [x] Fix progress indicator display
+- [x] Fix animal path animation offset
+- [x] Fix Pomodoro completion timing (end of work, not rest)
 
-1. **"Aventuras Claras"** (TinTin-inspired)
-   - Clean line art
-   - Bold, clear colors
-   - Expressive characters
-   - Adventure/exploration feel
-
-2. **"Sonhos Encantados"** (Studio Ghibli-inspired)
-   - Soft, watercolor-like tones
-   - Warm, gentle aesthetics
-   - Whimsical, magical feel
-   - Nature-focused elements
-
-### Implementation
-- [ ] Create ~25 illustrations per set
-- [ ] Add set selector in settings
-- [ ] Store preference per profile
-- [ ] Consider commissioning artist or using AI-assisted generation
+### P1: UX Polish (In Progress)
+- [x] Rebalance progression pacing (unlock curve)
+- [x] Create distinct ambient soundscapes
+- [ ] Add more classical music educational content
+- [ ] Test on various screen sizes (mobile, tablet)
+- [ ] Add haptic feedback on mobile (vibration API)
 
 ---
 
-## Phase 4: App Store Distribution
+## Feature Roadmap
 
-### Android (Google Play Store)
-- [ ] Set up Capacitor or Cordova for native wrapper
-- [ ] Configure Android build with proper icons and splash screens
-- [ ] Create Google Play Developer account ($25 one-time)
-- [ ] Prepare store listing (screenshots, description in Portuguese/English)
-- [ ] Set up app signing
-- [ ] Submit for review
+### Phase 1: Core Polish (High Priority, Low Effort)
+
+| Feature | Effort | Impact | Status |
+|---------|--------|--------|--------|
+| Profile editing (name, avatar) | Low | High | Planned |
+| Skip break option | Low | Medium | Planned |
+| Quiet hours setting | Low | Medium | Planned |
+| Progress persistence on refresh | Low | High | Planned |
+| Better empty states | Low | Medium | Planned |
+
+### Phase 2: Engagement (High Priority, Medium Effort)
+
+| Feature | Effort | Impact | Status |
+|---------|--------|--------|--------|
+| Daily goals | Medium | High | Planned |
+| Weekly summary view | Medium | Medium | Planned |
+| Achievement notifications | Low | Medium | Planned |
+| Streak recovery (grace period) | Low | High | Planned |
+| Sound effect variety | Medium | Medium | Planned |
+
+### Phase 3: Content & Education (Medium Priority)
+
+| Feature | Effort | Impact | Status |
+|---------|--------|--------|--------|
+| More break activity suggestions | Medium | Medium | Planned |
+| Illustration sets (TinTin, Ghibli style) | High | High | Future |
+| Music quiz mini-game | Medium | Medium | Future |
+| Composer fun facts during music | Low | Low | Planned |
+| Breathing exercise guide | Medium | Medium | Future |
+
+### Phase 4: Advanced Features (Lower Priority)
+
+| Feature | Effort | Impact | Status |
+|---------|--------|--------|--------|
+| Family sharing (sync) | High | Medium | Future |
+| Sibling competition mode | High | Medium | Future |
+| Custom timer sounds upload | Medium | Low | Future |
+| Export stats to PDF | Medium | Low | Future |
+| Multiple languages | High | Medium | Future |
+
+---
+
+## App Store Distribution
+
+### PWA (Recommended First Step)
+**Effort: Low | Reach: All platforms**
+
+1. Add service worker for offline support
+2. Configure web manifest with icons
+3. Enable "Add to Home Screen" prompts
+4. Host on GitHub Pages or Netlify
+5. No store fees, instant updates
+
+### Android (Google Play)
+**Effort: Medium | Cost: $25 one-time**
+
+1. Set up Capacitor for native wrapper
+2. Configure Android build (icons, splash)
+3. Create Google Play Developer account
+4. Prepare store listing (PT-BR + EN)
+5. Set up app signing
+6. Submit for review (1-3 days)
 
 ### iOS (Apple App Store)
-- [ ] Set up Capacitor/Cordova iOS build
-- [ ] Create Apple Developer account ($99/year)
-- [ ] Configure app icons and launch screens
-- [ ] Handle iOS-specific audio permissions
-- [ ] Submit for TestFlight, then App Store review
+**Effort: Medium-High | Cost: $99/year**
+
+1. Requires Mac for building
+2. Set up Capacitor iOS
+3. Create Apple Developer account
+4. Handle iOS audio permissions
+5. App Store review (1-7 days)
 
 ### Windows (Microsoft Store)
-- [ ] Package as PWA or Electron app
-- [ ] Create Microsoft Partner Center account
-- [ ] Generate MSIX package
-- [ ] Submit for certification
+**Effort: Low | Cost: Free for individuals**
+
+1. Package as PWA or Electron
+2. Create Microsoft Partner account
+3. Generate MSIX package
+4. Submit for certification (1-3 days)
 
 ### macOS (Mac App Store)
-- [ ] Create Electron or Tauri wrapper
-- [ ] Configure code signing and notarization
-- [ ] Prepare app sandbox entitlements
-- [ ] Submit via App Store Connect
+**Effort: Medium | Cost: Included with Apple Dev**
 
-### Alternative: PWA Distribution
-- [ ] Add service worker for offline support
-- [ ] Configure web app manifest
-- [ ] Enable "Add to Home Screen" prompts
-- [ ] This works on all platforms without store fees
+1. Electron or Tauri wrapper
+2. Code signing + notarization
+3. App sandbox entitlements
+4. Submit via App Store Connect
 
 ---
 
-## Phase 5: Monetization (Donations)
+## Monetization: Donation System
 
-### "Buy Me an Ice Cream" Feature
-Suggested donation amounts by region:
-- Brazil: R$ 10,00
-- USA: $3.00
-- Europe: €3,00
-- UK: £2.50
-- Japan: ¥500
-- Other: Auto-detect or let user choose
+### "Buy Me an Ice Cream" Model
+
+**Philosophy:**
+- All features free forever
+- Donations purely voluntary
+- No features locked behind paywall
+- Kid-friendly, pressure-free messaging
+
+### Suggested Amounts by Region
+
+| Region | Amount | Currency |
+|--------|--------|----------|
+| Brazil | R$ 10 | BRL |
+| USA | $3 | USD |
+| Europe | €3 | EUR |
+| UK | £2.50 | GBP |
+| Japan | ¥500 | JPY |
 
 ### Implementation Options
-1. **Ko-fi** - Simple, no fees for donations
-2. **Buy Me a Coffee** - Popular, easy setup
-3. **GitHub Sponsors** - Good for open-source
-4. **Stripe** - Direct payments, more control
-5. **PIX (Brazil)** - Direct bank transfer, very popular
 
-### Features
-- [ ] Donation button in settings/about screen
-- [ ] "Thank you" badge for donors (optional, privacy-respecting)
-- [ ] No features locked behind paywall - purely voluntary
-- [ ] Clear message: "If this app helps your family, consider buying us an ice cream!"
+**Option 1: Ko-fi (Recommended)**
+- No fees for donations
+- Easy setup
+- Supports multiple currencies
+- Link: ko-fi.com
+
+**Option 2: PIX (Brazil-specific)**
+- Direct bank transfer
+- Extremely popular in Brazil
+- Zero fees
+- Just need a PIX key (email/phone/random)
+
+**Option 3: GitHub Sponsors**
+- Good for open-source projects
+- Monthly sponsorship model
+- Requires GitHub account
+
+**Option 4: Buy Me a Coffee**
+- Similar to Ko-fi
+- More established brand
+- 5% platform fee
+
+### Setup Steps
+
+1. Create Ko-fi or BMC account
+2. Set up payment methods (PayPal, Stripe)
+3. Create donation page with kid-friendly message
+4. Add "Support" button in app settings
+5. Optional: "Thank you" badge for donors
+
+### Messaging Example
+
+```
+Gostou do timer? 🍦
+
+Se este app ajuda sua família, considere
+nos pagar um sorvete! É totalmente opcional.
+
+[Pagar um Sorvete]
+```
 
 ---
 
-## Phase 6: Additional Features (Future)
+## Technical Improvements
 
-### Educational Enhancements
-- [ ] Add more classical music pieces
-- [ ] Music quiz mini-game during breaks
-- [ ] Instrument recognition game
-- [ ] Composer fun facts
-
-### Social Features (Optional)
-- [ ] Family sharing (sync between devices)
-- [ ] Friendly competition between siblings
-- [ ] Share achievements on social media
-
-### Accessibility
-- [ ] Screen reader support
-- [ ] High contrast theme
-- [ ] Reduced motion option
-- [ ] Larger text option
-
-### Localization
-- [ ] English translation
-- [ ] Spanish translation
-- [ ] Other languages based on demand
-
----
-
-## Technical Debt & Improvements
-
-- [ ] Add unit tests for stores
+### Code Quality
+- [ ] Add unit tests for stores (Vitest)
 - [ ] Add component tests
-- [ ] Set up CI/CD with GitHub Actions
-- [ ] Optimize bundle size
+- [ ] Set up GitHub Actions CI/CD
 - [ ] Add error boundary components
 - [ ] Implement proper error logging
 
+### Performance
+- [ ] Lazy load modals and non-critical components
+- [ ] Optimize bundle size (analyze with vite-bundle-visualizer)
+- [ ] Add resource hints (preload, prefetch)
+- [ ] Test on low-end devices
+
+### Accessibility
+- [ ] Screen reader support (ARIA labels)
+- [ ] High contrast theme option
+- [ ] Reduced motion option
+- [ ] Larger text option
+- [ ] Keyboard navigation improvements
+
 ---
 
-## Contributing
+## Open Source Considerations
 
-This is a family project, but contributions are welcome! Please:
-1. Open an issue to discuss major changes
+### If Publishing Source Code
+
+**Recommended License:** MIT
+
+**Repository Structure:**
+```
+kids-timer/
+├── .github/
+│   ├── workflows/       # CI/CD
+│   └── ISSUE_TEMPLATE/
+├── docs/
+│   └── plans/           # Design docs
+├── public/
+├── src/
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+└── ROADMAP.md
+```
+
+**Contribution Guidelines:**
+1. Open issue before major changes
 2. Follow existing code style
-3. Test your changes thoroughly
-4. Keep the kid-friendly spirit
+3. Test thoroughly
+4. Keep kid-friendly spirit
+5. No ads or tracking
 
 ---
 
-## Notes
+## Decision Log
 
-- Keep the app simple and fun - avoid feature creep
-- Performance matters on older devices (kids often use hand-me-down tablets)
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| 2026-01-13 | Vue 3 + Vite | Modern, fast, good DX |
+| 2026-01-13 | Local storage only | Privacy for children |
+| 2026-01-13 | No accounts | Simplicity, privacy |
+| 2026-01-14 | Pomodoro = work end | More intuitive reward |
+| 2026-01-14 | Rebalanced costs | Better day-1 experience |
+
+---
+
+## Guiding Principles
+
+1. **Kids first** - Every feature should delight children
+2. **Privacy always** - No tracking, no data collection
+3. **Simple beats complex** - Avoid feature creep
+4. **Parents trust** - No dark patterns, no pressure
+5. **Performance matters** - Works on old devices
+6. **Test with real kids** - Get actual feedback
+
+---
+
+## Notes for Contributors
+
+- Keep the app simple and fun
+- Performance matters on older devices (hand-me-down tablets)
 - Privacy first - no analytics, no tracking, all data stays local
 - Test with actual children for UX feedback
+- Brazilian Portuguese is primary language
+- Use emojis thoughtfully (kids love them)
