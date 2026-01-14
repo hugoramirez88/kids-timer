@@ -133,6 +133,35 @@
         </button>
       </div>
     </section>
+
+    <!-- Developer Mode (for testing) -->
+    <section class="settings-section dev-section">
+      <h3>Modo Desenvolvedor</h3>
+      <p class="dev-hint">Para testar funcionalidades</p>
+
+      <div class="setting-row">
+        <label>Desbloquear tudo</label>
+        <button
+          type="button"
+          :class="['toggle-btn', { active: settings.devMode }]"
+          @click="settings.devMode = !settings.devMode"
+        >
+          {{ settings.devMode ? 'Ligado' : 'Desligado' }}
+        </button>
+      </div>
+
+      <div class="dev-actions">
+        <button type="button" class="dev-btn" @click="addTestPoints(50)">
+          +50 pontos
+        </button>
+        <button type="button" class="dev-btn" @click="addTestPoints(200)">
+          +200 pontos
+        </button>
+        <button type="button" class="dev-btn danger" @click="resetProfile">
+          Resetar perfil
+        </button>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -163,11 +192,39 @@ const indicators = [
 ]
 
 function isUnlocked(type, id) {
+  // Dev mode unlocks everything
+  if (settings.devMode) return true
+
   if (!profiles.activeProfile) return false
   if (type === 'theme') {
     return profiles.activeProfile.unlockedThemes.includes(id)
   }
   return true
+}
+
+function addTestPoints(amount) {
+  if (profiles.activeProfile) {
+    profiles.addPoints(amount)
+  }
+}
+
+function resetProfile() {
+  if (!profiles.activeProfile) return
+  if (!confirm('Isso vai resetar todos os pontos e desbloqueios. Continuar?')) return
+
+  profiles.updateProfile(profiles.activeProfileId, {
+    points: 0,
+    totalPomodoros: 0,
+    totalMinutes: 0,
+    currentStreak: 0,
+    longestStreak: 0,
+    unlockedThemes: ['divertido', 'minimalista'],
+    unlockedAvatars: ['rabbit'],
+    unlockedAnimals: ['rabbit'],
+    unlockedSoundscapes: ['jardim-tranquilo', 'brisa-suave'],
+    badges: [],
+    triedIndicators: [],
+  })
 }
 
 function selectTheme(themeId) {
@@ -354,5 +411,47 @@ input[type="range"] {
   font-size: 12px;
   font-weight: 600;
   color: var(--color-text, #333);
+}
+
+/* Developer Mode Section */
+.dev-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px dashed var(--color-border, #e0e0e0);
+}
+
+.dev-hint {
+  font-size: 12px;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 16px;
+}
+
+.dev-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.dev-btn {
+  padding: 8px 16px;
+  background: var(--color-secondary, #2196F3);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius, 8px);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.dev-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.dev-btn.danger {
+  background: var(--color-danger, #f44336);
 }
 </style>

@@ -32,6 +32,9 @@ export const useSettingsStore = defineStore('settings', () => {
   // Path animal (for animal-path indicator)
   const pathAnimal = ref('rabbit')
 
+  // Developer mode (unlocks all features for testing)
+  const devMode = ref(false)
+
   function saveSettings() {
     const current = storage.load()
     current.globalSettings = {
@@ -64,6 +67,7 @@ export const useSettingsStore = defineStore('settings', () => {
     progressIndicator,
     theme,
     pathAnimal,
+    devMode,
     setTheme,
     initTheme,
     saveSettings,

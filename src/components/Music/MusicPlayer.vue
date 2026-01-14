@@ -92,12 +92,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { soundscapes, getSoundscape } from '../../data/ambientSoundscapes'
 import { classicalMusic } from '../../data/classicalMusic'
 import { useTimerStore } from '../../stores/timer'
 import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
+import { getAmbientEngine } from '../../utils/ambientAudio'
 
 const timer = useTimerStore()
 const settings = useSettingsStore()
@@ -107,80 +108,15 @@ const currentSoundscape = ref(soundscapes[0])
 const selectedTrack = ref(null)
 const isPlaying = ref(false)
 
-let audioContext = null
-let oscillators = []
-let gainNode = null
-let lfoNode = null
+const ambientEngine = getAmbientEngine()
 
 function isUnlocked(soundscapeId) {
+  // Check for dev mode
+  if (settings.devMode) return true
+
   const soundscape = getSoundscape(soundscapeId)
   if (soundscape.cost === 0) return true
-  // Check if user has unlocked this soundscape
   return profiles.activeProfile?.unlockedSoundscapes?.includes(soundscapeId) || false
-}
-
-function initAudio() {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)()
-    gainNode = audioContext.createGain()
-    gainNode.gain.value = 0
-    gainNode.connect(audioContext.destination)
-  }
-}
-
-function createAmbientSound() {
-  stopAmbientSound()
-
-  const config = currentSoundscape.value.config
-
-  // Create LFO for subtle movement
-  lfoNode = audioContext.createOscillator()
-  lfoNode.type = 'sine'
-  lfoNode.frequency.value = config.lfoRate
-
-  const lfoGain = audioContext.createGain()
-  lfoGain.gain.value = config.lfoDepth
-  lfoNode.connect(lfoGain)
-
-  // Create oscillators for each frequency
-  config.frequencies.forEach((freqMultiplier, i) => {
-    const osc = audioContext.createOscillator()
-    osc.type = config.waveType
-    osc.frequency.value = config.baseFreq * freqMultiplier
-
-    // Add slight detuning for richness
-    osc.detune.value = (i - 1) * 2
-
-    // Connect LFO to frequency for subtle vibrato
-    lfoGain.connect(osc.frequency)
-
-    osc.connect(gainNode)
-    osc.start()
-    oscillators.push(osc)
-  })
-
-  lfoNode.start()
-
-  // Fade in smoothly
-  gainNode.gain.linearRampToValueAtTime(config.volume, audioContext.currentTime + 3)
-}
-
-function stopAmbientSound() {
-  oscillators.forEach(osc => {
-    try {
-      osc.stop()
-      osc.disconnect()
-    } catch (e) {}
-  })
-  oscillators = []
-
-  if (lfoNode) {
-    try {
-      lfoNode.stop()
-      lfoNode.disconnect()
-    } catch (e) {}
-    lfoNode = null
-  }
 }
 
 function togglePlayer() {
@@ -192,21 +128,12 @@ function togglePlayer() {
 }
 
 function playMusic() {
-  initAudio()
-  if (audioContext.state === 'suspended') {
-    audioContext.resume()
-  }
-  createAmbientSound()
+  ambientEngine.play(currentSoundscape.value.id)
   isPlaying.value = true
 }
 
 function pauseMusic() {
-  if (gainNode) {
-    gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5)
-  }
-  setTimeout(() => {
-    stopAmbientSound()
-  }, 600)
+  ambientEngine.stop()
   isPlaying.value = false
 }
 
@@ -216,12 +143,7 @@ function selectSoundscape(soundscape) {
   currentSoundscape.value = soundscape
 
   if (isPlaying.value) {
-    // Crossfade to new soundscape
-    gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5)
-    setTimeout(() => {
-      stopAmbientSound()
-      createAmbientSound()
-    }, 600)
+    ambientEngine.switchSoundscape(soundscape.id)
   }
 }
 
@@ -275,10 +197,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (isPlaying.value) {
-    stopAmbientSound()
-  }
-  if (audioContext) {
-    audioContext.close()
+    ambientEngine.stop()
   }
 })
 </script>

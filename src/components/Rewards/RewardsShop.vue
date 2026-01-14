@@ -154,6 +154,9 @@ const profiles = useProfilesStore()
 const settings = useSettingsStore()
 
 function isOwned(type, id) {
+  // Dev mode unlocks everything
+  if (settings.devMode) return true
+
   if (!profiles.activeProfile) return false
   switch (type) {
     case 'avatar': return profiles.activeProfile.unlockedAvatars.includes(id)

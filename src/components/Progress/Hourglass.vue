@@ -78,18 +78,25 @@ const sandColor = computed(() => {
   return '#D4A574' // Sand color
 })
 
+// Use sqrt transformation for visual proportionality
+// Since the hourglass has a tapered shape (area ∝ height²),
+// we need height ∝ sqrt(progress) for linear visual area change
+
 // Top sand decreases as progress increases
 const topSandHeight = computed(() => {
-  return 60 * (1 - timer.progress)
+  // sqrt makes the visible area decrease linearly with time
+  return 60 * Math.sqrt(1 - timer.progress)
 })
 
 const topSandY = computed(() => {
-  return 15 + (60 * timer.progress)
+  // Position adjusts based on remaining sand height
+  return 15 + (60 - topSandHeight.value)
 })
 
 // Bottom sand increases as progress increases
 const bottomSandHeight = computed(() => {
-  return 60 * timer.progress
+  // sqrt makes the visible area increase linearly with time
+  return 60 * Math.sqrt(timer.progress)
 })
 
 const bottomSandY = computed(() => {
@@ -99,8 +106,8 @@ const bottomSandY = computed(() => {
 
 <style scoped>
 .hourglass-container {
-  width: 120px;
-  height: 180px;
+  width: 200px;
+  height: 280px;
 }
 
 .hourglass-svg {
