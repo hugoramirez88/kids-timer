@@ -13,67 +13,49 @@ export const classicalMusic = [
     funFact: 'Bach compôs esta música para ajudar um conde com insônia!'
   },
   {
-    id: 'beethoven-moonlight-1',
-    title: 'Sonata ao Luar - 1º Mov.',
+    id: 'beethoven-eroica',
+    title: 'Sinfonia No. 3 "Eroica" - 2º Mov.',
     composer: 'Ludwig van Beethoven',
-    instrument: 'Piano',
+    instrument: 'Orquestra',
     duration: 360,
-    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Beethoven_PianoSonataNo.14/LudwigVanBeethoven-01-PianoSonataNo.14InC-SharpMinorOp.27No.2MoonlightI.AdagioSostenuto.mp3',
-    funFact: 'Beethoven a compôs para uma aluna que ele amava!'
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Beethoven_SymphonyNo.3Eroica/LudwigVanBeethoven-SymphonyNo.3InEFlatMajorEroicaOp.55-02-MarciaFunebreAdagioAssai.mp3',
+    funFact: 'Beethoven dedicou esta sinfonia a Napoleão, mas rasgou a dedicatória quando ele se coroou imperador!'
   },
   {
-    id: 'chopin-nocturne-op9-2',
-    title: 'Noturno Op. 9 No. 2',
-    composer: 'Frédéric Chopin',
-    instrument: 'Piano',
-    duration: 270,
-    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Chopin_NocturnesOp.9/FredericChopin-02-NocturneInE-FlatMajorOp.9No.2.mp3',
-    funFact: 'Chopin era conhecido como o "poeta do piano"'
-  },
-  {
-    id: 'debussy-arabesque-1',
-    title: 'Arabesque No. 1',
-    composer: 'Claude Debussy',
-    instrument: 'Piano',
-    duration: 240,
-    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Debussy_DeuxArabesques/ClaudeDebussy-01-DeuxArabesquesL.66No.1InEMajorAndantinoConMoto.mp3',
-    funFact: 'Debussy criou um novo estilo chamado "impressionismo musical"'
-  },
-  {
-    id: 'mozart-sonata-16',
-    title: 'Sonata No. 16 em Dó Maior',
-    composer: 'Wolfgang Amadeus Mozart',
-    instrument: 'Piano',
-    duration: 180,
-    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Mozart_PianoSonataNo.16/WolfgangAmadeusMozart-01-PianoSonataNo.16InCMajorK.545SonataFacileI.Allegro.mp3',
-    funFact: 'Mozart começou a compor com apenas 5 anos!'
-  },
-  {
-    id: 'schubert-impromptu-3',
-    title: 'Impromptu Op. 90 No. 3',
-    composer: 'Franz Schubert',
-    instrument: 'Piano',
-    duration: 360,
-    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Schubert_FourImpromptusOp.90/FranzSchubert-03-FourImpromptusOp.90D.899No.3InG-FlatMajorAndante.mp3',
-    funFact: 'Schubert compôs mais de 600 canções em sua curta vida!'
-  },
-  {
-    id: 'brahms-waltz-15',
-    title: 'Valsa Op. 39 No. 15',
-    composer: 'Johannes Brahms',
-    instrument: 'Piano',
-    duration: 120,
-    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Brahms_WaltzesOp.39/JohannesBrahms-15-16WaltzesOp.39No.15InA-FlatMajor.mp3',
-    funFact: 'Esta é uma das valsas mais conhecidas de Brahms!'
-  },
-  {
-    id: 'grieg-morning-mood',
+    id: 'grieg-morning',
     title: 'Manhã (Peer Gynt)',
     composer: 'Edvard Grieg',
     instrument: 'Orquestra',
     duration: 240,
-    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Grieg_PeerGyntSuiteNo.1/EdvardGrieg-01-PeerGyntSuiteNo.1Op.46I.MorningMood.mp3',
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Greig_PeerGynt/EdvardGrieg-PeerGyntSuiteNo.1Op.46-01-Morning.mp3',
     funFact: 'A flauta imita o canto dos pássaros ao amanhecer!'
+  },
+  {
+    id: 'grieg-hall-mountain-king',
+    title: 'Na Caverna do Rei da Montanha',
+    composer: 'Edvard Grieg',
+    instrument: 'Orquestra',
+    duration: 150,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Greig_PeerGynt/EdvardGrieg-PeerGyntSuiteNo.1Op.46-04-InTheHallOfTheMountainKing.mp3',
+    funFact: 'Esta música começa devagar e vai ficando cada vez mais rápida e emocionante!'
+  },
+  {
+    id: 'mozart-symphony-40',
+    title: 'Sinfonia No. 40 - 1º Mov.',
+    composer: 'Wolfgang Amadeus Mozart',
+    instrument: 'Orquestra',
+    duration: 480,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Mozart_SymphonyNo.40inGMinor/WolfgangAmadeusMozart-SymphonyNo.40InGMinorK.550-01-MoltoAllegro.mp3',
+    funFact: 'Mozart começou a compor com apenas 5 anos!'
+  },
+  {
+    id: 'schubert-sonata',
+    title: 'Sonata em Lá Maior - Andante',
+    composer: 'Franz Schubert',
+    instrument: 'Piano',
+    duration: 300,
+    audioUrl: 'https://archive.org/download/MusopenCollectionAsFlac/Schubert_SonataInAMajorD.664/FranzSchubert-SonataInAMajorD.664-02-Andante.mp3',
+    funFact: 'Schubert compôs mais de 600 canções em sua curta vida!'
   }
 ]
 

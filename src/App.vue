@@ -68,8 +68,36 @@
             <img :src="`/images/avatars/${profile.avatar}.svg`" :alt="profile.name" />
             <span>{{ profile.name }}</span>
           </button>
+          <!-- Add new profile option -->
+          <button class="profile-list-item add-new" @click="showCreateProfile = true; showProfileSwitch = false">
+            <span class="add-icon">+</span>
+            <span>Novo Perfil</span>
+          </button>
         </div>
-        <button class="btn btn-secondary" @click="showProfileSwitch = false">Fechar</button>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" @click="showProfileSwitch = false">Fechar</button>
+          <button class="btn btn-danger" @click="logout">Sair</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create New Profile Modal -->
+    <div v-if="showCreateProfile" class="modal-overlay" @click.self="showCreateProfile = false">
+      <div class="modal">
+        <h3>Criar Novo Perfil</h3>
+        <div class="form-group">
+          <label>Nome</label>
+          <input
+            v-model="newProfileName"
+            type="text"
+            placeholder="Digite o nome..."
+            @keyup.enter="createNewProfile"
+          />
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" @click="showCreateProfile = false">Cancelar</button>
+          <button class="btn btn-primary" @click="createNewProfile" :disabled="!newProfileName.trim()">Criar</button>
+        </div>
       </div>
     </div>
 
@@ -111,14 +139,21 @@
 
     <!-- Floating Mini Player (shows when music is playing) -->
     <MiniPlayer v-if="profiles.activeProfile" />
+
+    <!-- Hidden YouTube Player (persists across views) -->
+    <div class="hidden-youtube-player">
+      <div id="youtube-player-global"></div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useTimerStore } from './stores/timer'
 import { useProfilesStore } from './stores/profiles'
 import { useSettingsStore } from './stores/settings'
+import { useAudioStore } from './stores/audio'
+import { useYoutubeStore } from './stores/youtube'
 
 import ProfileSelector from './components/Profiles/ProfileSelector.vue'
 import TimerDisplay from './components/Timer/TimerDisplay.vue'
@@ -137,11 +172,15 @@ import MiniPlayer from './components/Music/MiniPlayer.vue'
 const timer = useTimerStore()
 const profiles = useProfilesStore()
 const settings = useSettingsStore()
+const audio = useAudioStore()
+const youtube = useYoutubeStore()
 
 const showProfileSwitch = ref(false)
 const showSettings = ref(false)
 const showRewardsShop = ref(false)
 const showBadges = ref(false)
+const showCreateProfile = ref(false)
+const newProfileName = ref('')
 
 // Dynamic progress indicator component
 const progressComponent = computed(() => {
@@ -169,9 +208,51 @@ function switchProfile(profileId) {
   showProfileSwitch.value = false
 }
 
+function createNewProfile() {
+  if (!newProfileName.value.trim()) return
+  const profile = profiles.createProfile(newProfileName.value.trim())
+  profiles.selectProfile(profile.id)
+  newProfileName.value = ''
+  showCreateProfile.value = false
+}
+
+function logout() {
+  if (timer.status !== 'idle') {
+    timer.stop()
+  }
+  profiles.logout()
+  showProfileSwitch.value = false
+}
+
 onMounted(() => {
   if (profiles.activeProfile) {
     settings.initTheme()
+  }
+  // Initialize YouTube
+  youtube.init()
+  youtube.initApi()
+  youtube.setPlayerElement('youtube-player-global')
+})
+
+// Pause music when timer pauses/stops/ends
+watch(() => timer.status, (newStatus, oldStatus) => {
+  // Pause music when timer is paused or stopped
+  if (newStatus === 'paused' || newStatus === 'idle') {
+    if (audio.isPlaying) {
+      audio.pause()
+    }
+    if (youtube.isPlaying) {
+      youtube.pause()
+    }
+  }
+  // Resume music when timer resumes from pause
+  if (oldStatus === 'paused' && (newStatus === 'working' || newStatus === 'break')) {
+    if (audio.currentTrackId && !audio.isPlaying) {
+      audio.toggle()
+    }
+    if (youtube.currentVideoId && !youtube.isPlaying) {
+      youtube.toggle()
+    }
   }
 })
 </script>
@@ -425,5 +506,80 @@ body {
 
 .close-btn:hover {
   color: var(--color-text, #333);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.btn-danger {
+  background: var(--color-danger, #f44336);
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #d32f2f;
+}
+
+.btn-primary {
+  background: var(--color-primary, #4CAF50);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark, #388E3C);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.profile-list-item.add-new {
+  border-style: dashed;
+}
+
+.profile-list-item .add-icon {
+  font-size: 24px;
+  color: var(--color-primary, #4CAF50);
+  width: 40px;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary, #666);
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 8px);
+  font-size: 18px;
+  font-family: inherit;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary, #4CAF50);
+}
+
+.hidden-youtube-player {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 </style>

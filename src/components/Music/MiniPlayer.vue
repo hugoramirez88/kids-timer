@@ -1,20 +1,20 @@
 <!-- src/components/Music/MiniPlayer.vue -->
 <!-- Floating mini player that shows on the main timer screen -->
 <template>
-  <div v-if="audio.currentTrackId" class="mini-player" :class="{ playing: audio.isPlaying }">
+  <div v-if="isActive" class="mini-player" :class="{ playing: isPlaying }">
     <div class="mini-player-info">
       <span class="mini-icon">{{ currentIcon }}</span>
       <span class="mini-title">{{ currentTitle }}</span>
     </div>
     <div class="mini-controls">
-      <button type="button" class="mini-btn" @click="audio.toggle()" :disabled="audio.isLoading">
-        {{ audio.isPlaying ? '⏸️' : '▶️' }}
+      <button type="button" class="mini-btn" @click="togglePlay" :disabled="audio.isLoading">
+        {{ isPlaying ? '⏸️' : '▶️' }}
       </button>
-      <button type="button" class="mini-btn stop" @click="audio.stop()">
+      <button type="button" class="mini-btn stop" @click="stopPlay">
         ⏹️
       </button>
     </div>
-    <div v-if="audio.isPlaying" class="mini-visualizer">
+    <div v-if="isPlaying" class="mini-visualizer">
       <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
@@ -25,12 +25,28 @@
 <script setup>
 import { computed } from 'vue'
 import { useAudioStore } from '../../stores/audio'
-import { soundscapes, getSoundscape } from '../../data/ambientSoundscapes'
+import { useYoutubeStore } from '../../stores/youtube'
+import { getSoundscape } from '../../data/ambientSoundscapes'
 import { classicalMusic } from '../../data/classicalMusic'
 
 const audio = useAudioStore()
+const youtube = useYoutubeStore()
+
+// Check if anything is playing or has content
+const isActive = computed(() => {
+  return audio.currentTrackId || youtube.currentVideoId
+})
+
+const isPlaying = computed(() => {
+  return audio.isPlaying || youtube.isPlaying
+})
 
 const currentIcon = computed(() => {
+  // YouTube
+  if (youtube.currentVideoId) {
+    return '📺'
+  }
+  // Audio store
   if (audio.currentType === 'ambient') {
     const soundscape = getSoundscape(audio.currentTrackId)
     return soundscape?.icon || '🎵'
@@ -43,6 +59,11 @@ const currentIcon = computed(() => {
 })
 
 const currentTitle = computed(() => {
+  // YouTube
+  if (youtube.currentVideoId) {
+    return youtube.currentVideoTitle || 'YouTube'
+  }
+  // Audio store
   if (audio.currentType === 'ambient') {
     const soundscape = getSoundscape(audio.currentTrackId)
     return soundscape?.name || 'Música'
@@ -53,6 +74,23 @@ const currentTitle = computed(() => {
   }
   return 'Música'
 })
+
+function togglePlay() {
+  if (youtube.currentVideoId) {
+    youtube.toggle()
+  } else {
+    audio.toggle()
+  }
+}
+
+function stopPlay() {
+  if (youtube.currentVideoId) {
+    youtube.stop()
+  }
+  if (audio.currentTrackId) {
+    audio.stop()
+  }
+}
 
 function getInstrumentEmoji(instrument) {
   const emojis = {

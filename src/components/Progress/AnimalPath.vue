@@ -30,10 +30,12 @@
       <circle cx="280" cy="100" r="12" fill="var(--color-warning, #FFE66D)" stroke="var(--color-warning, #FF9800)" stroke-width="2"/>
       <text x="280" y="104" text-anchor="middle" font-size="12">⭐</text>
 
-      <!-- Animal (flipped to face right/forward) -->
+      <!-- Animal on path -->
       <g :transform="`translate(${animalX}, ${animalY})`">
         <circle r="16" fill="var(--color-surface, white)" stroke="var(--color-primary, #4CAF50)" stroke-width="2"/>
-        <text y="5" text-anchor="middle" font-size="16" transform="scale(-1, 1)" class="animal-emoji">{{ animalEmoji }}</text>
+        <foreignObject x="-12" y="-12" width="24" height="24">
+          <div class="animal-emoji-container">{{ animalEmoji }}</div>
+        </foreignObject>
       </g>
     </svg>
   </div>
@@ -128,8 +130,13 @@ const animalEmoji = computed(() => {
   transition: stroke-dashoffset 0.5s ease;
 }
 
-/* Flip animal emoji to face the direction of travel (right) */
-.animal-emoji {
-  transform-origin: center;
+.animal-emoji-container {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
 }
 </style>

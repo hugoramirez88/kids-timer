@@ -197,6 +197,11 @@ export const useProfilesStore = defineStore('profiles', () => {
     saveProfiles()
   }
 
+  function logout() {
+    activeProfileId.value = null
+    saveProfiles()
+  }
+
   function saveProfiles() {
     const current = storage.load()
     current.profiles = profiles.value
@@ -212,6 +217,7 @@ export const useProfilesStore = defineStore('profiles', () => {
     selectProfile,
     updateProfile,
     deleteProfile,
+    logout,
     addPoints,
     spendPoints,
     unlockItem,
