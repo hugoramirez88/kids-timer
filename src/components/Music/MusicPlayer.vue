@@ -146,8 +146,10 @@ import { classicalMusic } from '../../data/classicalMusic'
 import { useAudioStore } from '../../stores/audio'
 import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
+import { useYoutubeStore } from '../../stores/youtube'
 
 const audio = useAudioStore()
+const youtube = useYoutubeStore()
 const settings = useSettingsStore()
 const profiles = useProfilesStore()
 
@@ -194,6 +196,11 @@ function isUnlocked(soundscapeId) {
 function playSoundscape(soundscape) {
   if (!isUnlocked(soundscape.id)) return
 
+  // Stop YouTube if playing
+  if (youtube.currentVideoId) {
+    youtube.stop()
+  }
+
   // If same track is playing, toggle pause
   if (audio.currentTrackId === soundscape.id && audio.currentType === 'ambient') {
     audio.toggle()
@@ -204,6 +211,11 @@ function playSoundscape(soundscape) {
 }
 
 function playClassical(track) {
+  // Stop YouTube if playing
+  if (youtube.currentVideoId) {
+    youtube.stop()
+  }
+
   // If same track is playing, toggle pause
   if (audio.currentTrackId === track.id && audio.currentType === 'classical') {
     audio.toggle()
