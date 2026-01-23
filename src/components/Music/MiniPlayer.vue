@@ -14,6 +14,18 @@
         ⏹️
       </button>
     </div>
+    <div class="mini-volume">
+      <span class="volume-icon">{{ volumeIcon }}</span>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.1"
+        :value="currentVolume"
+        @input="setVolume($event.target.value)"
+        class="volume-slider"
+      />
+    </div>
     <div v-if="isPlaying" class="mini-visualizer">
       <span class="dot"></span>
       <span class="dot"></span>
@@ -74,6 +86,24 @@ const currentTitle = computed(() => {
   }
   return 'Música'
 })
+
+const currentVolume = computed(() => {
+  if (youtube.currentVideoId) return youtube.volume
+  return audio.volume
+})
+
+const volumeIcon = computed(() => {
+  const vol = currentVolume.value
+  if (vol === 0) return '🔇'
+  if (vol < 0.5) return '🔉'
+  return '🔊'
+})
+
+function setVolume(value) {
+  const vol = parseFloat(value)
+  audio.setVolume(vol)
+  youtube.setVolume(vol)
+}
 
 function togglePlay() {
   if (youtube.currentVideoId) {
@@ -200,5 +230,22 @@ function getInstrumentEmoji(instrument) {
 @keyframes pulse-dot {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(0.6); opacity: 0.5; }
+}
+
+.mini-volume {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.volume-icon {
+  font-size: 14px;
+}
+
+.volume-slider {
+  width: 60px;
+  height: 4px;
+  cursor: pointer;
+  accent-color: var(--color-primary, #4CAF50);
 }
 </style>
