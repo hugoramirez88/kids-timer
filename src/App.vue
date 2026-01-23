@@ -245,8 +245,19 @@ watch(() => timer.status, (newStatus, oldStatus) => {
       youtube.pause()
     }
   }
-  // Resume music when timer resumes from pause
-  if (oldStatus === 'paused' && (newStatus === 'working' || newStatus === 'break')) {
+
+  // Resume music when starting work or resuming from pause
+  if ((oldStatus === 'paused' || oldStatus === 'idle') && newStatus === 'working') {
+    if (audio.currentTrackId && !audio.isPlaying) {
+      audio.toggle()
+    }
+    if (youtube.currentVideoId && !youtube.isPlaying) {
+      youtube.toggle()
+    }
+  }
+
+  // Also resume when transitioning to break
+  if (oldStatus === 'paused' && newStatus === 'break') {
     if (audio.currentTrackId && !audio.isPlaying) {
       audio.toggle()
     }
