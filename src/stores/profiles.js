@@ -40,7 +40,7 @@ export const useProfilesStore = defineStore('profiles', () => {
       unlockedThemes: ['divertido', 'minimalista'],
       unlockedAvatars: ['rabbit'],
       unlockedAnimals: ['rabbit'],
-      unlockedSoundscapes: ['jardim-tranquilo', 'brisa-suave'],
+      unlockedSoundscapes: ['piano-calmo', 'anoitecer'],
       badges: [],
 
       // Tried indicators (for explorer badge)
@@ -113,7 +113,7 @@ export const useProfilesStore = defineStore('profiles', () => {
         break
       case 'soundscape':
         if (!profile.unlockedSoundscapes) {
-          profile.unlockedSoundscapes = ['jardim-tranquilo', 'brisa-suave']
+          profile.unlockedSoundscapes = ['piano-calmo', 'anoitecer']
         }
         if (!profile.unlockedSoundscapes.includes(itemId)) {
           profile.unlockedSoundscapes.push(itemId)

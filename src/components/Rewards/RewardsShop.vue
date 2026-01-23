@@ -164,7 +164,7 @@ function isOwned(type, id) {
     case 'animal': return profiles.activeProfile.unlockedAnimals.includes(id)
     case 'soundscape':
       // Default soundscapes are always owned
-      const defaultSoundscapes = ['jardim-tranquilo', 'brisa-suave']
+      const defaultSoundscapes = ['piano-calmo', 'anoitecer']
       if (defaultSoundscapes.includes(id)) return true
       return profiles.activeProfile.unlockedSoundscapes?.includes(id) || false
   }

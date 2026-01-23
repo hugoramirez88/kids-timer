@@ -223,7 +223,7 @@ function resetProfile() {
     unlockedThemes: ['divertido', 'minimalista'],
     unlockedAvatars: ['rabbit'],
     unlockedAnimals: ['rabbit'],
-    unlockedSoundscapes: ['jardim-tranquilo', 'brisa-suave'],
+    unlockedSoundscapes: ['piano-calmo', 'anoitecer'],
     badges: [],
     triedIndicators: [],
   })
