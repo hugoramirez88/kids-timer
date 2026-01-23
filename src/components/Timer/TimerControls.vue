@@ -59,6 +59,15 @@
 
       <button
         type="button"
+        v-if="timer.status === 'break'"
+        class="btn btn-skip"
+        @click="timer.skipBreak()"
+      >
+        ⏭️ Pular
+      </button>
+
+      <button
+        type="button"
         v-if="timer.status === 'paused'"
         class="btn btn-primary"
         @click="timer.resume()"
@@ -230,5 +239,14 @@ function start() {
 
 .btn-danger:hover {
   background: #D32F2F;
+}
+
+.btn-skip {
+  background: var(--color-neutral, #9e9e9e);
+  color: white;
+}
+
+.btn-skip:hover {
+  background: #757575;
 }
 </style>

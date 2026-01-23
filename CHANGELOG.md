@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Profile editing feature: edit profile name and change avatar from header
 - Edit button (✏️) next to profile badge in header
 - Modal to edit profile name (max 20 chars) and select from unlocked avatars
+- Skip break option: "Pular" button during breaks for eager kids
+
+### Fixed
+- Meditação Zen, Sonho Tranquilo, and Foco Suave soundscapes not playing (fixed redirect URLs)
 
 ## [1.0.1] - 2026-01-23
 

@@ -222,6 +222,20 @@ export const useTimerStore = defineStore('timer', () => {
     pausedStatus = null
   }
 
+  function skipBreak() {
+    if (status.value !== 'break') return
+
+    clearInterval(intervalId)
+    intervalId = null
+
+    window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'break-skipped' } }))
+
+    status.value = 'idle'
+    timeRemaining.value = 0
+    totalTime.value = 0
+    targetEndTime.value = null
+  }
+
   // Handle tab visibility
   function handleVisibilityChange() {
     if (document.hidden) return
@@ -266,5 +280,6 @@ export const useTimerStore = defineStore('timer', () => {
     pause,
     resume,
     stop,
+    skipBreak,
   }
 })

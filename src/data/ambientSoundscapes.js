@@ -33,7 +33,7 @@ export const soundscapes = [
     cost: 40,
     unlocked: false,
     mood: 'meditation',
-    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_3_-_Lullaby_for_Grownups_462868CD-0AE8-469D-B460-63696B597AF7.mp3',
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_3_-_Lullaby_for_Grownups.mp3',
     duration: 300,
   },
   {
@@ -44,7 +44,7 @@ export const soundscapes = [
     cost: 60,
     unlocked: false,
     mood: 'dreamy',
-    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_4_-_The_Safest_Place_E7398A89-465A-46D4-AC1F-4D9A2015DEE1.mp3',
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_4_-_The_Safest_Place.mp3',
     duration: 300,
   },
   {
@@ -55,7 +55,7 @@ export const soundscapes = [
     cost: 80,
     unlocked: false,
     mood: 'focus',
-    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_5_-_Clair_de_Lune_842A6E32-AE71-4A74-A25C-A31E75E7DF7B.mp3',
+    audioUrl: 'https://archive.org/download/CalmPills/Uplifting_Pills_-_Calm_Pill_5_-_Clair_de_Lune.mp3',
     duration: 300,
   }
 ]

@@ -33,7 +33,7 @@
 |---------|-------------|
 | Larger progress indicators | Caminho 1.5x, Barra 3x visual size |
 | ~~Profile editing~~ | ~~Change name/avatar~~ ✅ |
-| Skip break option | Quick skip for eager kids |
+| ~~Skip break option~~ | ~~Quick skip for eager kids~~ ✅ |
 | Progress persistence | Survive page refresh |
 | Haptic feedback (mobile) | Vibration on timer events |
 
