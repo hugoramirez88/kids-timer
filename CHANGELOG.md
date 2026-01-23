@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Profile editing feature: edit profile name and change avatar from header
+- Edit button (✏️) next to profile badge in header
+- Modal to edit profile name (max 20 chars) and select from unlocked avatars
+
 ## [1.0.1] - 2026-01-23
 
 ### Changed

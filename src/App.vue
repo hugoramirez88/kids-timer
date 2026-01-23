@@ -10,14 +10,19 @@
     <!-- Main Timer Screen -->
     <main v-else class="timer-screen">
       <header class="app-header">
-        <button class="profile-badge" @click="showProfileSwitch = true">
-          <img
-            :src="`/images/avatars/${profiles.activeProfile.avatar}.svg`"
-            :alt="profiles.activeProfile.name"
-            class="profile-badge-avatar"
-          />
-          <span>{{ profiles.activeProfile.name }}</span>
-        </button>
+        <div class="profile-section">
+          <button class="profile-badge" @click="showProfileSwitch = true">
+            <img
+              :src="`/images/avatars/${profiles.activeProfile.avatar}.svg`"
+              :alt="profiles.activeProfile.name"
+              class="profile-badge-avatar"
+            />
+            <span>{{ profiles.activeProfile.name }}</span>
+          </button>
+          <button class="edit-profile-btn" @click="openEditProfile" title="Editar perfil">
+            ✏️
+          </button>
+        </div>
 
         <div class="header-actions">
           <div class="header-stats">
@@ -101,6 +106,49 @@
       </div>
     </div>
 
+    <!-- Edit Profile Modal -->
+    <div v-if="showEditProfile" class="modal-overlay" @click.self="showEditProfile = false">
+      <div class="modal">
+        <h3>Editar Perfil</h3>
+
+        <div class="form-group">
+          <label>Nome</label>
+          <input
+            v-model="editProfileName"
+            type="text"
+            maxlength="20"
+            placeholder="Digite o nome..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Avatar</label>
+          <div class="avatar-grid">
+            <button
+              v-for="avatar in unlockedAvatars"
+              :key="avatar.id"
+              :class="['avatar-option', { selected: editProfileAvatar === avatar.id }]"
+              @click="editProfileAvatar = avatar.id"
+              type="button"
+            >
+              <img :src="`/images/avatars/${avatar.id}.svg`" :alt="avatar.name" />
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-secondary" @click="showEditProfile = false">Cancelar</button>
+          <button
+            class="btn btn-primary"
+            @click="saveProfileEdit"
+            :disabled="!editProfileName.trim()"
+          >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Settings Modal -->
     <div v-if="showSettings" class="modal-overlay" @click.self="showSettings = false">
       <div class="modal modal-large">
@@ -168,6 +216,7 @@ import RewardsShop from './components/Rewards/RewardsShop.vue'
 import BadgesDisplay from './components/Rewards/BadgesDisplay.vue'
 import Celebration from './components/Rewards/Celebration.vue'
 import MiniPlayer from './components/Music/MiniPlayer.vue'
+import { avatars } from './data/rewards'
 
 const timer = useTimerStore()
 const profiles = useProfilesStore()
@@ -181,6 +230,9 @@ const showRewardsShop = ref(false)
 const showBadges = ref(false)
 const showCreateProfile = ref(false)
 const newProfileName = ref('')
+const showEditProfile = ref(false)
+const editProfileName = ref('')
+const editProfileAvatar = ref('')
 
 // Dynamic progress indicator component
 const progressComponent = computed(() => {
@@ -191,6 +243,12 @@ const progressComponent = computed(() => {
     'progress-bar': ProgressBar,
   }
   return indicators[settings.progressIndicator] || CircularProgress
+})
+
+// Unlocked avatars for profile editing
+const unlockedAvatars = computed(() => {
+  if (!profiles.activeProfile) return []
+  return avatars.filter(a => profiles.activeProfile.unlockedAvatars.includes(a.id))
 })
 
 function onProfileSelected() {
@@ -222,6 +280,22 @@ function logout() {
   }
   profiles.logout()
   showProfileSwitch.value = false
+}
+
+function openEditProfile() {
+  if (!profiles.activeProfile) return
+  editProfileName.value = profiles.activeProfile.name
+  editProfileAvatar.value = profiles.activeProfile.avatar
+  showEditProfile.value = true
+}
+
+function saveProfileEdit() {
+  if (!editProfileName.value.trim()) return
+  profiles.updateProfile(profiles.activeProfileId, {
+    name: editProfileName.value.trim(),
+    avatar: editProfileAvatar.value
+  })
+  showEditProfile.value = false
 }
 
 onMounted(() => {
@@ -592,5 +666,61 @@ body {
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-profile-btn {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 8px);
+  background: var(--color-surface, white);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-profile-btn:hover {
+  border-color: var(--color-primary, #4CAF50);
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.avatar-option {
+  width: 70px;
+  height: 70px;
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--border-radius, 12px);
+  background: var(--color-surface, white);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.avatar-option:hover {
+  border-color: var(--color-primary, #4CAF50);
+  transform: scale(1.05);
+}
+
+.avatar-option.selected {
+  border-color: var(--color-primary, #4CAF50);
+  background: var(--color-primary-light, #E8F5E9);
+}
+
+.avatar-option img {
+  width: 50px;
+  height: 50px;
 }
 </style>
