@@ -1,7 +1,7 @@
 <!-- src/components/Settings/SettingsPanel.vue -->
 <template>
   <div class="settings-panel">
-    <h2>Configuracoes</h2>
+    <h2 @click="handleHeaderTap">Configuracoes</h2>
 
     <!-- Theme Selection -->
     <section class="settings-section">
@@ -135,7 +135,7 @@
     </section>
 
     <!-- Developer Mode (for testing) -->
-    <section class="settings-section dev-section">
+    <section v-if="devModeVisible" class="settings-section dev-section">
       <h3>Modo Desenvolvedor</h3>
       <p class="dev-hint">Para testar funcionalidades</p>
 
@@ -166,7 +166,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
 import { useAudioStore } from '../../stores/audio'
@@ -177,6 +177,29 @@ import YouTubePlayer from '../Music/YouTubePlayer.vue'
 const settings = useSettingsStore()
 const profiles = useProfilesStore()
 const audio = useAudioStore()
+
+// Dev mode visibility (hidden behind secret gesture)
+const devModeVisible = ref(false)
+const tapCount = ref(0)
+let tapTimer = null
+
+function handleHeaderTap() {
+  tapCount.value++
+
+  // Clear previous timer
+  if (tapTimer) clearTimeout(tapTimer)
+
+  // Reset after 2 seconds
+  tapTimer = setTimeout(() => {
+    tapCount.value = 0
+  }, 2000)
+
+  // Unlock after 7 taps
+  if (tapCount.value >= 7) {
+    devModeVisible.value = true
+    tapCount.value = 0
+  }
+}
 
 const availableThemes = themes
 
