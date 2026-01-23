@@ -118,7 +118,7 @@ const animalEmoji = computed(() => {
 <style scoped>
 .animal-path {
   width: 100%;
-  max-width: 450px;
+  max-width: 675px;
 }
 
 .path-svg {

@@ -52,7 +52,7 @@ const characterEmoji = computed(() => {
 <style scoped>
 .progress-bar-container {
   width: 100%;
-  max-width: 450px;
+  max-width: 1350px;
   padding: 20px 0;
 }
 
