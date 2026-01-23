@@ -10,6 +10,7 @@ export const useYoutubeStore = defineStore('youtube', () => {
   const currentVideoTitle = ref('')
   const savedVideos = ref([])
   const isReady = ref(false)
+  const volume = ref(0.5)
 
   let player = null
   let playerElement = null
@@ -69,6 +70,7 @@ export const useYoutubeStore = defineStore('youtube', () => {
       },
       events: {
         onReady: () => {
+          player.setVolume(volume.value * 100)
           player.playVideo()
           isPlaying.value = true
         },
@@ -145,6 +147,13 @@ export const useYoutubeStore = defineStore('youtube', () => {
     }
   }
 
+  function setVolume(newVolume) {
+    volume.value = newVolume
+    if (player) {
+      player.setVolume(newVolume * 100)
+    }
+  }
+
   function stop() {
     if (player) {
       player.stopVideo()
@@ -174,6 +183,7 @@ export const useYoutubeStore = defineStore('youtube', () => {
     currentVideoTitle,
     savedVideos,
     isReady,
+    volume,
     init,
     initApi,
     setPlayerElement,
@@ -181,6 +191,7 @@ export const useYoutubeStore = defineStore('youtube', () => {
     playVideo,
     toggle,
     pause,
+    setVolume,
     stop,
     removeVideo,
   }
