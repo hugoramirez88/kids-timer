@@ -22,6 +22,7 @@ export const useAudioStore = defineStore('audio', () => {
       audioElement.volume = volume.value
 
       audioElement.addEventListener('canplaythrough', () => {
+        console.log('[Audio] canplaythrough - ready to play')
         isLoading.value = false
         error.value = null
       })
@@ -29,7 +30,9 @@ export const useAudioStore = defineStore('audio', () => {
       audioElement.addEventListener('error', (e) => {
         isLoading.value = false
         error.value = 'Erro ao carregar música'
-        console.error('Audio error:', e)
+        console.error('[Audio] Error event:', e)
+        console.error('[Audio] Error code:', audioElement.error?.code)
+        console.error('[Audio] Error message:', audioElement.error?.message)
       })
 
       audioElement.addEventListener('ended', () => {
@@ -43,24 +46,29 @@ export const useAudioStore = defineStore('audio', () => {
   }
 
   function play(trackId, type, url) {
+    console.log('[Audio] Play called:', { trackId, type, url })
+
     const audio = getAudioElement()
 
     // If same track, just resume
     if (currentTrackId.value === trackId && audio.src) {
+      console.log('[Audio] Resuming same track')
       audio.play()
       isPlaying.value = true
       return
     }
 
     // New track
+    console.log('[Audio] Loading new track')
     isLoading.value = true
     currentTrackId.value = trackId
     currentType.value = type
 
     audio.src = url
+    console.log('[Audio] Set audio.src to:', url)
     audio.load()
     audio.play().catch(err => {
-      console.error('Playback error:', err)
+      console.error('[Audio] Playback error:', err)
       error.value = 'Não foi possível reproduzir'
       isPlaying.value = false
     })
