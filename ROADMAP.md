@@ -35,7 +35,7 @@
 | ~~Profile editing~~ | ~~Change name/avatar~~ ✅ |
 | ~~Skip break option~~ | ~~Quick skip for eager kids~~ ✅ |
 | ~~Progress persistence~~ | ~~Survive page refresh~~ ✅ |
-| Haptic feedback (mobile) | Vibration on timer events |
+| ~~Haptic feedback (mobile)~~ | ~~Vibration on timer events~~ ✅ |
 
 ### High Impact | Medium Effort
 

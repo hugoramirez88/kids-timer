@@ -9,6 +9,7 @@ export const useSettingsStore = defineStore('settings', () => {
   // Global settings
   const masterVolume = ref(data.globalSettings?.masterVolume ?? 0.8)
   const soundEffectsEnabled = ref(data.globalSettings?.soundEffectsEnabled ?? true)
+  const hapticEnabled = ref(data.globalSettings?.hapticEnabled ?? true)
   const defaultPreset = ref(data.globalSettings?.defaultPreset ?? '25-5')
 
   // Sound alerts
@@ -40,13 +41,14 @@ export const useSettingsStore = defineStore('settings', () => {
     current.globalSettings = {
       masterVolume: masterVolume.value,
       soundEffectsEnabled: soundEffectsEnabled.value,
+      hapticEnabled: hapticEnabled.value,
       defaultPreset: defaultPreset.value,
     }
     storage.save(current)
   }
 
   // Auto-save on changes
-  watch([masterVolume, soundEffectsEnabled, defaultPreset], saveSettings)
+  watch([masterVolume, soundEffectsEnabled, hapticEnabled, defaultPreset], saveSettings)
 
   function setTheme(newTheme) {
     theme.value = newTheme
@@ -60,6 +62,7 @@ export const useSettingsStore = defineStore('settings', () => {
   return {
     masterVolume,
     soundEffectsEnabled,
+    hapticEnabled,
     defaultPreset,
     alerts,
     musicPreference,

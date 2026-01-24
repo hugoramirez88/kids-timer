@@ -5,10 +5,21 @@ class AudioManager {
     this.audioContext = null
     this.masterVolume = 0.8
     this.enabled = true
+    this.hapticEnabled = true
     this.sounds = {}
 
     // Initialize on first user interaction
     this.initialized = false
+  }
+
+  // Haptic feedback methods
+  vibrate(pattern) {
+    if (!this.hapticEnabled || !navigator.vibrate) return
+    navigator.vibrate(pattern)
+  }
+
+  setHapticEnabled(enabled) {
+    this.hapticEnabled = enabled
   }
 
   init() {
@@ -55,6 +66,8 @@ class AudioManager {
     this.playTone(523.25, 0.15) // C5
     setTimeout(() => this.playTone(659.25, 0.15), 100) // E5
     setTimeout(() => this.playTone(783.99, 0.2), 200) // G5
+    // 3 short pulses
+    this.vibrate([50, 50, 50])
   }
 
   playBreak() {
@@ -62,6 +75,8 @@ class AudioManager {
     // Cheerful ding
     this.playTone(783.99, 0.3) // G5
     setTimeout(() => this.playTone(1046.50, 0.4), 150) // C6
+    // 2 medium pulses
+    this.vibrate([100, 50, 100])
   }
 
   playComplete() {
@@ -71,6 +86,8 @@ class AudioManager {
     setTimeout(() => this.playTone(659.25, 0.1), 80) // E5
     setTimeout(() => this.playTone(783.99, 0.1), 160) // G5
     setTimeout(() => this.playTone(1046.50, 0.3), 240) // C6
+    // Celebration pattern
+    this.vibrate([50, 30, 50, 30, 50, 30, 100])
   }
 
   playWarning() {
@@ -78,6 +95,8 @@ class AudioManager {
     // Gentle alert
     this.playTone(440, 0.2) // A4
     setTimeout(() => this.playTone(440, 0.2), 300)
+    // Alert pattern
+    this.vibrate([100, 100, 100])
   }
 
   playTick() {
@@ -91,6 +110,14 @@ export const audioManager = new AudioManager()
 
 // Setup event listeners for timer events
 export function setupAudioListeners() {
+  // Load haptic setting from storage
+  try {
+    const saved = JSON.parse(localStorage.getItem('kids-timer') || '{}')
+    audioManager.setHapticEnabled(saved.globalSettings?.hapticEnabled ?? true)
+  } catch (e) {
+    // Ignore parse errors, use default
+  }
+
   window.addEventListener('timer-event', (e) => {
     const { type } = e.detail
     switch (type) {

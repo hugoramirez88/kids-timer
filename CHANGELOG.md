@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-01-23
+
+### Added
+- Haptic feedback (vibration) on timer events for mobile devices
+- New "Vibração" toggle in Sound settings to enable/disable haptic feedback
+- Vibration patterns: 3 short pulses on start, 2 medium pulses on break, celebration pattern on complete, alert pattern on warning
+
 ## [1.1.0] - 2026-01-23
 
 ### Added

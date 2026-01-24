@@ -64,6 +64,17 @@
           v-model.number="settings.masterVolume"
         />
       </div>
+
+      <div class="setting-row">
+        <label>Vibração</label>
+        <button
+          type="button"
+          :class="['toggle-btn', { active: settings.hapticEnabled }]"
+          @click="toggleHaptic"
+        >
+          {{ settings.hapticEnabled ? 'Ligado' : 'Desligado' }}
+        </button>
+      </div>
     </section>
 
     <!-- Music Settings -->
@@ -171,6 +182,7 @@ import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
 import { useAudioStore } from '../../stores/audio'
 import { themes } from '../../data/rewards'
+import { audioManager } from '../../utils/audio'
 import MusicPlayer from '../Music/MusicPlayer.vue'
 import YouTubePlayer from '../Music/YouTubePlayer.vue'
 
@@ -289,6 +301,11 @@ function selectMusicPreference(preference) {
     audio.stop()
   }
   settings.musicPreference = preference
+}
+
+function toggleHaptic() {
+  settings.hapticEnabled = !settings.hapticEnabled
+  audioManager.setHapticEnabled(settings.hapticEnabled)
 }
 </script>
 
