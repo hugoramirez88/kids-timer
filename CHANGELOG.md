@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-01-23
+
 ### Added
+- Progress persistence: timer state now survives page refresh
+- Saves timer state (status, time remaining, durations) to localStorage
+- Automatically restores running/paused timers on page load
+- Handles edge cases: expired timers trigger completion with awards
 - Profile editing feature: edit profile name and change avatar from header
 - Edit button (✏️) next to profile badge in header
 - Modal to edit profile name (max 20 chars) and select from unlocked avatars

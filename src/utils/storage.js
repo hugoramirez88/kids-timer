@@ -10,7 +10,8 @@ const defaultData = {
     soundEffectsEnabled: true,
     defaultPreset: '25-5'
   },
-  sessionHistory: []
+  sessionHistory: [],
+  timerState: null  // Will store: { status, timeRemaining, totalTime, targetEndTime, workDuration, breakDuration, pausedStatus, savedAt }
 }
 
 export const storage = {

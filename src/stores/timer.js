@@ -128,6 +128,7 @@ export const useTimerStore = defineStore('timer', () => {
       status.value = 'idle'
       timeRemaining.value = 0
       totalTime.value = 0
+      clearTimerState()
     }
   }
 
@@ -182,6 +183,7 @@ export const useTimerStore = defineStore('timer', () => {
     window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'work-start' } }))
 
     intervalId = setInterval(tick, 1000)
+    saveTimerState()
   }
 
   function startBreak() {
@@ -193,6 +195,7 @@ export const useTimerStore = defineStore('timer', () => {
     window.dispatchEvent(new CustomEvent('timer-event', { detail: { type: 'break-start' } }))
 
     intervalId = setInterval(tick, 1000)
+    saveTimerState()
   }
 
   function pause() {
@@ -202,6 +205,7 @@ export const useTimerStore = defineStore('timer', () => {
     status.value = 'paused'
     clearInterval(intervalId)
     intervalId = null
+    saveTimerState()
   }
 
   function resume() {
@@ -210,6 +214,7 @@ export const useTimerStore = defineStore('timer', () => {
     status.value = pausedStatus
     targetEndTime.value = Date.now() + (timeRemaining.value * 1000)
     intervalId = setInterval(tick, 1000)
+    saveTimerState()
   }
 
   function stop() {
@@ -220,6 +225,7 @@ export const useTimerStore = defineStore('timer', () => {
     totalTime.value = 0
     targetEndTime.value = null
     pausedStatus = null
+    clearTimerState()
   }
 
   function skipBreak() {
@@ -234,6 +240,77 @@ export const useTimerStore = defineStore('timer', () => {
     timeRemaining.value = 0
     totalTime.value = 0
     targetEndTime.value = null
+    clearTimerState()
+  }
+
+  // Timer state persistence
+  function saveTimerState() {
+    const data = storage.load()
+    data.timerState = {
+      status: status.value,
+      timeRemaining: timeRemaining.value,
+      totalTime: totalTime.value,
+      targetEndTime: targetEndTime.value,
+      workDuration: workDuration.value,
+      breakDuration: breakDuration.value,
+      pausedStatus: pausedStatus,
+      savedAt: Date.now()
+    }
+    storage.save(data)
+  }
+
+  function clearTimerState() {
+    const data = storage.load()
+    data.timerState = null
+    storage.save(data)
+  }
+
+  function restoreTimerState() {
+    const data = storage.load()
+    const saved = data.timerState
+    if (!saved || saved.status === 'idle') return false
+
+    const now = Date.now()
+
+    if (saved.status === 'paused') {
+      // Restore paused state as-is
+      status.value = 'paused'
+      timeRemaining.value = saved.timeRemaining
+      totalTime.value = saved.totalTime
+      workDuration.value = saved.workDuration
+      breakDuration.value = saved.breakDuration
+      pausedStatus = saved.pausedStatus
+      return true
+    }
+
+    if (saved.status === 'working' || saved.status === 'break') {
+      // Calculate elapsed time since save
+      const elapsed = Math.floor((now - saved.savedAt) / 1000)
+      const newTimeRemaining = Math.max(0, saved.timeRemaining - elapsed)
+
+      if (newTimeRemaining <= 0) {
+        // Timer expired while page was closed - trigger completion
+        status.value = saved.status
+        workDuration.value = saved.workDuration
+        breakDuration.value = saved.breakDuration
+        totalTime.value = saved.totalTime
+        timeRemaining.value = 0
+        handleTimerComplete()
+        return true
+      }
+
+      // Resume timer from calculated position
+      status.value = saved.status
+      timeRemaining.value = newTimeRemaining
+      totalTime.value = saved.totalTime
+      targetEndTime.value = now + (newTimeRemaining * 1000)
+      workDuration.value = saved.workDuration
+      breakDuration.value = saved.breakDuration
+      intervalId = setInterval(tick, 1000)
+      return true
+    }
+
+    return false
   }
 
   // Handle tab visibility
@@ -262,6 +339,7 @@ export const useTimerStore = defineStore('timer', () => {
   }
 
   checkNewDay()
+  restoreTimerState()
 
   return {
     status,
@@ -281,5 +359,6 @@ export const useTimerStore = defineStore('timer', () => {
     resume,
     stop,
     skipBreak,
+    restoreTimerState,
   }
 })
