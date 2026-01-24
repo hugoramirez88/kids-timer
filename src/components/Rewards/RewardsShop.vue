@@ -141,6 +141,33 @@
         </div>
       </div>
     </section>
+
+    <!-- Energetic Music Section -->
+    <section class="shop-section">
+      <h3>Música Animada</h3>
+      <div class="items-grid">
+        <div
+          v-for="track in energeticTracksData"
+          :key="track.id"
+          :class="['shop-item', { owned: isOwned('energetic', track.id) }]"
+        >
+          <div class="item-preview">
+            <span class="soundscape-emoji">{{ track.icon }}</span>
+          </div>
+          <span class="item-name">{{ track.name }}</span>
+          <button
+            type="button"
+            v-if="!isOwned('energetic', track.id)"
+            class="buy-btn"
+            :disabled="!canAfford(track.cost)"
+            @click="buyItem('energetic', track.id, track.cost)"
+          >
+            {{ track.cost }} ⭐
+          </button>
+          <span v-else class="selected-badge">Desbloqueado</span>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -149,6 +176,7 @@ import { useProfilesStore } from '../../stores/profiles'
 import { useSettingsStore } from '../../stores/settings'
 import { avatars, themes as themesData, pathAnimals as pathAnimalsData } from '../../data/rewards'
 import { soundscapes as soundscapesData } from '../../data/ambientSoundscapes'
+import { energeticTracks as energeticTracksData } from '../../data/energeticMusic'
 
 const profiles = useProfilesStore()
 const settings = useSettingsStore()
@@ -167,6 +195,11 @@ function isOwned(type, id) {
       const defaultSoundscapes = ['piano-calmo', 'anoitecer']
       if (defaultSoundscapes.includes(id)) return true
       return profiles.activeProfile.unlockedSoundscapes?.includes(id) || false
+    case 'energetic':
+      // Default energetic tracks are always owned
+      const defaultEnergeticTracks = ['happy-ukulele', 'adventure-theme']
+      if (defaultEnergeticTracks.includes(id)) return true
+      return profiles.activeProfile.unlockedEnergeticTracks?.includes(id) || false
   }
   return false
 }

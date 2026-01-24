@@ -99,6 +99,39 @@
       </div>
     </section>
 
+    <!-- Energetic Music Section -->
+    <section class="music-section">
+      <h3>🎉 Música Animada</h3>
+      <p class="section-desc">Para quem prefere ritmos mais alegres!</p>
+
+      <div class="track-grid">
+        <button
+          type="button"
+          v-for="track in energeticTracks"
+          :key="track.id"
+          :class="[
+            'track-card',
+            {
+              active: audio.currentTrackId === track.id && audio.currentType === 'energetic',
+              playing: audio.currentTrackId === track.id && audio.isPlaying,
+              locked: !isEnergeticUnlocked(track.id)
+            }
+          ]"
+          @click="playEnergetic(track)"
+          :disabled="!isEnergeticUnlocked(track.id)"
+        >
+          <span class="track-icon">{{ track.icon }}</span>
+          <span class="track-name">{{ track.name }}</span>
+          <span v-if="!isEnergeticUnlocked(track.id)" class="track-cost">
+            {{ track.cost }} ⭐
+          </span>
+          <span v-else-if="audio.currentTrackId === track.id && audio.isPlaying" class="playing-badge">
+            ♪
+          </span>
+        </button>
+      </div>
+    </section>
+
     <!-- Volume Control -->
     <section class="volume-section">
       <label>🔊 Volume</label>
@@ -143,6 +176,7 @@
 import { ref, computed } from 'vue'
 import { soundscapes, getSoundscape } from '../../data/ambientSoundscapes'
 import { classicalMusic } from '../../data/classicalMusic'
+import { energeticTracks, getEnergeticTrack } from '../../data/energeticMusic'
 import { useAudioStore } from '../../stores/audio'
 import { useSettingsStore } from '../../stores/settings'
 import { useProfilesStore } from '../../stores/profiles'
@@ -165,6 +199,10 @@ const currentIcon = computed(() => {
     const track = classicalMusic.find(t => t.id === audio.currentTrackId)
     return getInstrumentEmoji(track?.instrument)
   }
+  if (audio.currentType === 'energetic') {
+    const track = getEnergeticTrack(audio.currentTrackId)
+    return track?.icon || '🎵'
+  }
   return '🎵'
 })
 
@@ -177,12 +215,17 @@ const currentTitle = computed(() => {
     const track = classicalMusic.find(t => t.id === audio.currentTrackId)
     return track?.title || 'Música'
   }
+  if (audio.currentType === 'energetic') {
+    const track = getEnergeticTrack(audio.currentTrackId)
+    return track?.name || 'Música'
+  }
   return 'Música'
 })
 
 const currentTypeLabel = computed(() => {
   if (audio.currentType === 'ambient') return 'Som Ambiente'
   if (audio.currentType === 'classical') return 'Música Clássica'
+  if (audio.currentType === 'energetic') return 'Música Animada'
   return ''
 })
 
@@ -191,6 +234,13 @@ function isUnlocked(soundscapeId) {
   const soundscape = getSoundscape(soundscapeId)
   if (soundscape.cost === 0) return true
   return profiles.activeProfile?.unlockedSoundscapes?.includes(soundscapeId) || false
+}
+
+function isEnergeticUnlocked(trackId) {
+  if (settings.devMode) return true
+  const track = getEnergeticTrack(trackId)
+  if (track.cost === 0) return true
+  return profiles.activeProfile?.unlockedEnergeticTracks?.includes(trackId) || false
 }
 
 function playSoundscape(soundscape) {
@@ -223,6 +273,23 @@ function playClassical(track) {
   }
 
   audio.play(track.id, 'classical', track.audioUrl)
+}
+
+function playEnergetic(track) {
+  if (!isEnergeticUnlocked(track.id)) return
+
+  // Stop YouTube if playing
+  if (youtube.currentVideoId) {
+    youtube.stop()
+  }
+
+  // If same track is playing, toggle pause
+  if (audio.currentTrackId === track.id && audio.currentType === 'energetic') {
+    audio.toggle()
+    return
+  }
+
+  audio.play(track.id, 'energetic', track.audioUrl)
 }
 
 function showTrackInfo(track) {

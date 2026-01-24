@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-01-23
+
+### Added
+- Energetic music section ("Música Animada") for kids who prefer upbeat music during focus
+- 5 upbeat tracks from Archive.org CC0 collection: Ukulele Feliz, Tema de Aventura, Batidas Divertidas, Dia Ensolarado, Festa Dançante
+- 2 free default tracks + 3 unlockable with stars
+- Energetic tracks purchasable in Rewards Shop
+
 ## [1.2.0] - 2026-01-23
 
 ### Added
