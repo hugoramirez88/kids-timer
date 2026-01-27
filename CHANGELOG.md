@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-01-25
+
+### Added
+- Comprehensive Playwright E2E test suite with 97 test cases across 10 test files
+- Test infrastructure: conftest.py, config.py, port_detector.py, storage_helpers.py
+- Profile CRUD tests (P01-P08): create, select, switch, edit, logout, persistence
+- Timer functionality tests (T01-T10): start, presets, pause/resume, stop, completion, points
+- Progress indicator tests (PR01-PR06): all 4 indicators, settings, persistence
+- Music player tests (M01-M08): enable, play, pause, volume, locked tracks
+- Rewards shop tests (R01-R08): open, buy, insufficient points, select items
+- Settings panel tests (S01-S10): themes, toggles, volume, music, dev mode
+- Badge system tests (B01-B05): display, earned/locked states, earning via pomodoro
+- Responsive design tests: mobile (375px), tablet (768px), desktop (1024px) viewports
+- Visual states tests (VS01-VS08): button states, theme states, timer states
+- Accessibility tests (A01-A05): touch targets, focus management, labels, keyboard nav
+- npm test scripts: `npm run test`, `npm run test:headed`, `npm run test:report`
+- IDEAS.md for capturing improvement ideas during development
+
+### Discovered Issues
+- Progress indicator setting not restored from profile on page reload (xfail)
+- Settings button touch target below 44px minimum on mobile (xfail)
+- Minor horizontal overflow (5px) on 375px mobile viewport
+
 ## [1.3.0] - 2026-01-23
 
 ### Added

@@ -56,19 +56,61 @@ npm run dev
 - Vite will try 5173 first, then 3000, 3001, etc.
 - Look for `Local: http://localhost:XXXX` in the output
 
-## Playwright Testing (webapp-testing skill)
+## Playwright Testing
 
-This system uses an externally-managed Python environment. Use a virtual environment:
+This project has a comprehensive Playwright test suite in `/tests/`.
 
+### Setup (one-time)
 ```bash
-# Create venv (only needed once)
 python3 -m venv /tmp/playwright-venv
-/tmp/playwright-venv/bin/pip install playwright
-/tmp/playwright-venv/bin/python -m playwright install chromium
-
-# Run tests
-/tmp/playwright-venv/bin/python your_test_script.py
+source /tmp/playwright-venv/bin/activate
+pip install playwright pytest pytest-html
+python -m playwright install chromium
 ```
+
+### Running Tests
+```bash
+# Start dev server first (in separate terminal)
+cd /home/in/kids-timer && npm run dev
+
+# Run all tests
+npm run test
+
+# Run with visible browser
+npm run test:headed
+
+# Run specific test file
+/tmp/playwright-venv/bin/python -m pytest tests/test_01_profiles.py -v
+
+# Generate HTML report
+npm run test:report
+```
+
+### Test Structure
+```
+tests/
+├── conftest.py              # Fixtures, browser setup
+├── config.py                # Selectors, viewports, constants
+├── utils/
+│   ├── port_detector.py     # Auto-detect dev server port
+│   └── storage_helpers.py   # localStorage manipulation
+├── test_01_profiles.py      # Profile CRUD (P01-P08)
+├── test_02_timer.py         # Timer functionality (T01-T10)
+├── test_03_progress.py      # Progress indicators (PR01-PR06)
+├── test_04_music.py         # Music player (M01-M08)
+├── test_05_rewards.py       # Rewards shop (R01-R08)
+├── test_06_settings.py      # Settings panel (S01-S10)
+├── test_07_badges.py        # Badge system (B01-B05)
+├── test_08_ux_responsive.py # Responsive design
+├── test_09_ux_states.py     # Visual states (VS01-VS08)
+└── test_10_accessibility.py # Accessibility (A01-A05)
+```
+
+### Writing New Tests
+- Use `create_profile()` helper to set up test data
+- Use selectors from `config.py` (SEL dict)
+- For timer completion tests, use 1-minute custom duration
+- Audio tests may need `--headed` mode
 
 ## Key Directories
 
@@ -76,3 +118,21 @@ python3 -m venv /tmp/playwright-venv
 - `src/stores/` - Pinia stores (timer, settings)
 - `src/views/` - Main views
 - `docs/plans/` - Design documents
+- `tests/` - Playwright E2E tests
+
+## Post-Implementation Checklist
+
+After completing features/fixes:
+1. Update CHANGELOG.md - Add items under "Unreleased"
+2. Update package.json version if releasing
+3. Update ROADMAP.md - Mark completed items with ~~strikethrough~~ ✅
+4. Commit with appropriate type prefix (feat/fix/docs/refactor)
+5. Push to origin master
+
+## Ideas Capture Workflow
+
+Use IDEAS.md to capture improvement ideas during development:
+- During development: Note ideas as they arise
+- After features: Review for related ideas
+- Before planning: Check for backlog items
+- Periodically: Triage into ROADMAP.md or discard

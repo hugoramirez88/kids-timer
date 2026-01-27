@@ -70,7 +70,7 @@
 
 ## Technical Debt
 
-- Add unit tests for stores (Vitest)
+- ~~Add unit tests for stores (Vitest)~~ ✅ (Playwright E2E tests added)
 - Set up GitHub Actions CI/CD
 - Lazy load modals and non-critical components
 - Screen reader support (ARIA labels)
