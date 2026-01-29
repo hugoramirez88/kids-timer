@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#FF6B6B"/>
+
+  <!-- Tomato body highlight (left) -->
+  <ellipse cx="200" cy="280" rx="80" ry="120" fill="#FF8A8A" opacity="0.6"/>
+
+  <!-- Tomato body shadow (right) -->
+  <ellipse cx="320" cy="300" rx="60" ry="100" fill="#E55555" opacity="0.4"/>
+
+  <!-- Tomato stem -->
+  <path d="M256 80 Q240 60 220 70 Q200 80 210 100 Q220 115 240 110 L256 120 L272 110 Q292 115 302 100 Q312 80 292 70 Q272 60 256 80" fill="#4CAF50"/>
+
+  <!-- Stem center -->
+  <ellipse cx="256" cy="95" rx="15" ry="20" fill="#388E3C"/>
+
+  <!-- Left leaf -->
+  <path d="M220 85 Q180 60 160 80 Q175 95 210 95 Z" fill="#66BB6A"/>
+
+  <!-- Right leaf -->
+  <path d="M292 85 Q332 60 352 80 Q337 95 302 95 Z" fill="#66BB6A"/>
+
+  <!-- Happy face - left eye -->
+  <ellipse cx="200" cy="250" rx="25" ry="30" fill="#FFFFFF"/>
+  <ellipse cx="205" cy="255" rx="12" ry="15" fill="#333333"/>
+  <circle cx="210" cy="250" r="5" fill="#FFFFFF"/>
+
+  <!-- Happy face - right eye -->
+  <ellipse cx="312" cy="250" rx="25" ry="30" fill="#FFFFFF"/>
+  <ellipse cx="317" cy="255" rx="12" ry="15" fill="#333333"/>
+  <circle cx="322" cy="250" r="5" fill="#FFFFFF"/>
+
+  <!-- Happy smile -->
+  <path d="M180 320 Q256 400 332 320" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" fill="none"/>
+
+  <!-- Rosy cheeks -->
+  <ellipse cx="150" cy="310" rx="30" ry="20" fill="#FF9999" opacity="0.6"/>
+  <ellipse cx="362" cy="310" rx="30" ry="20" fill="#FF9999" opacity="0.6"/>
+</svg>

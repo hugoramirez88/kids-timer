@@ -123,11 +123,13 @@ tests/
 ## Post-Implementation Checklist
 
 After completing features/fixes:
-1. Update CHANGELOG.md - Add items under "Unreleased"
-2. Update package.json version if releasing
-3. Update ROADMAP.md - Mark completed items with ~~strikethrough~~ ✅
-4. Commit with appropriate type prefix (feat/fix/docs/refactor)
-5. Push to origin master
+1. **Code review** - Review changes for best practices, anti-patterns, over-engineering
+2. Update CHANGELOG.md - Add items under "Unreleased"
+3. Update package.json version if releasing
+4. Update ROADMAP.md - Mark completed items with ~~strikethrough~~ ✅
+5. Review CLAUDE.md - Add any new learnings or gotchas
+6. Commit with appropriate type prefix (feat/fix/docs/refactor)
+7. Push to origin master
 
 ## Ideas Capture Workflow
 
@@ -154,3 +156,9 @@ This is intentional, not a bug.
 ### Default Unlocked Items
 All default unlocked items are centralized in `src/data/defaults.js`.
 Used by profiles.js when creating new profiles and RewardsShop.vue for ownership checks.
+
+### PWA Service Worker
+- Service worker is in `public/sw.js` with manual cache versioning
+- **Important**: Bump `CACHE_NAME` version when deploying significant changes
+- Current strategy: network-first with cache fallback (dynamic caching)
+- For production, consider migrating to `vite-plugin-pwa` for automatic versioning

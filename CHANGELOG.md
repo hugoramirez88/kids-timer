@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- PWA (Progressive Web App) support: app can now be installed on any device
+- Web app manifest with app metadata and icons
+- Service worker for offline caching (network-first strategy)
+- Kid-friendly tomato icon (192x192 and 512x512 PNG)
+- Favicon for browser tabs
+- Apple mobile web app meta tags for iOS home screen
+
 ## [1.4.2] - 2026-01-29
 
 ### Fixed

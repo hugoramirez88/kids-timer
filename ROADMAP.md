@@ -85,7 +85,33 @@
 
 ## Distribution
 
-See [DISTRIBUTION.md](DISTRIBUTION.md) for app store publishing details.
+See [DISTRIBUTION.md](DISTRIBUTION.md) for detailed implementation guides.
+
+### High Impact | Low Effort
+
+| Feature | Description |
+|---------|-------------|
+| ~~PWA Support~~ | ~~Installable from browser, works offline~~ ✅ |
+| Web Hosting | Deploy to Netlify/Vercel/GitHub Pages |
+
+### High Impact | Medium Effort
+
+| Feature | Description |
+|---------|-------------|
+| GitHub Actions CI/CD | Auto-deploy on push, run tests |
+| Android App (Capacitor) | Native APK for Play Store or direct sharing |
+
+### Medium Impact | Medium Effort
+
+| Feature | Description |
+|---------|-------------|
+| Windows App (Electron) | Standalone .exe installer |
+
+### Medium Impact | High Effort
+
+| Feature | Description |
+|---------|-------------|
+| iOS App (Capacitor) | Requires Mac + Apple Developer account ($99/yr) |
 
 ---
 
