@@ -20,7 +20,7 @@
           :class="['shop-item', { owned: isOwned('avatar', avatar.id), selected: isSelected('avatar', avatar.id) }]"
         >
           <div class="item-preview">
-            <img :src="`/images/avatars/${avatar.id}.svg`" :alt="avatar.name" />
+            <img :src="`${baseUrl}images/avatars/${avatar.id}.svg`" :alt="avatar.name" />
           </div>
           <span class="item-name">{{ avatar.name }}</span>
           <button
@@ -178,6 +178,8 @@ import { avatars, themes as themesData, pathAnimals as pathAnimalsData } from '.
 import { soundscapes as soundscapesData } from '../../data/ambientSoundscapes'
 import { energeticTracks as energeticTracksData } from '../../data/energeticMusic'
 import { DEFAULT_UNLOCKED } from '../../data/defaults'
+
+const baseUrl = import.meta.env.BASE_URL
 
 const profiles = useProfilesStore()
 const settings = useSettingsStore()

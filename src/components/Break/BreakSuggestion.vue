@@ -3,7 +3,7 @@
   <div class="break-suggestion" v-if="currentSuggestion">
     <div class="suggestion-image">
       <img
-        :src="`/images/break/${currentSuggestion.image}`"
+        :src="`${baseUrl}images/break/${currentSuggestion.image}`"
         :alt="currentSuggestion.text"
         @error="handleImageError"
       />
@@ -19,6 +19,8 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useTimerStore } from '../../stores/timer'
 import { getRandomSuggestion } from '../../data/breakSuggestions'
+
+const baseUrl = import.meta.env.BASE_URL
 
 const timer = useTimerStore()
 const currentSuggestion = ref(null)
@@ -45,7 +47,7 @@ function pickSuggestion() {
 
 function handleImageError(e) {
   // Fallback to placeholder if image not found
-  e.target.src = '/images/break/placeholder.svg'
+  e.target.src = `${baseUrl}images/break/placeholder.svg`
 }
 
 function startRotation() {

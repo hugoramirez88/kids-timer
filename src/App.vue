@@ -13,7 +13,7 @@
         <div class="profile-section">
           <button class="profile-badge" @click="showProfileSwitch = true">
             <img
-              :src="`/images/avatars/${profiles.activeProfile.avatar}.svg`"
+              :src="`${baseUrl}images/avatars/${profiles.activeProfile.avatar}.svg`"
               :alt="profiles.activeProfile.name"
               class="profile-badge-avatar"
             />
@@ -72,7 +72,7 @@
             :class="{ active: profile.id === profiles.activeProfileId }"
             @click="switchProfile(profile.id)"
           >
-            <img :src="`/images/avatars/${profile.avatar}.svg`" :alt="profile.name" />
+            <img :src="`${baseUrl}images/avatars/${profile.avatar}.svg`" :alt="profile.name" />
             <span>{{ profile.name }}</span>
           </button>
           <!-- Add new profile option -->
@@ -133,7 +133,7 @@
               @click="editProfileAvatar = avatar.id"
               type="button"
             >
-              <img :src="`/images/avatars/${avatar.id}.svg`" :alt="avatar.name" />
+              <img :src="`${baseUrl}images/avatars/${avatar.id}.svg`" :alt="avatar.name" />
             </button>
           </div>
         </div>
@@ -221,6 +221,8 @@ import BadgesDisplay from './components/Rewards/BadgesDisplay.vue'
 import Celebration from './components/Rewards/Celebration.vue'
 import MiniPlayer from './components/Music/MiniPlayer.vue'
 import { avatars } from './data/rewards'
+
+const baseUrl = import.meta.env.BASE_URL
 
 const timer = useTimerStore()
 const profiles = useProfilesStore()
