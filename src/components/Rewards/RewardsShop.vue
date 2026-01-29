@@ -177,6 +177,7 @@ import { useSettingsStore } from '../../stores/settings'
 import { avatars, themes as themesData, pathAnimals as pathAnimalsData } from '../../data/rewards'
 import { soundscapes as soundscapesData } from '../../data/ambientSoundscapes'
 import { energeticTracks as energeticTracksData } from '../../data/energeticMusic'
+import { DEFAULT_UNLOCKED } from '../../data/defaults'
 
 const profiles = useProfilesStore()
 const settings = useSettingsStore()
@@ -192,13 +193,11 @@ function isOwned(type, id) {
     case 'animal': return profiles.activeProfile.unlockedAnimals.includes(id)
     case 'soundscape':
       // Default soundscapes are always owned
-      const defaultSoundscapes = ['piano-calmo', 'anoitecer']
-      if (defaultSoundscapes.includes(id)) return true
+      if (DEFAULT_UNLOCKED.soundscapes.includes(id)) return true
       return profiles.activeProfile.unlockedSoundscapes?.includes(id) || false
     case 'energetic':
       // Default energetic tracks are always owned
-      const defaultEnergeticTracks = ['happy-ukulele', 'adventure-theme']
-      if (defaultEnergeticTracks.includes(id)) return true
+      if (DEFAULT_UNLOCKED.energeticTracks.includes(id)) return true
       return profiles.activeProfile.unlockedEnergeticTracks?.includes(id) || false
   }
   return false

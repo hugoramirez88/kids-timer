@@ -30,16 +30,10 @@
 <script setup>
 import { computed } from 'vue'
 import { useTimerStore } from '../../stores/timer'
+import { useProgressColor } from '../../composables/useProgressColor'
 
 const timer = useTimerStore()
-
-const progressColor = computed(() => {
-  const percent = timer.progressPercent
-  if (timer.status === 'break') return 'var(--color-secondary, #2196F3)'
-  if (percent >= 75) return 'var(--color-danger, #f44336)'
-  if (percent >= 50) return 'var(--color-warning, #FF9800)'
-  return 'var(--color-primary, #4CAF50)'
-})
+const { progressColor } = useProgressColor()
 
 const characterEmoji = computed(() => {
   const percent = timer.progressPercent

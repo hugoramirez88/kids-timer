@@ -136,3 +136,21 @@ Use IDEAS.md to capture improvement ideas during development:
 - After features: Review for related ideas
 - Before planning: Check for backlog items
 - Periodically: Triage into ROADMAP.md or discard
+
+## Known Patterns
+
+### Profile Settings Sync
+Profile-specific settings (theme, progressIndicator, etc.) are stored in both:
+- `profiles.activeProfile` (persisted per-profile)
+- `settings` store (runtime state)
+
+On profile selection/reload, App.vue syncs them in `onMounted()`.
+
+### Store Communication
+Stores can import and call each other directly (standard Pinia pattern).
+Timer → Profiles (addPoints, recordComplete)
+This is intentional, not a bug.
+
+### Default Unlocked Items
+All default unlocked items are centralized in `src/data/defaults.js`.
+Used by profiles.js when creating new profiles and RewardsShop.vue for ownership checks.

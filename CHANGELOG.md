@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.2] - 2026-01-29
+
+### Fixed
+- Alert settings (1 minute, 5 minutes, 50%, 25% warnings) now persist across page reload
+- Event listener memory leaks: cleanup functions added for visibilitychange and timer events
+- Progress color consistency: AnimalPath now shows warning colors at 50%/75% like other indicators
+
+### Changed
+- Progress color logic extracted to shared `useProgressColor` composable (DRY improvement)
+- Default unlocked items centralized in `src/data/defaults.js` (single source of truth)
+
+### Added
+- ErrorBoundary component wraps critical sections to prevent white screen on errors
+
 ## [1.4.1] - 2026-01-29
 
 ### Fixed

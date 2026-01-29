@@ -108,6 +108,10 @@ class AudioManager {
 
 export const audioManager = new AudioManager()
 
+// Event handlers (stored for cleanup)
+let timerEventHandler = null
+let timerAlertHandler = null
+
 // Setup event listeners for timer events
 export function setupAudioListeners() {
   // Load haptic setting from storage
@@ -118,7 +122,7 @@ export function setupAudioListeners() {
     // Ignore parse errors, use default
   }
 
-  window.addEventListener('timer-event', (e) => {
+  timerEventHandler = (e) => {
     const { type } = e.detail
     switch (type) {
       case 'work-start':
@@ -132,12 +136,27 @@ export function setupAudioListeners() {
         audioManager.playComplete()
         break
     }
-  })
+  }
 
-  window.addEventListener('timer-alert', (e) => {
+  timerAlertHandler = (e) => {
     const { alerts } = e.detail
     if (alerts.length > 0) {
       audioManager.playWarning()
     }
-  })
+  }
+
+  window.addEventListener('timer-event', timerEventHandler)
+  window.addEventListener('timer-alert', timerAlertHandler)
+}
+
+// Cleanup function for removing event listeners
+export function cleanupAudioListeners() {
+  if (timerEventHandler) {
+    window.removeEventListener('timer-event', timerEventHandler)
+    timerEventHandler = null
+  }
+  if (timerAlertHandler) {
+    window.removeEventListener('timer-alert', timerAlertHandler)
+    timerAlertHandler = null
+  }
 }

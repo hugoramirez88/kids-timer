@@ -326,6 +326,15 @@ export const useTimerStore = defineStore('timer', () => {
   // Initialize visibility listener
   document.addEventListener('visibilitychange', handleVisibilityChange)
 
+  // Cleanup function for removing event listeners
+  function cleanup() {
+    document.removeEventListener('visibilitychange', handleVisibilityChange)
+    if (intervalId) {
+      clearInterval(intervalId)
+      intervalId = null
+    }
+  }
+
   // Check if new day for first-of-day bonus
   function checkNewDay() {
     const lastDate = localStorage.getItem('kids-timer-last-date')
@@ -360,5 +369,6 @@ export const useTimerStore = defineStore('timer', () => {
     stop,
     skipBreak,
     restoreTimerState,
+    cleanup,
   }
 })

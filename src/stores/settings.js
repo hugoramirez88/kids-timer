@@ -12,12 +12,12 @@ export const useSettingsStore = defineStore('settings', () => {
   const hapticEnabled = ref(data.globalSettings?.hapticEnabled ?? true)
   const defaultPreset = ref(data.globalSettings?.defaultPreset ?? '25-5')
 
-  // Sound alerts
+  // Sound alerts (loaded from saved data)
   const alerts = ref({
-    oneMinute: true,
-    fiveMinutes: false,
-    fiftyPercent: false,
-    twentyFivePercent: false,
+    oneMinute: data.globalSettings?.alerts?.oneMinute ?? true,
+    fiveMinutes: data.globalSettings?.alerts?.fiveMinutes ?? false,
+    fiftyPercent: data.globalSettings?.alerts?.fiftyPercent ?? false,
+    twentyFivePercent: data.globalSettings?.alerts?.twentyFivePercent ?? false,
   })
 
   // Music preference: 'none' | 'classical' | 'youtube'
@@ -43,12 +43,14 @@ export const useSettingsStore = defineStore('settings', () => {
       soundEffectsEnabled: soundEffectsEnabled.value,
       hapticEnabled: hapticEnabled.value,
       defaultPreset: defaultPreset.value,
+      alerts: alerts.value,
     }
     storage.save(current)
   }
 
-  // Auto-save on changes
+  // Auto-save on changes (including alerts - use deep watch for alerts object)
   watch([masterVolume, soundEffectsEnabled, hapticEnabled, defaultPreset], saveSettings)
+  watch(alerts, saveSettings, { deep: true })
 
   function setTheme(newTheme) {
     theme.value = newTheme

@@ -40,22 +40,24 @@
         </div>
       </header>
 
-      <div class="timer-main">
-        <div class="progress-container">
-          <!-- Dynamic Progress Indicator -->
-          <component :is="progressComponent" />
-          <div class="timer-overlay" v-if="settings.progressIndicator === 'circular'">
-            <TimerDisplay />
+      <ErrorBoundary>
+        <div class="timer-main">
+          <div class="progress-container">
+            <!-- Dynamic Progress Indicator -->
+            <component :is="progressComponent" />
+            <div class="timer-overlay" v-if="settings.progressIndicator === 'circular'">
+              <TimerDisplay />
+            </div>
           </div>
+
+          <!-- Timer display below for non-circular indicators -->
+          <TimerDisplay v-if="settings.progressIndicator !== 'circular'" />
+
+          <BreakSuggestion v-if="timer.status === 'break'" />
+
+          <TimerControls />
         </div>
-
-        <!-- Timer display below for non-circular indicators -->
-        <TimerDisplay v-if="settings.progressIndicator !== 'circular'" />
-
-        <BreakSuggestion v-if="timer.status === 'break'" />
-
-        <TimerControls />
-      </div>
+      </ErrorBoundary>
     </main>
 
     <!-- Profile Switch Modal -->
@@ -203,6 +205,8 @@ import { useSettingsStore } from './stores/settings'
 import { useAudioStore } from './stores/audio'
 import { useYoutubeStore } from './stores/youtube'
 
+import { cleanupAudioListeners } from './utils/audio'
+import ErrorBoundary from './components/ErrorBoundary.vue'
 import ProfileSelector from './components/Profiles/ProfileSelector.vue'
 import TimerDisplay from './components/Timer/TimerDisplay.vue'
 import TimerControls from './components/Timer/TimerControls.vue'
@@ -310,6 +314,12 @@ onMounted(() => {
   youtube.init()
   youtube.initApi()
   youtube.setPlayerElement('youtube-player-global')
+})
+
+onUnmounted(() => {
+  // Clean up event listeners to prevent memory leaks
+  timer.cleanup()
+  cleanupAudioListeners()
 })
 
 // Pause music when timer pauses/stops/ends

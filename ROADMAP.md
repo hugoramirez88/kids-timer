@@ -71,6 +71,11 @@
 ## Technical Debt
 
 - ~~Add unit tests for stores (Vitest)~~ ✅ (Playwright E2E tests added)
+- ~~Fix alerts settings persistence~~ ✅
+- ~~Fix event listener memory leaks~~ ✅
+- ~~Create useProgressColor composable~~ ✅
+- ~~Centralize default unlock items~~ ✅
+- ~~Add error boundary component~~ ✅
 - Set up GitHub Actions CI/CD
 - Lazy load modals and non-critical components
 - Screen reader support (ARIA labels)

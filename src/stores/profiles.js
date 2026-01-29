@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { storage } from '../utils/storage'
 import { useSettingsStore } from './settings'
+import { DEFAULT_UNLOCKED } from '../data/defaults'
 
 export const useProfilesStore = defineStore('profiles', () => {
   const data = storage.load()
@@ -37,11 +38,11 @@ export const useProfilesStore = defineStore('profiles', () => {
 
       // Gamification
       points: 0,
-      unlockedThemes: ['divertido', 'minimalista'],
-      unlockedAvatars: ['rabbit'],
-      unlockedAnimals: ['rabbit'],
-      unlockedSoundscapes: ['piano-calmo', 'anoitecer'],
-      unlockedEnergeticTracks: ['happy-ukulele', 'adventure-theme'],
+      unlockedThemes: [...DEFAULT_UNLOCKED.themes],
+      unlockedAvatars: [...DEFAULT_UNLOCKED.avatars],
+      unlockedAnimals: [...DEFAULT_UNLOCKED.animals],
+      unlockedSoundscapes: [...DEFAULT_UNLOCKED.soundscapes],
+      unlockedEnergeticTracks: [...DEFAULT_UNLOCKED.energeticTracks],
       badges: [],
 
       // Tried indicators (for explorer badge)
@@ -114,7 +115,7 @@ export const useProfilesStore = defineStore('profiles', () => {
         break
       case 'soundscape':
         if (!profile.unlockedSoundscapes) {
-          profile.unlockedSoundscapes = ['piano-calmo', 'anoitecer']
+          profile.unlockedSoundscapes = [...DEFAULT_UNLOCKED.soundscapes]
         }
         if (!profile.unlockedSoundscapes.includes(itemId)) {
           profile.unlockedSoundscapes.push(itemId)
@@ -122,7 +123,7 @@ export const useProfilesStore = defineStore('profiles', () => {
         break
       case 'energetic':
         if (!profile.unlockedEnergeticTracks) {
-          profile.unlockedEnergeticTracks = ['happy-ukulele', 'adventure-theme']
+          profile.unlockedEnergeticTracks = [...DEFAULT_UNLOCKED.energeticTracks]
         }
         if (!profile.unlockedEnergeticTracks.includes(itemId)) {
           profile.unlockedEnergeticTracks.push(itemId)

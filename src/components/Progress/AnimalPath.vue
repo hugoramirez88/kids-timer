@@ -45,9 +45,11 @@
 import { computed } from 'vue'
 import { useTimerStore } from '../../stores/timer'
 import { useSettingsStore } from '../../stores/settings'
+import { useProgressColor } from '../../composables/useProgressColor'
 
 const timer = useTimerStore()
 const settings = useSettingsStore()
+const { progressColor } = useProgressColor()
 
 // Winding path definition
 const pathD = "M 20 100 Q 80 40 140 100 Q 200 160 260 100 L 280 100"
@@ -55,11 +57,6 @@ const pathLength = 340 // Approximate path length
 
 const dashOffset = computed(() => {
   return pathLength * (1 - timer.progress)
-})
-
-const progressColor = computed(() => {
-  if (timer.status === 'break') return 'var(--color-secondary, #2196F3)'
-  return 'var(--color-primary, #4CAF50)'
 })
 
 // Quadratic bezier interpolation: B(t) = (1-t)²P0 + 2(1-t)tP1 + t²P2

@@ -32,6 +32,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useTimerStore } from '../../stores/timer'
+import { useProgressColor } from '../../composables/useProgressColor'
 
 const props = defineProps({
   size: { type: Number, default: 280 },
@@ -39,6 +40,7 @@ const props = defineProps({
 })
 
 const timer = useTimerStore()
+const { progressColor } = useProgressColor()
 
 const center = computed(() => props.size / 2)
 const radius = computed(() => (props.size - props.strokeWidth) / 2)
@@ -50,14 +52,6 @@ const dashOffset = computed(() => {
 })
 
 const bgColor = computed(() => 'var(--color-progress-bg, #e0e0e0)')
-
-const progressColor = computed(() => {
-  const percent = timer.progressPercent
-  if (timer.status === 'break') return 'var(--color-secondary, #2196F3)'
-  if (percent >= 75) return 'var(--color-danger, #f44336)'
-  if (percent >= 50) return 'var(--color-warning, #FF9800)'
-  return 'var(--color-primary, #4CAF50)'
-})
 
 const shouldPulse = computed(() => {
   return timer.timeRemaining <= 60 && timer.timeRemaining > 0 && timer.status !== 'paused'

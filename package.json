@@ -1,6 +1,6 @@
 {
   "name": "kids-timer",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Kids Pomodoro Timer application",
   "scripts": {
     "dev": "vite",
