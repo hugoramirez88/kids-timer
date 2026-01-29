@@ -99,7 +99,7 @@ See [DISTRIBUTION.md](DISTRIBUTION.md) for detailed implementation guides.
 | Feature | Description |
 |---------|-------------|
 | ~~GitHub Actions CI/CD~~ | ~~Auto-deploy on push, run tests~~ ✅ |
-| Android App (Capacitor) | Native APK for Play Store or direct sharing |
+| ~~Android App (Capacitor)~~ | ~~Native APK for Play Store or direct sharing~~ ✅ |
 
 ### Medium Impact | Medium Effort
 

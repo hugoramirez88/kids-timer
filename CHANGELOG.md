@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-01-29
+
+### Added
+- Android app support via Capacitor
+- `capacitor.config.json` for native app configuration
+- npm scripts: `build:android` and `android:open` for Android builds
+- `android/` directory with native Android project
+
+### Changed
+- `vite.config.js` now uses conditional base path: `/` for Capacitor builds, `/kids-timer/` for web
+- `index.html` asset paths changed from absolute to relative (Vite prepends BASE_URL automatically)
+- `src/main.js` service worker registration uses `import.meta.env.BASE_URL` for environment awareness
+- `public/sw.js` detects Capacitor environment and sets BASE_PATH accordingly
+- Service worker cache version bumped to v3
+
 ## [1.5.1] - 2026-01-29
 
 ### Fixed

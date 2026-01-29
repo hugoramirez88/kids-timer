@@ -1,11 +1,13 @@
 {
   "name": "kids-timer",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Kids Pomodoro Timer application",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "build:android": "CAPACITOR_BUILD=true npm run build && npx cap sync android",
+    "android:open": "npx cap open android",
     "test": "/tmp/playwright-venv/bin/python -m pytest tests/ -v",
     "test:headed": "/tmp/playwright-venv/bin/python -m pytest tests/ -v --headed",
     "test:report": "/tmp/playwright-venv/bin/python -m pytest tests/ --html=test-report.html"
@@ -15,6 +17,9 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@capacitor/android": "^8.0.2",
+    "@capacitor/cli": "^8.0.2",
+    "@capacitor/core": "^8.0.2",
     "pinia": "^3.0.4",
     "vue": "^3.5.26"
   },

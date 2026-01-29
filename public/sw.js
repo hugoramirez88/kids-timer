@@ -1,10 +1,15 @@
 // Kids Timer Service Worker
 // NOTE: Bump version on each deployment to clear old caches
 // Consider using vite-plugin-pwa for automatic versioning in production
-const CACHE_NAME = 'kids-timer-v2';
+const CACHE_NAME = 'kids-timer-v3';
 
-// Base path for GitHub Pages deployment
-const BASE_PATH = '/kids-timer';
+// Detect if running in Capacitor (native) or web
+// In Capacitor, the app runs on https://localhost or capacitor:// scheme
+const isCapacitor = self.location.hostname === 'localhost'
+  || self.location.protocol === 'capacitor:';
+
+// Base path: empty for Capacitor, /kids-timer for GitHub Pages
+const BASE_PATH = isCapacitor ? '' : '/kids-timer';
 
 // App shell files to cache (core files for basic offline support)
 // JS/CSS bundles are cached dynamically on first fetch via network-first strategy

@@ -1,0 +1,8 @@
+{
+  "appId": "com.kidstimer.app",
+  "appName": "Kids Timer",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}
