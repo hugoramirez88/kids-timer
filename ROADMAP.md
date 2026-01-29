@@ -76,7 +76,7 @@
 - ~~Create useProgressColor composable~~ ✅
 - ~~Centralize default unlock items~~ ✅
 - ~~Add error boundary component~~ ✅
-- Set up GitHub Actions CI/CD
+- ~~Set up GitHub Actions CI/CD~~ ✅
 - Lazy load modals and non-critical components
 - Screen reader support (ARIA labels)
 - High contrast and reduced motion options
@@ -92,13 +92,13 @@ See [DISTRIBUTION.md](DISTRIBUTION.md) for detailed implementation guides.
 | Feature | Description |
 |---------|-------------|
 | ~~PWA Support~~ | ~~Installable from browser, works offline~~ ✅ |
-| Web Hosting | Deploy to Netlify/Vercel/GitHub Pages |
+| ~~Web Hosting~~ | ~~Deploy to Netlify/Vercel/GitHub Pages~~ ✅ |
 
 ### High Impact | Medium Effort
 
 | Feature | Description |
 |---------|-------------|
-| GitHub Actions CI/CD | Auto-deploy on push, run tests |
+| ~~GitHub Actions CI/CD~~ | ~~Auto-deploy on push, run tests~~ ✅ |
 | Android App (Capacitor) | Native APK for Play Store or direct sharing |
 
 ### Medium Impact | Medium Effort

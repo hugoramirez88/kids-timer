@@ -1,17 +1,20 @@
 // Kids Timer Service Worker
 // NOTE: Bump version on each deployment to clear old caches
 // Consider using vite-plugin-pwa for automatic versioning in production
-const CACHE_NAME = 'kids-timer-v1';
+const CACHE_NAME = 'kids-timer-v2';
+
+// Base path for GitHub Pages deployment
+const BASE_PATH = '/kids-timer';
 
 // App shell files to cache (core files for basic offline support)
 // JS/CSS bundles are cached dynamically on first fetch via network-first strategy
 const APP_SHELL = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/favicon.ico'
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/manifest.json`,
+  `${BASE_PATH}/icon-192.png`,
+  `${BASE_PATH}/icon-512.png`,
+  `${BASE_PATH}/favicon.ico`
 ];
 
 // Install event - cache app shell
@@ -79,7 +82,7 @@ self.addEventListener('fetch', (event) => {
 
           // If request is for navigation, return cached index.html
           if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+            return caches.match(`${BASE_PATH}/index.html`);
           }
 
           // Return empty response for other failed requests

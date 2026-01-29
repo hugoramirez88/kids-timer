@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-01-29
+
 ### Added
 - PWA (Progressive Web App) support: app can now be installed on any device
 - Web app manifest with app metadata and icons
@@ -14,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Kid-friendly tomato icon (192x192 and 512x512 PNG)
 - Favicon for browser tabs
 - Apple mobile web app meta tags for iOS home screen
+- GitHub Pages deployment with automatic CI/CD via GitHub Actions
+- Live at: https://hugoramirez88.github.io/kids-timer/
+
+### Changed
+- Vite base path set to `/kids-timer/` for GitHub Pages subfolder deployment
+- Manifest paths changed to relative (`./`) for portability
+- Service worker updated with base path for correct caching on GitHub Pages
 
 ## [1.4.2] - 2026-01-29
 
