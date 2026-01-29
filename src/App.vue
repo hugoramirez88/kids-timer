@@ -301,6 +301,10 @@ function saveProfileEdit() {
 onMounted(() => {
   if (profiles.activeProfile) {
     settings.initTheme()
+    // Restore other profile settings that aren't part of theme
+    settings.progressIndicator = profiles.activeProfile.progressIndicator
+    settings.musicPreference = profiles.activeProfile.musicPreference
+    settings.pathAnimal = profiles.activeProfile.pathAnimal
   }
   // Initialize YouTube
   youtube.init()
@@ -358,6 +362,7 @@ body {
 .app {
   min-height: 100vh;
   transition: background 0.3s ease;
+  overflow-x: hidden;
 }
 
 .app.break-mode {
@@ -413,6 +418,8 @@ body {
 
 .points-btn, .badges-btn {
   padding: 6px 12px;
+  min-width: 44px;
+  min-height: 44px;
   background: var(--color-surface, white);
   border: 2px solid var(--color-border, #e0e0e0);
   border-radius: var(--border-radius, 8px);
@@ -552,8 +559,10 @@ body {
 }
 
 .settings-btn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border: 2px solid var(--color-border, #e0e0e0);
   border-radius: var(--border-radius, 12px);
   background: var(--color-surface, white);

@@ -101,7 +101,6 @@ class TestProgressSettings:
         # Verify indicator changed
         page.wait_for_selector(SEL["timer_display"])
 
-    @pytest.mark.xfail(reason="Known bug: progressIndicator not restored from profile on reload")
     def test_pr06_persistence(self, page, base_url):
         """PR06: Progress indicator persists after reload."""
         create_profile(page)

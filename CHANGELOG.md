@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-01-29
+
+### Fixed
+- Progress indicator setting (hourglass, animal path, etc.) now persists after page reload
+- Settings button touch target increased to 44x44px (WCAG minimum) for better mobile accessibility
+- Minor horizontal overflow on 375px mobile viewport fixed with overflow-x: hidden
+
+### Changed
+- Removed xfail markers from test_pr06_persistence and test_a01_touch_targets_minimum_size tests
+
 ## [1.4.0] - 2026-01-25
 
 ### Added

@@ -7,7 +7,6 @@ from utils.storage_helpers import create_profile
 class TestTouchTargets:
     """Tests for touch target sizes (min 44x44px)."""
 
-    @pytest.mark.xfail(reason="Known: settings button (35px) below 44px minimum touch target")
     def test_a01_touch_targets_minimum_size(self, mobile_page, base_url):
         """A01: All touch targets meet 44x44px minimum."""
         create_profile(mobile_page)
