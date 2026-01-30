@@ -46,7 +46,7 @@ const characterEmoji = computed(() => {
 <style scoped>
 .progress-bar-container {
   width: 100%;
-  max-width: 1350px;
+  max-width: 675px;
   padding: 20px 0;
 }
 
@@ -66,7 +66,7 @@ const characterEmoji = computed(() => {
 
 .character {
   position: absolute;
-  top: -20px;
+  top: -4px;
   transform: translateX(-50%);
   transition: left 0.5s ease;
 }
@@ -79,8 +79,8 @@ const characterEmoji = computed(() => {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: scaleX(-1) translateY(0); }
-  50% { transform: scaleX(-1) translateY(-5px); }
+  0%, 100% { transform: scaleX(-1) translateY(-12px); }
+  50% { transform: scaleX(-1) translateY(0); }
 }
 
 .markers {
