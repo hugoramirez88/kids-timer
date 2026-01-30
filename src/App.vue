@@ -330,14 +330,17 @@ onUnmounted(() => {
 
 // Pause music when timer pauses/stops/ends
 watch(() => timer.status, (newStatus, oldStatus) => {
-  // Pause music when timer is paused or stopped
-  if (newStatus === 'paused' || newStatus === 'idle') {
-    if (audio.isPlaying) {
-      audio.pause()
-    }
-    if (youtube.isPlaying) {
-      youtube.pause()
-    }
+  // Pause music when timer is paused (preserves position for resume)
+  if (newStatus === 'paused') {
+    audio.pause()
+    youtube.pause()
+  }
+
+  // Also pause when idle (break complete, timer stopped)
+  // Always call pause() regardless of isPlaying state to ensure audio stops
+  if (newStatus === 'idle') {
+    audio.pause()
+    youtube.pause()
   }
 
   // Resume music when starting work or resuming from pause

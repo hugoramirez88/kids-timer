@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.10.0] - 2026-01-30
+
+### Added
+- 5 new long-form ambient soundscapes (60-75 min) for extended focus sessions
+- 5 new classical symphony movements (16-19 min) from Brahms, Beethoven, and Tchaikovsky
+- Safe-area CSS support for Android notch/status bar in MiniPlayer
+
+### Fixed
+- Android app icon now shows tomato instead of placeholder (all mipmap densities)
+- MiniPlayer positioning on Android with `viewport-fit=cover` and safe-area insets
+- Audio now properly pauses when break time ends (removed isPlaying guard)
+
+### Changed
+- Updated ambient track durations to reflect actual lengths (60+ min mixes)
+- MiniPlayer responsive layout improved for mobile devices (480px and below)
+
 ## [1.9.1] - 2026-01-30
 
 ### Fixed

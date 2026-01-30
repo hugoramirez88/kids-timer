@@ -138,8 +138,8 @@ function getInstrumentEmoji(instrument) {
 <style scoped>
 .mini-player {
   position: fixed;
-  top: 80px;
-  right: 20px;
+  top: calc(80px + env(safe-area-inset-top, 0px));
+  right: max(20px, env(safe-area-inset-right, 0px));
   display: flex;
   align-items: center;
   gap: 10px;
@@ -150,6 +150,23 @@ function getInstrumentEmoji(instrument) {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 50;
   transition: all 0.3s;
+}
+
+@media (max-width: 480px) {
+  .mini-player {
+    top: calc(70px + env(safe-area-inset-top, 0px));
+    right: 10px;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+
+  .mini-title {
+    max-width: 80px;
+  }
+
+  .volume-slider {
+    width: 40px;
+  }
 }
 
 .mini-player.playing {
