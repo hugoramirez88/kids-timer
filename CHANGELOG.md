@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-01-30
+
+### Added
+- Expanded break suggestions from 23 to 100 activities
+- 3 new activity categories: alongamento (stretching), criatividade (creativity), social (connection)
+- Portuguese category names: movimento, alongamento, descanso, hidratação, olhos, diversão, criatividade, social
+
+### Changed
+- Suggestion rotation interval increased from 30s to 60s (one per minute)
+- Recent suggestion buffer increased from 5 to 15 (better variety before repeats)
+
 ## [1.7.0] - 2026-01-29
 
 ### Added

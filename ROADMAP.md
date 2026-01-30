@@ -50,7 +50,7 @@
 
 | Feature | Description |
 |---------|-------------|
-| More break activities | Expand suggestion variety |
+| ~~More break activities~~ | ~~Expand suggestion variety~~ ✅ |
 | Quiet hours | Disable sounds during certain times |
 | Breathing exercises | Guided relaxation during breaks |
 

@@ -40,7 +40,7 @@ function pickSuggestion() {
 
   // Track recent to avoid repeats
   recentTexts.value.push(suggestion.text)
-  if (recentTexts.value.length > 5) {
+  if (recentTexts.value.length > 15) {
     recentTexts.value.shift()
   }
 }
@@ -52,7 +52,7 @@ function handleImageError(e) {
 
 function startRotation() {
   pickSuggestion()
-  rotationInterval = setInterval(pickSuggestion, 30000)
+  rotationInterval = setInterval(pickSuggestion, 60000)
 }
 
 function stopRotation() {
