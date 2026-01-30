@@ -194,6 +194,9 @@
     <div class="hidden-youtube-player">
       <div id="youtube-player-global"></div>
     </div>
+
+    <!-- Toast Notifications -->
+    <Toast />
   </div>
 </template>
 
@@ -220,6 +223,7 @@ import RewardsShop from './components/Rewards/RewardsShop.vue'
 import BadgesDisplay from './components/Rewards/BadgesDisplay.vue'
 import Celebration from './components/Rewards/Celebration.vue'
 import MiniPlayer from './components/Music/MiniPlayer.vue'
+import Toast from './components/UI/Toast.vue'
 import { avatars } from './data/rewards'
 
 const baseUrl = import.meta.env.BASE_URL

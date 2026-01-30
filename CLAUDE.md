@@ -7,9 +7,10 @@
 2. **Check CHANGELOG.md** - Understand recent changes and current version
 
 ### After Completing Any Task
-1. **Update CHANGELOG.md** - Document what changed under "Unreleased" section
-2. **Review this CLAUDE.md** - Add any new learnings or gotchas encountered
-3. **Commit and push** - See Git Workflow section below
+1. **Bump version in package.json** - MINOR for feat, PATCH for fix/docs/refactor
+2. **Update CHANGELOG.md** - Move changes to new version section (not Unreleased)
+3. **Review this CLAUDE.md** - Add any new learnings or gotchas encountered
+4. **Commit and push** - See Git Workflow section below
 
 ## Git Workflow
 
@@ -34,10 +35,11 @@ git push origin master
 - `style:` - Formatting, no code change (triggers PATCH bump)
 - `chore:` - Maintenance tasks (triggers PATCH bump)
 
-### Version Bump (when releasing)
-1. Update version in `package.json`
-2. Move "Unreleased" items to new version section in CHANGELOG.md
-3. Commit with message: `chore: bump version to X.Y.Z`
+### Version Bump (REQUIRED with every commit)
+**ALWAYS bump version before committing:**
+1. Update version in `package.json` (MINOR for feat, PATCH for others)
+2. Move "Unreleased" items to new version section in CHANGELOG.md with today's date
+3. Include version bump in the same commit as the feature/fix
 
 ## Project Setup
 
@@ -124,8 +126,8 @@ tests/
 
 After completing features/fixes:
 1. **Code review** - Review changes for best practices, anti-patterns, over-engineering
-2. Update CHANGELOG.md - Add items under "Unreleased"
-3. Update package.json version if releasing
+2. **Bump version** in package.json (MINOR for feat, PATCH for fix/docs/refactor)
+3. **Update CHANGELOG.md** - Move items to new version section with today's date
 4. Update ROADMAP.md - Mark completed items with ~~strikethrough~~ ✅
 5. Review CLAUDE.md - Add any new learnings or gotchas
 6. Commit with appropriate type prefix (feat/fix/docs/refactor)

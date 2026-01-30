@@ -139,6 +139,9 @@ export const useProfilesStore = defineStore('profiles', () => {
     if (activeProfile.value.badges.includes(badgeId)) return
 
     activeProfile.value.badges.push(badgeId)
+    window.dispatchEvent(new CustomEvent('badge-earned', {
+      detail: { badgeId }
+    }))
     saveProfiles()
   }
 
@@ -175,23 +178,32 @@ export const useProfilesStore = defineStore('profiles', () => {
   }
 
   function checkBadges(profile) {
-    if (profile.totalPomodoros >= 1 && !profile.badges.includes('primeiro-passo')) {
-      profile.badges.push('primeiro-passo')
+    const earnBadge = (badgeId) => {
+      if (!profile.badges.includes(badgeId)) {
+        profile.badges.push(badgeId)
+        window.dispatchEvent(new CustomEvent('badge-earned', {
+          detail: { badgeId }
+        }))
+      }
     }
-    if (profile.totalPomodoros >= 100 && !profile.badges.includes('centuriao')) {
-      profile.badges.push('centuriao')
+
+    if (profile.totalPomodoros >= 1) {
+      earnBadge('primeiro-passo')
     }
-    if (profile.currentStreak >= 7 && !profile.badges.includes('consistente')) {
-      profile.badges.push('consistente')
+    if (profile.totalPomodoros >= 100) {
+      earnBadge('centuriao')
     }
-    if (profile.currentStreak >= 30 && !profile.badges.includes('dedicado')) {
-      profile.badges.push('dedicado')
+    if (profile.currentStreak >= 7) {
+      earnBadge('consistente')
     }
-    if (profile.unlockedThemes.length >= 3 && !profile.badges.includes('fashionista')) {
-      profile.badges.push('fashionista')
+    if (profile.currentStreak >= 30) {
+      earnBadge('dedicado')
     }
-    if (profile.triedIndicators.length >= 4 && !profile.badges.includes('explorador')) {
-      profile.badges.push('explorador')
+    if (profile.unlockedThemes.length >= 3) {
+      earnBadge('fashionista')
+    }
+    if (profile.triedIndicators.length >= 4) {
+      earnBadge('explorador')
     }
   }
 

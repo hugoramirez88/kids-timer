@@ -44,7 +44,7 @@
 | Ghibli-style illustrations | Whimsical art style for break suggestions (unlockable) |
 | TinTin-style illustrations | Adventure art style for break suggestions (unlockable) |
 | ~~Energetic music options~~ | ~~Upbeat/stimulating music for kids who prefer it~~ ✅ |
-| Achievement notifications | Toast when badge earned |
+| ~~Achievement notifications~~ | ~~Toast when badge earned~~ ✅ |
 
 ### Medium Impact
 
