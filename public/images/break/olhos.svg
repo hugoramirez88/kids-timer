@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#E8EAF6"/>
+  <!-- Left eye -->
+  <ellipse cx="35" cy="45" rx="12" ry="10" fill="white" stroke="#7986CB" stroke-width="2"/>
+  <circle cx="38" cy="45" r="5" fill="#3F51B5"/>
+  <circle cx="40" cy="43" r="2" fill="white"/>
+  <!-- Right eye -->
+  <ellipse cx="65" cy="45" rx="12" ry="10" fill="white" stroke="#7986CB" stroke-width="2"/>
+  <circle cx="68" cy="45" r="5" fill="#3F51B5"/>
+  <circle cx="70" cy="43" r="2" fill="white"/>
+  <!-- Distant mountains/horizon (look far) -->
+  <path d="M 15 75 L 30 60 L 45 72 L 60 55 L 75 68 L 85 75" fill="none" stroke="#9FA8DA" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <!-- Sparkle stars suggesting rest -->
+  <polygon points="20,25 22,30 27,30 23,33 25,38 20,35 15,38 17,33 13,30 18,30" fill="#7986CB" opacity="0.6"/>
+  <polygon points="80,30 81,33 84,33 82,35 83,38 80,36 77,38 78,35 76,33 79,33" fill="#7986CB" opacity="0.6"/>
+  <!-- Small decorative circles -->
+  <circle cx="50" cy="20" r="3" fill="#9FA8DA" opacity="0.5"/>
+  <circle cx="25" cy="65" r="2" fill="#9FA8DA" opacity="0.5"/>
+  <circle cx="75" cy="65" r="2" fill="#9FA8DA" opacity="0.5"/>
+</svg>

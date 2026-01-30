@@ -135,6 +135,17 @@ export const categoryIcons = {
   fun: '😄'
 }
 
+export const categoryImages = {
+  movimento: 'movimento.svg',
+  alongamento: 'stretch.svg',
+  descanso: 'breathe.svg',
+  hidratacao: 'drink-water.svg',
+  olhos: 'olhos.svg',
+  diversao: 'diversao.svg',
+  criatividade: 'criatividade.svg',
+  social: 'social.svg'
+}
+
 export function getRandomSuggestion(excludeCategories = [], recentTexts = []) {
   const categories = Object.keys(breakSuggestions).filter(c => !excludeCategories.includes(c))
   if (categories.length === 0) return getRandomSuggestion([], recentTexts)
@@ -147,5 +158,9 @@ export function getRandomSuggestion(excludeCategories = [], recentTexts = []) {
   }
 
   const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)]
-  return { ...suggestion, category, icon: categoryIcons[category] }
+  // Use category-specific image as fallback when suggestion uses placeholder
+  const image = suggestion.image === 'placeholder.svg'
+    ? categoryImages[category]
+    : suggestion.image
+  return { ...suggestion, image, category, icon: categoryIcons[category] }
 }

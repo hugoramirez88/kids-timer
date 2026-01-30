@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#FCE4EC"/>
+  <!-- Big happy face -->
+  <circle cx="50" cy="50" r="28" fill="#F48FB1"/>
+  <!-- Eyes - happy squint -->
+  <path d="M 38 45 Q 42 40 46 45" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 54 45 Q 58 40 62 45" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Big smile -->
+  <path d="M 36 55 Q 50 72 64 55" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Tongue sticking out (playful) -->
+  <ellipse cx="50" cy="62" rx="6" ry="4" fill="#E91E63"/>
+  <!-- Confetti / stars around -->
+  <polygon points="20,25 22,30 27,30 23,33 25,38 20,35 15,38 17,33 13,30 18,30" fill="#E91E63" opacity="0.7"/>
+  <polygon points="80,25 82,30 87,30 83,33 85,38 80,35 75,38 77,33 73,30 78,30" fill="#F8BBD9"/>
+  <polygon points="75,70 77,74 81,74 78,76 79,80 75,78 71,80 72,76 69,74 73,74" fill="#E91E63" opacity="0.7"/>
+  <polygon points="25,70 27,74 31,74 28,76 29,80 25,78 21,80 22,76 19,74 23,74" fill="#F8BBD9"/>
+  <!-- Colorful dots -->
+  <circle cx="15" cy="50" r="4" fill="#E91E63" opacity="0.5"/>
+  <circle cx="85" cy="50" r="4" fill="#E91E63" opacity="0.5"/>
+  <circle cx="50" cy="15" r="3" fill="#F8BBD9"/>
+  <circle cx="35" cy="85" r="3" fill="#F8BBD9"/>
+  <circle cx="65" cy="85" r="3" fill="#F8BBD9"/>
+</svg>

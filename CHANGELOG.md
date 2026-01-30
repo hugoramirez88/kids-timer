@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] - 2026-01-30
+
+### Added
+- Category-specific break suggestion images for visual variety
+- 5 new SVG images: movimento.svg (running figure), olhos.svg (eye rest), diversao.svg (fun/play), criatividade.svg (light bulb), social.svg (two figures hugging)
+- Automatic image fallback: suggestions using placeholder.svg now display their category-specific image
+
 ## [1.8.0] - 2026-01-30
 
 ### Added
