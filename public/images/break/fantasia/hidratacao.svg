@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Soft background -->
+  <circle cx="50" cy="50" r="48" fill="#E3F2FD"/>
+  <!-- Magical water sparkles in background -->
+  <circle cx="20" cy="25" r="2" fill="#81D4FA" opacity="0.6"/>
+  <circle cx="80" cy="30" r="1.5" fill="#81D4FA" opacity="0.6"/>
+  <circle cx="15" cy="60" r="1.5" fill="#81D4FA" opacity="0.5"/>
+  <circle cx="85" cy="55" r="2" fill="#81D4FA" opacity="0.5"/>
+  <!-- Happy child -->
+  <circle cx="45" cy="35" r="12" fill="#FFE4D6"/>
+  <!-- Hair -->
+  <path d="M 34 30 Q 32 18 40 16 Q 48 14 52 18 Q 58 22 55 32" fill="#5D4037"/>
+  <ellipse cx="38" cy="24" rx="4" ry="6" fill="#5D4037"/>
+  <!-- Happy eyes looking at water -->
+  <circle cx="41" cy="33" r="2" fill="#5D4E37"/>
+  <circle cx="49" cy="33" r="2" fill="#5D4E37"/>
+  <circle cx="42" cy="32" r="0.8" fill="#fff"/>
+  <circle cx="50" cy="32" r="0.8" fill="#fff"/>
+  <!-- Rosy cheeks -->
+  <circle cx="37" cy="38" r="3" fill="#FFB6C1" opacity="0.5"/>
+  <circle cx="53" cy="38" r="3" fill="#FFB6C1" opacity="0.5"/>
+  <!-- Happy drinking expression -->
+  <ellipse cx="45" cy="42" rx="3" ry="2" fill="#FFB6C1"/>
+  <!-- Body -->
+  <path d="M 38 46 L 35 70 L 55 70 L 52 46 Z" fill="#B8E6B8"/>
+  <!-- Arm holding glass -->
+  <path d="M 52 50 Q 58 52 62 48" fill="none" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Magical water glass -->
+  <path d="M 60 42 L 58 62 L 72 62 L 70 42 Z" fill="#E3F2FD" stroke="#81D4FA" stroke-width="1.5"/>
+  <!-- Water inside with magic sparkles -->
+  <path d="M 59 48 L 58 60 L 71 60 L 70 48 Q 65 52 59 48" fill="#81D4FA" opacity="0.7"/>
+  <circle cx="63" cy="52" r="1" fill="#fff" opacity="0.8"/>
+  <circle cx="67" cy="56" r="0.8" fill="#fff" opacity="0.8"/>
+  <!-- Other arm -->
+  <path d="M 38 50 Q 30 55 25 52" fill="none" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="25" cy="52" r="3" fill="#FFE4D6"/>
+  <!-- Legs -->
+  <line x1="40" y1="70" x2="38" y2="88" stroke="#FFE4D6" stroke-width="4" stroke-linecap="round"/>
+  <line x1="50" y1="70" x2="52" y2="88" stroke="#FFE4D6" stroke-width="4" stroke-linecap="round"/>
+  <!-- Water droplet sparkles -->
+  <path d="M 78 70 Q 80 74 78 78 Q 76 74 78 70" fill="#81D4FA" opacity="0.7"/>
+  <path d="M 22 75 Q 24 78 22 81 Q 20 78 22 75" fill="#81D4FA" opacity="0.6"/>
+</svg>

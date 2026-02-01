@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Tiny whimsical fox -->
+  <!-- Face -->
+  <ellipse cx="50" cy="50" rx="28" ry="26" fill="#FFAB91"/>
+  <!-- White face marking -->
+  <path d="M 50 32 L 35 72 Q 50 80 65 72 Z" fill="#FFF8E1"/>
+  <!-- Ears -->
+  <polygon points="25,35 15,8 40,30" fill="#FFAB91"/>
+  <polygon points="75,35 85,8 60,30" fill="#FFAB91"/>
+  <polygon points="26,32 20,15 36,30" fill="#FFCC80"/>
+  <polygon points="74,32 80,15 64,30" fill="#FFCC80"/>
+  <!-- Ear tips -->
+  <ellipse cx="15" cy="10" rx="2" ry="3" fill="#FFF8E1"/>
+  <ellipse cx="85" cy="10" rx="2" ry="3" fill="#FFF8E1"/>
+  <!-- Eyes -->
+  <circle cx="38" cy="45" r="5" fill="#5D4037"/>
+  <circle cx="62" cy="45" r="5" fill="#5D4037"/>
+  <circle cx="37" cy="43" r="2" fill="#fff"/>
+  <circle cx="61" cy="43" r="2" fill="#fff"/>
+  <!-- Nose -->
+  <ellipse cx="50" cy="58" rx="5" ry="4" fill="#5D4037"/>
+  <!-- Cheeks -->
+  <circle cx="28" cy="55" r="4" fill="#FFCDD2" opacity="0.4"/>
+  <circle cx="72" cy="55" r="4" fill="#FFCDD2" opacity="0.4"/>
+  <!-- Smile -->
+  <path d="M 44 65 Q 50 72 56 65" fill="none" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+  <!-- Sparkle -->
+  <circle cx="78" cy="28" r="2" fill="#FFCC80" opacity="0.7"/>
+</svg>

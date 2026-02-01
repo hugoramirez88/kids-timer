@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dreamy sky background -->
+  <circle cx="50" cy="50" r="48" fill="#E8F4FC"/>
+  <!-- Soft clouds -->
+  <ellipse cx="20" cy="25" rx="12" ry="6" fill="#fff" opacity="0.7"/>
+  <ellipse cx="75" cy="20" rx="10" ry="5" fill="#fff" opacity="0.7"/>
+  <!-- Ground with grass -->
+  <ellipse cx="50" cy="88" rx="45" ry="10" fill="#B8E6B8"/>
+  <!-- Whimsical child jumping -->
+  <circle cx="50" cy="38" r="12" fill="#FFE4D6"/>
+  <!-- Hair flowing -->
+  <path d="M 38 32 Q 35 20 42 18 Q 50 15 58 18 Q 65 20 62 32" fill="#8B7355"/>
+  <ellipse cx="42" cy="22" rx="4" ry="6" fill="#8B7355"/>
+  <ellipse cx="58" cy="22" rx="4" ry="6" fill="#8B7355"/>
+  <!-- Happy closed eyes -->
+  <path d="M 44 36 Q 46 34 48 36" fill="none" stroke="#5D4E37" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 52 36 Q 54 34 56 36" fill="none" stroke="#5D4E37" stroke-width="2" stroke-linecap="round"/>
+  <!-- Rosy cheeks -->
+  <circle cx="42" cy="42" r="3" fill="#FFB6C1" opacity="0.6"/>
+  <circle cx="58" cy="42" r="3" fill="#FFB6C1" opacity="0.6"/>
+  <!-- Joyful smile -->
+  <path d="M 46 44 Q 50 48 54 44" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Dress/body -->
+  <path d="M 42 48 Q 38 60 35 72 L 50 75 L 65 72 Q 62 60 58 48 Z" fill="#A8D8EA"/>
+  <!-- Arms spread wide in joy -->
+  <path d="M 42 52 Q 30 45 22 48" fill="none" stroke="#FFE4D6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 58 52 Q 70 45 78 48" fill="none" stroke="#FFE4D6" stroke-width="6" stroke-linecap="round"/>
+  <!-- Tiny hands -->
+  <circle cx="22" cy="48" r="4" fill="#FFE4D6"/>
+  <circle cx="78" cy="48" r="4" fill="#FFE4D6"/>
+  <!-- Legs -->
+  <line x1="44" y1="72" x2="40" y2="85" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <line x1="56" y1="72" x2="60" y2="85" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Sparkles -->
+  <circle cx="25" cy="35" r="2" fill="#FFD700" opacity="0.8"/>
+  <circle cx="75" cy="32" r="1.5" fill="#FFD700" opacity="0.8"/>
+  <circle cx="15" cy="55" r="1.5" fill="#FFD700" opacity="0.8"/>
+  <circle cx="85" cy="60" r="2" fill="#FFD700" opacity="0.8"/>
+</svg>

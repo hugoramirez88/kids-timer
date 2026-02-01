@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Warm friendly background -->
+  <circle cx="50" cy="50" r="48" fill="#FFF8E1"/>
+  <!-- Happy sparkles -->
+  <circle cx="18" cy="20" r="2" fill="#FFD54F" opacity="0.6"/>
+  <circle cx="82" cy="25" r="1.5" fill="#FFD54F" opacity="0.6"/>
+  <circle cx="20" cy="80" r="1.5" fill="#FFD54F" opacity="0.5"/>
+  <!-- Whimsical dog face -->
+  <circle cx="50" cy="55" r="32" fill="#D7A86E"/>
+  <!-- Floppy ears -->
+  <ellipse cx="20" cy="45" rx="12" ry="22" fill="#C49A6C"/>
+  <ellipse cx="80" cy="45" rx="12" ry="22" fill="#C49A6C"/>
+  <!-- White snout area -->
+  <ellipse cx="50" cy="62" rx="18" ry="16" fill="#FFF8E1"/>
+  <!-- Forehead spot -->
+  <circle cx="50" cy="35" r="8" fill="#C49A6C"/>
+  <!-- Dreamy eyes -->
+  <circle cx="38" cy="48" r="8" fill="#fff"/>
+  <circle cx="62" cy="48" r="8" fill="#fff"/>
+  <circle cx="40" cy="50" r="5" fill="#5D4037"/>
+  <circle cx="64" cy="50" r="5" fill="#5D4037"/>
+  <circle cx="38" cy="47" r="2" fill="#fff"/>
+  <circle cx="62" cy="47" r="2" fill="#fff"/>
+  <!-- Happy eyebrows -->
+  <path d="M 32 40 Q 38 36 44 40" fill="none" stroke="#8D6E63" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 56 40 Q 62 36 68 40" fill="none" stroke="#8D6E63" stroke-width="2" stroke-linecap="round"/>
+  <!-- Big black nose -->
+  <ellipse cx="50" cy="62" rx="8" ry="6" fill="#5D4037"/>
+  <ellipse cx="50" cy="60" rx="3" ry="2" fill="#8D6E63"/>
+  <!-- Rosy cheeks -->
+  <circle cx="28" cy="58" r="5" fill="#FFCDD2" opacity="0.5"/>
+  <circle cx="72" cy="58" r="5" fill="#FFCDD2" opacity="0.5"/>
+  <!-- Happy tongue out -->
+  <ellipse cx="50" cy="78" rx="6" ry="8" fill="#F48FB1"/>
+  <!-- Big happy smile -->
+  <path d="M 36 70 Q 50 82 64 70" fill="none" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+  <!-- Collar with tag -->
+  <path d="M 30 82 Q 50 88 70 82" fill="none" stroke="#EF5350" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="50" cy="90" r="5" fill="#FFD54F"/>
+  <circle cx="50" cy="90" r="3" fill="#FFC107"/>
+  <!-- Star on collar -->
+  <polygon points="50,88 51,90 53,90 51.5,91.5 52,93.5 50,92 48,93.5 48.5,91.5 47,90 49,90" fill="#FFF"/>
+</svg>

@@ -20,7 +20,7 @@
           :class="['shop-item', { owned: isOwned('avatar', avatar.id), selected: isSelected('avatar', avatar.id) }]"
         >
           <div class="item-preview">
-            <img :src="`${baseUrl}images/avatars/${avatar.id}.svg`" :alt="avatar.name" />
+            <img :src="getAvatarPath(avatar.id)" :alt="avatar.name" />
           </div>
           <span class="item-name">{{ avatar.name }}</span>
           <button
@@ -115,6 +115,41 @@
       </div>
     </section>
 
+    <!-- Illustration Styles Section -->
+    <section class="shop-section">
+      <h3>Estilo de Ilustração</h3>
+      <div class="items-grid">
+        <div
+          v-for="style in illustrationStylesData"
+          :key="style.id"
+          :class="['shop-item', { owned: isOwned('illustrationStyle', style.id), selected: isSelected('illustrationStyle', style.id) }]"
+        >
+          <div class="item-preview illustration-preview">
+            <img :src="getStylePreviewImage(style.id)" :alt="style.name" />
+          </div>
+          <span class="item-name">{{ style.name }}</span>
+          <button
+            type="button"
+            v-if="!isOwned('illustrationStyle', style.id)"
+            class="buy-btn"
+            :disabled="!canAfford(style.cost)"
+            @click="buyItem('illustrationStyle', style.id, style.cost)"
+          >
+            {{ style.cost }} ⭐
+          </button>
+          <button
+            type="button"
+            v-else-if="!isSelected('illustrationStyle', style.id)"
+            class="select-btn"
+            @click="selectIllustrationStyle(style.id)"
+          >
+            Usar
+          </button>
+          <span v-else class="selected-badge">Em uso</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Soundscapes Section -->
     <section class="shop-section">
       <h3>Sons Ambiente</h3>
@@ -174,7 +209,7 @@
 <script setup>
 import { useProfilesStore } from '../../stores/profiles'
 import { useSettingsStore } from '../../stores/settings'
-import { avatars, themes as themesData, pathAnimals as pathAnimalsData } from '../../data/rewards'
+import { avatars, themes as themesData, pathAnimals as pathAnimalsData, illustrationStyles as illustrationStylesData } from '../../data/rewards'
 import { soundscapes as soundscapesData } from '../../data/ambientSoundscapes'
 import { energeticTracks as energeticTracksData } from '../../data/energeticMusic'
 import { DEFAULT_UNLOCKED } from '../../data/defaults'
@@ -201,6 +236,10 @@ function isOwned(type, id) {
       // Default energetic tracks are always owned
       if (DEFAULT_UNLOCKED.energeticTracks.includes(id)) return true
       return profiles.activeProfile.unlockedEnergeticTracks?.includes(id) || false
+    case 'illustrationStyle':
+      // Default illustration styles are always owned
+      if (DEFAULT_UNLOCKED.illustrationStyles.includes(id)) return true
+      return profiles.activeProfile.unlockedIllustrationStyles?.includes(id) || false
   }
   return false
 }
@@ -211,6 +250,7 @@ function isSelected(type, id) {
     case 'avatar': return profiles.activeProfile.avatar === id
     case 'theme': return settings.theme === id
     case 'animal': return settings.pathAnimal === id
+    case 'illustrationStyle': return settings.illustrationStyle === id
   }
   return false
 }
@@ -259,6 +299,28 @@ function getThemeStyle(themeId) {
 function getAnimalEmoji(animalId) {
   const emojis = { rabbit: '🐰', turtle: '🐢', fox: '🦊', snail: '🐌' }
   return emojis[animalId] || '🐰'
+}
+
+function selectIllustrationStyle(styleId) {
+  settings.setIllustrationStyle(styleId)
+  if (profiles.activeProfile) {
+    profiles.updateProfile(profiles.activeProfileId, { illustrationStyle: styleId })
+  }
+}
+
+function getStylePreviewImage(styleId) {
+  if (styleId === 'default') {
+    return `${baseUrl}images/avatars/rabbit.svg`
+  }
+  return `${baseUrl}images/avatars/${styleId}/rabbit.svg`
+}
+
+function getAvatarPath(avatarId) {
+  const style = settings.illustrationStyle
+  if (style === 'default') {
+    return `${baseUrl}images/avatars/${avatarId}.svg`
+  }
+  return `${baseUrl}images/avatars/${style}/${avatarId}.svg`
 }
 </script>
 
@@ -350,6 +412,12 @@ function getAnimalEmoji(animalId) {
 .item-preview img {
   width: 50px;
   height: 50px;
+}
+
+.illustration-preview img {
+  width: 55px;
+  height: 55px;
+  border-radius: 8px;
 }
 
 .theme-preview {

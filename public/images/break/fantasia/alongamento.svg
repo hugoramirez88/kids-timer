@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Soft morning sky -->
+  <circle cx="50" cy="50" r="48" fill="#FFF5F0"/>
+  <!-- Gentle sunrise glow -->
+  <circle cx="50" cy="90" r="30" fill="#FFE4B5" opacity="0.4"/>
+  <!-- Peaceful child stretching -->
+  <circle cx="50" cy="32" r="11" fill="#FFE4D6"/>
+  <!-- Messy morning hair -->
+  <path d="M 40 28 Q 38 18 45 16 Q 50 14 55 16 Q 62 18 60 28" fill="#D4A574"/>
+  <ellipse cx="42" cy="22" rx="3" ry="5" fill="#D4A574"/>
+  <ellipse cx="58" cy="22" rx="3" ry="5" fill="#D4A574"/>
+  <!-- Sleepy happy eyes -->
+  <path d="M 44 30 Q 46 28 48 30" fill="none" stroke="#5D4E37" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 52 30 Q 54 28 56 30" fill="none" stroke="#5D4E37" stroke-width="2" stroke-linecap="round"/>
+  <!-- Rosy cheeks -->
+  <circle cx="42" cy="36" r="3" fill="#FFB6C1" opacity="0.5"/>
+  <circle cx="58" cy="36" r="3" fill="#FFB6C1" opacity="0.5"/>
+  <!-- Content smile -->
+  <path d="M 47 38 Q 50 41 53 38" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Body -->
+  <path d="M 43 42 L 40 65 L 50 68 L 60 65 L 57 42 Z" fill="#E8D4F0"/>
+  <!-- Arms stretched up high -->
+  <path d="M 43 45 Q 38 35 35 20" fill="none" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 57 45 Q 62 35 65 20" fill="none" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Tiny hands reaching -->
+  <circle cx="35" cy="20" r="4" fill="#FFE4D6"/>
+  <circle cx="65" cy="20" r="4" fill="#FFE4D6"/>
+  <!-- Legs standing -->
+  <line x1="45" y1="66" x2="42" y2="85" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <line x1="55" y1="66" x2="58" y2="85" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Ground -->
+  <ellipse cx="50" cy="88" rx="30" ry="6" fill="#C8E6C9"/>
+  <!-- Morning sparkles -->
+  <circle cx="28" cy="28" r="2" fill="#FFD700" opacity="0.7"/>
+  <circle cx="72" cy="25" r="2" fill="#FFD700" opacity="0.7"/>
+  <circle cx="50" cy="10" r="1.5" fill="#FFD700" opacity="0.7"/>
+</svg>

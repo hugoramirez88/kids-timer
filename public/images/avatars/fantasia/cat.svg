@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Soft cozy background -->
+  <circle cx="50" cy="50" r="48" fill="#FCE4EC"/>
+  <!-- Playful sparkles -->
+  <circle cx="20" cy="22" r="2" fill="#F48FB1" opacity="0.5"/>
+  <circle cx="80" cy="25" r="1.5" fill="#F48FB1" opacity="0.5"/>
+  <circle cx="18" cy="78" r="1.5" fill="#F48FB1" opacity="0.4"/>
+  <!-- Whimsical cat face -->
+  <circle cx="50" cy="55" r="32" fill="#E0E0E0"/>
+  <!-- Pointed ears -->
+  <polygon points="22,40 15,8 38,35" fill="#E0E0E0"/>
+  <polygon points="78,40 85,8 62,35" fill="#E0E0E0"/>
+  <!-- Inner ear -->
+  <polygon points="24,38 20,18 35,35" fill="#FFCDD2"/>
+  <polygon points="76,38 80,18 65,35" fill="#FFCDD2"/>
+  <!-- Darker face markings -->
+  <path d="M 30 45 Q 50 38 70 45" fill="#BDBDBD"/>
+  <!-- Dreamy cat eyes -->
+  <ellipse cx="36" cy="48" rx="9" ry="10" fill="#fff"/>
+  <ellipse cx="64" cy="48" rx="9" ry="10" fill="#fff"/>
+  <ellipse cx="38" cy="50" rx="5" ry="7" fill="#81C784"/>
+  <ellipse cx="66" cy="50" rx="5" ry="7" fill="#81C784"/>
+  <ellipse cx="38" cy="50" rx="2" ry="5" fill="#2E2E2E"/>
+  <ellipse cx="66" cy="50" rx="2" ry="5" fill="#2E2E2E"/>
+  <circle cx="36" cy="46" r="2" fill="#fff"/>
+  <circle cx="64" cy="46" r="2" fill="#fff"/>
+  <!-- Pink nose -->
+  <ellipse cx="50" cy="62" rx="5" ry="4" fill="#F8BBD9"/>
+  <!-- Rosy cheeks -->
+  <circle cx="28" cy="58" r="5" fill="#FFCDD2" opacity="0.5"/>
+  <circle cx="72" cy="58" r="5" fill="#FFCDD2" opacity="0.5"/>
+  <!-- Cat mouth -->
+  <path d="M 50 66 L 50 72" stroke="#9E9E9E" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 42 70 Q 50 76 58 70" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-linecap="round"/>
+  <!-- Whiskers -->
+  <line x1="22" y1="58" x2="8" y2="55" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="22" y1="64" x2="6" y2="64" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="22" y1="70" x2="8" y2="73" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="78" y1="58" x2="92" y2="55" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="78" y1="64" x2="94" y2="64" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="78" y1="70" x2="92" y2="73" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Bow accessory -->
+  <ellipse cx="75" cy="28" rx="6" ry="4" fill="#F48FB1" transform="rotate(-20 75 28)"/>
+  <ellipse cx="82" cy="32" rx="6" ry="4" fill="#F48FB1" transform="rotate(20 82 32)"/>
+  <circle cx="78" cy="30" r="3" fill="#EC407A"/>
+</svg>

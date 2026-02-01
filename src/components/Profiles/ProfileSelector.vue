@@ -12,7 +12,7 @@
         @click="selectProfile(profile.id)"
       >
         <div class="profile-avatar">
-          <img :src="`${baseUrl}images/avatars/${profile.avatar}.svg`" :alt="profile.name" />
+          <img :src="getAvatarPath(profile.avatar)" :alt="profile.name" />
         </div>
         <span class="profile-name">{{ profile.name }}</span>
         <span class="profile-stats">{{ profile.totalPomodoros }} pomodoros</span>
@@ -54,8 +54,18 @@
 <script setup>
 import { ref, nextTick, watch } from 'vue'
 import { useProfilesStore } from '../../stores/profiles'
+import { useSettingsStore } from '../../stores/settings'
 
 const baseUrl = import.meta.env.BASE_URL
+const settings = useSettingsStore()
+
+function getAvatarPath(avatarId) {
+  const style = settings.illustrationStyle
+  if (style === 'default') {
+    return `${baseUrl}images/avatars/${avatarId}.svg`
+  }
+  return `${baseUrl}images/avatars/${style}/${avatarId}.svg`
+}
 
 const emit = defineEmits(['profileSelected'])
 

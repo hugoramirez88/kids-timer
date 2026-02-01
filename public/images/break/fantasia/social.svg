@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Warm loving background -->
+  <circle cx="50" cy="50" r="48" fill="#FFEBEE"/>
+  <!-- Floating hearts -->
+  <path d="M 18 20 C 15 15 10 18 10 22 C 10 28 18 32 18 32 C 18 32 26 28 26 22 C 26 18 21 15 18 20" fill="#F48FB1" opacity="0.6"/>
+  <path d="M 82 25 C 80 22 77 24 77 26 C 77 30 82 33 82 33 C 82 33 87 30 87 26 C 87 24 84 22 82 25" fill="#F48FB1" opacity="0.5" transform="scale(0.7) translate(32 10)"/>
+  <path d="M 15 70 C 13 67 10 69 10 71 C 10 75 15 78 15 78 C 15 78 20 75 20 71 C 20 69 17 67 15 70" fill="#F48FB1" opacity="0.5" transform="scale(0.6) translate(5 20)"/>
+  <!-- Two children hugging -->
+  <!-- Left child -->
+  <circle cx="38" cy="42" r="10" fill="#FFE4D6"/>
+  <path d="M 29 38 Q 26 28 34 25 Q 40 23 44 28 Q 48 32 46 40" fill="#8D6E63"/>
+  <ellipse cx="32" cy="32" rx="3" ry="5" fill="#8D6E63"/>
+  <!-- Happy closed eyes -->
+  <path d="M 33 40 Q 35 38 37 40" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 39 40 Q 41 38 43 40" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="32" cy="44" r="2.5" fill="#FFB6C1" opacity="0.5"/>
+  <circle cx="44" cy="44" r="2.5" fill="#FFB6C1" opacity="0.5"/>
+  <path d="M 36 47 Q 38 49 40 47" fill="none" stroke="#5D4E37" stroke-width="1" stroke-linecap="round"/>
+  <!-- Right child -->
+  <circle cx="62" cy="42" r="10" fill="#FFDAB9"/>
+  <path d="M 54 40 Q 52 28 58 25 Q 66 22 70 28 Q 74 32 72 38" fill="#5D4037"/>
+  <ellipse cx="68" cy="32" rx="3" ry="5" fill="#5D4037"/>
+  <!-- Happy closed eyes -->
+  <path d="M 57 40 Q 59 38 61 40" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 63 40 Q 65 38 67 40" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="56" cy="44" r="2.5" fill="#FFB6C1" opacity="0.5"/>
+  <circle cx="68" cy="44" r="2.5" fill="#FFB6C1" opacity="0.5"/>
+  <path d="M 60 47 Q 62 49 64 47" fill="none" stroke="#5D4E37" stroke-width="1" stroke-linecap="round"/>
+  <!-- Bodies hugging -->
+  <path d="M 32 51 L 28 75 L 45 78 L 50 55 Z" fill="#A5D6A7"/>
+  <path d="M 68 51 L 72 75 L 55 78 L 50 55 Z" fill="#81D4FA"/>
+  <!-- Arms hugging each other -->
+  <path d="M 45 55 Q 50 58 55 55" fill="none" stroke="#FFE4D6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 32 55 Q 40 65 50 62" fill="none" stroke="#FFE4D6" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 68 55 Q 60 65 50 62" fill="none" stroke="#FFDAB9" stroke-width="5" stroke-linecap="round"/>
+  <!-- Legs -->
+  <line x1="32" y1="75" x2="28" y2="90" stroke="#FFE4D6" stroke-width="4" stroke-linecap="round"/>
+  <line x1="42" y1="77" x2="40" y2="90" stroke="#FFE4D6" stroke-width="4" stroke-linecap="round"/>
+  <line x1="58" y1="77" x2="60" y2="90" stroke="#FFDAB9" stroke-width="4" stroke-linecap="round"/>
+  <line x1="68" y1="75" x2="72" y2="90" stroke="#FFDAB9" stroke-width="4" stroke-linecap="round"/>
+  <!-- Love sparkles -->
+  <circle cx="50" cy="30" r="2" fill="#F48FB1"/>
+  <circle cx="28" cy="55" r="1.5" fill="#F48FB1" opacity="0.7"/>
+  <circle cx="72" cy="55" r="1.5" fill="#F48FB1" opacity="0.7"/>
+</svg>

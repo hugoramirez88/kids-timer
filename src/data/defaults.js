@@ -8,4 +8,5 @@ export const DEFAULT_UNLOCKED = {
   animals: ['rabbit'],
   soundscapes: ['piano-calmo', 'anoitecer'],
   energeticTracks: ['happy-ukulele', 'adventure-theme'],
+  illustrationStyles: ['default'],
 }

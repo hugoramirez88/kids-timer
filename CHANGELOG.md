@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.11.0] - 2026-01-31
+
+### Added
+- Illustration style system for customizable art across the app
+- "Fantasia" unlockable illustration style (150 stars) with whimsical Ghibli-inspired art
+- 18 new Fantasia SVG assets:
+  - 8 break suggestion illustrations (movimento, alongamento, descanso, hidratacao, olhos, diversao, criatividade, social)
+  - 6 avatar variations (rabbit, turtle, fox, owl, cat, dog)
+  - 4 path animal illustrations (rabbit, turtle, fox, snail)
+- Illustration styles section in Rewards Shop for purchasing and selecting styles
+- Style-aware rendering for break suggestions, avatars, and animal path indicators
+
+### Changed
+- Break suggestion images now respect the selected illustration style
+- Avatar images throughout the app (header, profile selector, edit modal, rewards shop) now use style-aware paths
+- AnimalPath indicator renders SVG illustrations for non-default styles instead of emojis
+
 ## [1.10.0] - 2026-01-30
 
 ### Added

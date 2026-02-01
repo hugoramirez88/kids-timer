@@ -20,6 +20,11 @@ export const pathAnimals = [
   { id: 'snail', name: 'Caracol', cost: 70, unlocked: false },
 ]
 
+export const illustrationStyles = [
+  { id: 'default', name: 'Padrão', cost: 0, unlocked: true },
+  { id: 'fantasia', name: 'Fantasia', cost: 150, unlocked: false },
+]
+
 export const themes = [
   { id: 'divertido', name: 'Divertido', cost: 0, unlocked: true },
   { id: 'minimalista', name: 'Minimalista', cost: 0, unlocked: true },

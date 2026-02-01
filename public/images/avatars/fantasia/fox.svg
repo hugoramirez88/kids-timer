@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Warm autumn background -->
+  <circle cx="50" cy="50" r="48" fill="#FFF3E0"/>
+  <!-- Gentle sparkles -->
+  <circle cx="20" cy="20" r="2" fill="#FFCC80" opacity="0.6"/>
+  <circle cx="80" cy="25" r="1.5" fill="#FFCC80" opacity="0.6"/>
+  <circle cx="15" cy="75" r="1.5" fill="#FFCC80" opacity="0.5"/>
+  <!-- Whimsical fox face -->
+  <ellipse cx="50" cy="55" rx="30" ry="28" fill="#FFAB91"/>
+  <!-- White face marking -->
+  <path d="M 50 35 L 35 75 Q 50 85 65 75 Z" fill="#FFF8E1"/>
+  <!-- Pointed ears -->
+  <polygon points="25,35 15,8 40,30" fill="#FFAB91"/>
+  <polygon points="75,35 85,8 60,30" fill="#FFAB91"/>
+  <!-- Inner ear -->
+  <polygon points="26,32 20,15 36,30" fill="#FFCC80"/>
+  <polygon points="74,32 80,15 64,30" fill="#FFCC80"/>
+  <!-- Ear tufts -->
+  <ellipse cx="15" cy="10" rx="3" ry="4" fill="#FFF8E1"/>
+  <ellipse cx="85" cy="10" rx="3" ry="4" fill="#FFF8E1"/>
+  <!-- Dreamy eyes -->
+  <ellipse cx="38" cy="48" rx="7" ry="8" fill="#fff"/>
+  <ellipse cx="62" cy="48" rx="7" ry="8" fill="#fff"/>
+  <circle cx="40" cy="50" r="4" fill="#5D4037"/>
+  <circle cx="64" cy="50" r="4" fill="#5D4037"/>
+  <circle cx="39" cy="48" r="1.5" fill="#fff"/>
+  <circle cx="63" cy="48" r="1.5" fill="#fff"/>
+  <!-- Rosy cheeks -->
+  <circle cx="28" cy="58" r="5" fill="#FFCDD2" opacity="0.5"/>
+  <circle cx="72" cy="58" r="5" fill="#FFCDD2" opacity="0.5"/>
+  <!-- Cute black nose -->
+  <ellipse cx="50" cy="62" rx="5" ry="4" fill="#5D4037"/>
+  <ellipse cx="50" cy="61" rx="2" ry="1" fill="#8D6E63"/>
+  <!-- Sweet smile -->
+  <path d="M 42 68 Q 50 75 58 68" fill="none" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+  <!-- Whisker dots -->
+  <circle cx="38" cy="65" r="1" fill="#8D6E63"/>
+  <circle cx="34" cy="62" r="1" fill="#8D6E63"/>
+  <circle cx="62" cy="65" r="1" fill="#8D6E63"/>
+  <circle cx="66" cy="62" r="1" fill="#8D6E63"/>
+  <!-- Leaf accessory -->
+  <path d="M 75 35 Q 82 30 85 35 Q 82 40 75 35" fill="#81C784"/>
+  <line x1="75" y1="35" x2="80" y2="35" stroke="#66BB6A" stroke-width="1"/>
+</svg>

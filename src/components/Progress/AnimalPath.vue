@@ -34,7 +34,12 @@
       <g :transform="`translate(${animalX}, ${animalY})`">
         <circle r="16" fill="var(--color-surface, white)" stroke="var(--color-primary, #4CAF50)" stroke-width="2"/>
         <foreignObject x="-12" y="-12" width="24" height="24">
-          <div class="animal-emoji-container">{{ animalEmoji }}</div>
+          <img
+            v-if="settings.illustrationStyle !== 'default'"
+            :src="animalImagePath"
+            class="animal-image"
+          />
+          <div v-else class="animal-emoji-container">{{ animalEmoji }}</div>
         </foreignObject>
       </g>
     </svg>
@@ -46,6 +51,8 @@ import { computed } from 'vue'
 import { useTimerStore } from '../../stores/timer'
 import { useSettingsStore } from '../../stores/settings'
 import { useProgressColor } from '../../composables/useProgressColor'
+
+const baseUrl = import.meta.env.BASE_URL
 
 const timer = useTimerStore()
 const settings = useSettingsStore()
@@ -110,6 +117,11 @@ const animalEmoji = computed(() => {
   }
   return animals[settings.pathAnimal] || '🐰'
 })
+
+const animalImagePath = computed(() => {
+  const style = settings.illustrationStyle
+  return `${baseUrl}images/animals/${style}/${settings.pathAnimal}.svg`
+})
 </script>
 
 <style scoped>
@@ -135,5 +147,12 @@ const animalEmoji = computed(() => {
   justify-content: center;
   font-size: 16px;
   line-height: 1;
+}
+
+.animal-image {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 50%;
 }
 </style>

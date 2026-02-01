@@ -33,6 +33,9 @@ export const useSettingsStore = defineStore('settings', () => {
   // Path animal (for animal-path indicator)
   const pathAnimal = ref('rabbit')
 
+  // Illustration style: 'default' | 'fantasia'
+  const illustrationStyle = ref('default')
+
   // Developer mode (unlocks all features for testing)
   const devMode = ref(false)
 
@@ -61,6 +64,10 @@ export const useSettingsStore = defineStore('settings', () => {
     document.documentElement.setAttribute('data-theme', theme.value)
   }
 
+  function setIllustrationStyle(style) {
+    illustrationStyle.value = style
+  }
+
   return {
     masterVolume,
     soundEffectsEnabled,
@@ -72,9 +79,11 @@ export const useSettingsStore = defineStore('settings', () => {
     progressIndicator,
     theme,
     pathAnimal,
+    illustrationStyle,
     devMode,
     setTheme,
     initTheme,
+    setIllustrationStyle,
     saveSettings,
   }
 })

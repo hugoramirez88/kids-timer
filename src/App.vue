@@ -13,7 +13,7 @@
         <div class="profile-section">
           <button class="profile-badge" @click="showProfileSwitch = true">
             <img
-              :src="`${baseUrl}images/avatars/${profiles.activeProfile.avatar}.svg`"
+              :src="getAvatarPath(profiles.activeProfile.avatar)"
               :alt="profiles.activeProfile.name"
               class="profile-badge-avatar"
             />
@@ -72,7 +72,7 @@
             :class="{ active: profile.id === profiles.activeProfileId }"
             @click="switchProfile(profile.id)"
           >
-            <img :src="`${baseUrl}images/avatars/${profile.avatar}.svg`" :alt="profile.name" />
+            <img :src="getAvatarPath(profile.avatar)" :alt="profile.name" />
             <span>{{ profile.name }}</span>
           </button>
           <!-- Add new profile option -->
@@ -133,7 +133,7 @@
               @click="editProfileAvatar = avatar.id"
               type="button"
             >
-              <img :src="`${baseUrl}images/avatars/${avatar.id}.svg`" :alt="avatar.name" />
+              <img :src="getAvatarPath(avatar.id)" :alt="avatar.name" />
             </button>
           </div>
         </div>
@@ -228,6 +228,14 @@ import { avatars } from './data/rewards'
 
 const baseUrl = import.meta.env.BASE_URL
 
+function getAvatarPath(avatarId) {
+  const style = settings.illustrationStyle
+  if (style === 'default') {
+    return `${baseUrl}images/avatars/${avatarId}.svg`
+  }
+  return `${baseUrl}images/avatars/${style}/${avatarId}.svg`
+}
+
 const timer = useTimerStore()
 const profiles = useProfilesStore()
 const settings = useSettingsStore()
@@ -315,6 +323,7 @@ onMounted(() => {
     settings.progressIndicator = profiles.activeProfile.progressIndicator
     settings.musicPreference = profiles.activeProfile.musicPreference
     settings.pathAnimal = profiles.activeProfile.pathAnimal
+    settings.illustrationStyle = profiles.activeProfile.illustrationStyle || 'default'
   }
   // Initialize YouTube
   youtube.init()

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Tiny whimsical snail -->
+  <!-- Shell spiral -->
+  <circle cx="55" cy="45" r="28" fill="#FFCC80"/>
+  <circle cx="55" cy="45" r="22" fill="#FFE082"/>
+  <circle cx="55" cy="45" r="16" fill="#FFCC80"/>
+  <circle cx="55" cy="45" r="10" fill="#FFE082"/>
+  <circle cx="55" cy="45" r="5" fill="#FFCC80"/>
+  <!-- Shell decorations -->
+  <circle cx="40" cy="35" r="2" fill="#F48FB1" opacity="0.6"/>
+  <circle cx="68" cy="40" r="2" fill="#81D4FA" opacity="0.6"/>
+  <circle cx="50" cy="55" r="1.5" fill="#A5D6A7" opacity="0.6"/>
+  <!-- Body -->
+  <ellipse cx="35" cy="70" rx="25" ry="10" fill="#FFAB91"/>
+  <!-- Head -->
+  <ellipse cx="18" cy="58" rx="12" ry="14" fill="#FFAB91"/>
+  <!-- Eye stalks -->
+  <line x1="12" y1="48" x2="8" y2="35" stroke="#FFAB91" stroke-width="3" stroke-linecap="round"/>
+  <line x1="24" y1="48" x2="28" y2="35" stroke="#FFAB91" stroke-width="3" stroke-linecap="round"/>
+  <!-- Eyes -->
+  <circle cx="8" cy="32" r="5" fill="#fff"/>
+  <circle cx="28" cy="32" r="5" fill="#fff"/>
+  <circle cx="8" cy="33" r="3" fill="#5D4037"/>
+  <circle cx="28" cy="33" r="3" fill="#5D4037"/>
+  <circle cx="7" cy="31" r="1.2" fill="#fff"/>
+  <circle cx="27" cy="31" r="1.2" fill="#fff"/>
+  <!-- Cheeks -->
+  <circle cx="12" cy="62" r="3" fill="#FFCDD2" opacity="0.5"/>
+  <circle cx="24" cy="62" r="3" fill="#FFCDD2" opacity="0.5"/>
+  <!-- Smile -->
+  <path d="M 14 68 Q 18 72 22 68" fill="none" stroke="#8D6E63" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Sparkle on shell -->
+  <circle cx="70" cy="30" r="2" fill="#FFD700" opacity="0.8"/>
+  <!-- Trail sparkle -->
+  <circle cx="62" cy="75" r="1.5" fill="#81D4FA" opacity="0.5"/>
+</svg>

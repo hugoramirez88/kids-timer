@@ -43,6 +43,8 @@ export const useProfilesStore = defineStore('profiles', () => {
       unlockedAnimals: [...DEFAULT_UNLOCKED.animals],
       unlockedSoundscapes: [...DEFAULT_UNLOCKED.soundscapes],
       unlockedEnergeticTracks: [...DEFAULT_UNLOCKED.energeticTracks],
+      unlockedIllustrationStyles: [...DEFAULT_UNLOCKED.illustrationStyles],
+      illustrationStyle: 'default',
       badges: [],
 
       // Tried indicators (for explorer badge)
@@ -127,6 +129,14 @@ export const useProfilesStore = defineStore('profiles', () => {
         }
         if (!profile.unlockedEnergeticTracks.includes(itemId)) {
           profile.unlockedEnergeticTracks.push(itemId)
+        }
+        break
+      case 'illustrationStyle':
+        if (!profile.unlockedIllustrationStyles) {
+          profile.unlockedIllustrationStyles = [...DEFAULT_UNLOCKED.illustrationStyles]
+        }
+        if (!profile.unlockedIllustrationStyles.includes(itemId)) {
+          profile.unlockedIllustrationStyles.push(itemId)
         }
         break
     }

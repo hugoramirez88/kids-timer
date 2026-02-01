@@ -3,7 +3,7 @@
   <div class="break-suggestion" v-if="currentSuggestion">
     <div class="suggestion-image">
       <img
-        :src="`${baseUrl}images/break/${currentSuggestion.image}`"
+        :src="suggestionImagePath"
         :alt="currentSuggestion.text"
         @error="handleImageError"
       />
@@ -16,14 +16,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useTimerStore } from '../../stores/timer'
-import { getRandomSuggestion } from '../../data/breakSuggestions'
+import { useSettingsStore } from '../../stores/settings'
+import { getRandomSuggestion, categoryImages } from '../../data/breakSuggestions'
 
 const baseUrl = import.meta.env.BASE_URL
 
 const timer = useTimerStore()
+const settings = useSettingsStore()
 const currentSuggestion = ref(null)
+
+const suggestionImagePath = computed(() => {
+  if (!currentSuggestion.value) return ''
+  const style = settings.illustrationStyle
+  if (style === 'default') {
+    return `${baseUrl}images/break/${currentSuggestion.value.image}`
+  }
+  // For non-default styles, use the category-based path
+  return `${baseUrl}images/break/${style}/${currentSuggestion.value.category}.svg`
+})
 const recentTexts = ref([])
 const lastCategory = ref(null)
 
